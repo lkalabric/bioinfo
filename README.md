@@ -5,7 +5,7 @@ Since Bio-Linux (DistroWatch https://distrowatch.com/table.php?distribution=biol
 <b>Repository Goal</b><br>
 Our main goal is to make different scripts available to help users install bioinformatics packages, discuss their usage by providing example data and actually analyze this data. Simply creating this repository will be a great opportunity for all of us to learn by doing, by programming Linux's own bash scripting language, by running the packages themselves, or by creating scripts to run them individually or in a pipeline!
 
-<b>Required Operational System</b><br>
+<b>Required Operational System (OS)</b><br>
 Any Linux distro can be used for this purpose, however, we strongly recommend all users to update and upgrade their Linux software before installing any package or running any of our scripts. All our experience was using Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish). 
 
 To find the name of the Linux operating system and the kernel version you are running, type:
