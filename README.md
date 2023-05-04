@@ -27,27 +27,27 @@ $ sudo apt upgrade
 <b>Installation</b><br>
 Programming languages, package repositories and bioinformatics packages themselves will be installed by different scripts. Read their documentation before running them on your system. Most of the time, we will only install packages that you don't already have installed on your system and that are necessary for our bioinformatics training!
 
-First, let´s check if git package is installed and install it if not?
-$ dpkg -s git
-NOTE: git package ins installed in Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish) by default. If this is not the case, type:
-$ sudo apt install git
+First, let´s check if git package is installed and install it if not?<br>
+$ dpkg -s git<br>
+NOTE: git package is installed in Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish) by default. If this is not the case, type:<br>
+$ sudo apt install git<br>
 
-Second, let´s prepare our enviroment to clone biolinux git repository into our local machine and be able to execute all scripts. 
-$ mkdir scripts                                           # create a directory named scripts/
-$ mkdir repos                                             # create a directory named repos/
-$ cd repos                                                # change to directory repos
-$ git clone https://github.com/lkalabric/biolinux.git     # clone biolinux git repo into the directory repos/biolinux/
-$ cp biolinux/*.sh ~/scripts/                             # copy all scripts to the directory scripts/
-$ cd                                                      # change to your home directory
-$ chmod +x scripts/*                                      # change scripts mode to executable
+Second, let´s prepare our enviroment to clone biolinux git repository into our local machine and be able to execute all scripts.<br>
+$ mkdir scripts                                           # create a directory named scripts/<br>
+$ mkdir repos                                             # create a directory named repos/<br>
+$ cd repos                                                # change to directory repos<br>
+$ git clone https://github.com/lkalabric/biolinux.git     # clone biolinux git repo into the directory repos/biolinux/<br>
+$ cp biolinux/*.sh ~/scripts/                             # copy all scripts to the directory scripts/<br>
+$ cd                                                      # change to your home directory<br>
+$ chmod +x scripts/*                                      # change scripts mode to executable<br>
 
-Third, this is optional. We recommend the following directory tree to organize your files and directories:
-$ create_folders.sh
-bin/ - 
-repos/ - 
-scripts/ - 
-examples/ -
-data/ -
-results/ -
+Third, this is optional. We recommend the following directory tree to organize your files and directories:<br>
+$ create_folders.sh<br>
+bin/ - <br>
+repos/ - <br>
+scripts/ - <br>
+examples/ -<br>
+data/ -<br>
+results/ -<br>
 
 
