@@ -5,7 +5,7 @@ Since Bio-Linux (DistroWatch https://distrowatch.com/table.php?distribution=biol
 
 Anyone interested to contribuite is welcome!
 
-Instalattion
+Installation
 
 List of repository and packages inteded to be installed
 
