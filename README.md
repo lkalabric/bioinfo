@@ -8,27 +8,28 @@ Our main goal is to make different scripts available to help users install bioin
 <b>Required Operational System (OS)</b><br>
 Any Linux distro can be used for this purpose, however, we strongly recommend all users to update and upgrade their Linux software before installing any package or running any of our scripts. All our experience was using Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish). 
 
-To find the name of the Linux operating system and the kernel version you are running, type:
-$ lsb_release -a
+To find the name of the Linux operating system and the kernel version you are running, type:<br>
+$ lsb_release -a<br>
 
-Get updated software list for Ubuntu, enter:
-$ sudo apt-get update
-or
-$ sudo apt update
+Get updated software list for Ubuntu, enter:<br>
+$ sudo apt-get update<br>
+or<br>
+$ sudo apt update<br>
 
-To see available updates, run:
-$ sudo ap list --upgradable
+To see available updates, run:<br>
+$ sudo ap list --upgradable<br>
 
-Update software(s) i.e. apply updates and patches on Ubuntu Linux, type the following:
-$ sudo apt-get upgrade
-or
-$ sudo apt upgrade
+Update software(s) i.e. apply updates and patches on Ubuntu Linux, type the following:<br>
+$ sudo apt-get upgrade<br>
+or<br>
+$ sudo apt upgrade<br>
 
 <b>Installation</b><br>
 Programming languages, package repositories and bioinformatics packages themselves will be installed by different scripts. Read their documentation before running them on your system. Most of the time, we will only install packages that you don't already have installed on your system and that are necessary for our bioinformatics training!
 
 First, let´s check if git package is installed and install it if not?<br>
 $ dpkg -s git<br>
+
 NOTE: git package is installed in Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish) by default. If this is not the case, type:<br>
 $ sudo apt install git<br>
 
