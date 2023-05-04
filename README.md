@@ -8,3 +8,6 @@ Our main goal is to make different scripts available to help users install bioin
 <b>Installation</b><br>
 Programming languages, package repositories and bioinformatics packages intended to be installed
 
+First, let´s prepare our system by creating a local repository for our scripts. Follow this linux commands:
+$ mkdir repos
+$ git clone 
