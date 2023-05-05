@@ -51,4 +51,9 @@ examples/ -<br>
 data/ -<br>
 results/ -<br>
 
+Programming languages and package repositories
+- Perl (CPAN)
+- Python (Conda or Miniconda)
+- R (BioConductor)
+$ sudo apt install r-cran-littler
 
