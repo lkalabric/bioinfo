@@ -16,7 +16,7 @@ if [ $# = 0 ]; then
 fi
 while read -r PACKAGE; do 
 	if ! which $PACKAGE > /dev/null; then
-		echo -e "$PACKAGE is not found! Install? (y/n) \c"
+		echo -e "${PACKAGE} is not found! Install? (y/n) \c\n"
 		read $REPLY
 		if [ $REPLY = "y" ]; then
 			sudo apt-get install ${PACKAGE}
