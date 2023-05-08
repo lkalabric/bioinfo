@@ -17,7 +17,7 @@ cd ${HOME}
 
 # Read each directory name from the array and try to create a directory
 for DIRECTORY_NAME in ${DIRECTORY_LIST[@]}; do 
-  [ -d $DIRECTORY_NAME ] && echo "Directory ${$DIRECTORY_NAME} exists!" || mkdir $DIRECTORY_NAME
+  [ -d ${DIRECTORY_NAME} ] && echo "Directory ${$DIRECTORY_NAME} exists!" || mkdir ${DIRECTORY_NAME}
 done
 
 # Adding a directory to your PATH (temporary solution)
@@ -32,7 +32,7 @@ else
   echo -e "\n" >> ${HOME}/.bashrc
   echo "# New directories in PATH included by script organize_filesystem.sh" >> ${HOME}/.bashrc
   echo "PATH="$HOME/bin:$HOME/scripts:$PATH"" >> ${HOME}/.bashrc
-  echo "PATH configured succesfully!"
+  echo "PATH configured successfully!"
   # Reload .bashrc without need to wait until next login
   source ${HOME}/.bashrc
 fi
