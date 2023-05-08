@@ -29,9 +29,9 @@ done
 if [-z $(grep -q organize_filesystem.sh .bashrc)]; then 
    echo "PATH already configured!"
 else
-  echo -e '\n' >> .bashrc
-  echo '# New directories in PATH included by script organize_filesystem.sh' >> .bashrc
-  echo 'PATH="$HOME/bin:$HOME/scripts:$PATH"' >> .bashrc
+  echo -e '\n' >> ${HOME}/.bashrc
+  echo '# New directories in PATH included by script organize_filesystem.sh' >> ${HOME}/.bashrc
+  echo 'PATH="$HOME/bin:$HOME/scripts:$PATH"' >> ${HOME}/.bashrc
   echo "PATH configured succesfully!"
 fi
 
