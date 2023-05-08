@@ -15,9 +15,14 @@ declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scr
 # Change to home directory
 cd ${HOME}
 
-# Read each directory name from the array and try to create a directory
+# Read each DIRECTORY_NAME from the ${DIRECTORY_LIST[@]} array and try to create it
 for DIRECTORY_NAME in ${DIRECTORY_LIST[@]}; do 
-  [ -d ${DIRECTORY_NAME} ] && echo "Directory ${DIRECTORY_NAME} exists!" || echo "Directory ${DIRECTORY_NAME} created!"; mkdir ${DIRECTORY_NAME}
+  if [ -d ${DIRECTORY_NAME} ]; then 
+    echo "Directory ${DIRECTORY_NAME} exists!"
+  else
+    mkdir ${DIRECTORY_NAME}
+    echo "Directory ${DIRECTORY_NAME} created!"
+  fi
 done
 
 # Adding a directory to your PATH (temporary solution)
