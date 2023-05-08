@@ -26,6 +26,15 @@ done
 # export PATH="$HOME/scripts:$PATH"
 
 # Add directories to PATH (permanent change)
-# IMPORTANT: run those line only once, otherwise they will be reapted in the .bashrc file!
-echo  'PATH="$HOME/bin:$PATH"' >> .bashrc
+if [-z $(grep -q organize_filesystem.sh .bashrc)]; then 
+   echo "PATH already configured!"
+else
+  echo -e '\n' >> .bashrc
+  echo '# New directories in PATH included by script organize_filesystem.sh' >> .bashrc
+  echo 'PATH="$HOME/bin:$HOME/scripts:$PATH"' >> .bashrc
+  echo "PATH configured succesfully!"
+fi
+
+
+# IMPORTANT: Only run those line once, otherwise they will be repeated in the .bashrc file!
 
