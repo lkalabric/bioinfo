@@ -23,4 +23,7 @@ for DIRECTORY_NAME in ${DIRECTORY_LIST}; do
   [ -d $DIRECTORY_NAME ] && echo "Directory ${$DIRECTORY_NAME} exists!" || mkdir $DIRECTORY_NAME
 done
 
+# Add directories to PATH
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/scripts:$PATH"
 
