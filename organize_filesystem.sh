@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# autor: Luciano Kalabric Silva
-# creation date (YYYY-MM-DD): 2023-05-08
-# institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
-# links:
-
-
+# Autor: Luciano Kalabric Silva
+# Creation date (YYYY-MM-DD): 2023-05-08
+# Institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # Objetive: Organize files and diretories
 # Syntax: ./organize_filesystem.sh
 
@@ -23,7 +20,12 @@ for DIRECTORY_NAME in ${DIRECTORY_LIST}; do
   [ -d $DIRECTORY_NAME ] && echo "Directory ${$DIRECTORY_NAME} exists!" || mkdir $DIRECTORY_NAME
 done
 
-# Add directories to PATH
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/scripts:$PATH"
+# Adding a directory to your PATH (temporary solution)
+# Link: https://linuxize.com/post/how-to-add-directory-to-path-in-linux/
+# export PATH="$HOME/bin:$PATH"
+# export PATH="$HOME/scripts:$PATH"
+
+# Add directories to PATH (permanent change)
+# IMPORTANT: run those line only once, otherwise they will be reapted in the .bashrc file!
+echo  'PATH="$HOME/bin:$PATH"' >> .bashrc
 
