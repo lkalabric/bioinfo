@@ -33,6 +33,8 @@ else
   echo "# New directories in PATH included by script organize_filesystem.sh" >> ${HOME}/.bashrc
   echo "PATH="$HOME/bin:$HOME/scripts:$PATH"" >> ${HOME}/.bashrc
   echo "PATH configured succesfully!"
+  # Reload .bashrc without need to wait until next login
+  source ${HOME}/.bashrc
 fi
 
 
