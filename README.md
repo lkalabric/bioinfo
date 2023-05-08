@@ -43,13 +43,14 @@ $ cd                                                      # change to your home 
 $ chmod +x scripts/*                                      # change scripts mode to executable<br>
 
 Third, this is optional. We recommend the following directory tree to organize your files and directories:<br>
-$ create_folders.sh<br>
+$ organize_filesystem.sh<br>
 bin/ - <br>
-repos/ - <br>
-scripts/ - <br>
-examples/ -<br>
 data/ -<br>
+examples/ -<br>
+logs/ - <br>
+repos/ - <br>
 results/ -<br>
+scripts/ - <br>
 
 Programming languages and package repositories
 - Perl (CPAN)
