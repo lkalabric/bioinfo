@@ -53,7 +53,9 @@ results/ -<br>
 
 Programming languages and package repositories
 - Perl (CPAN)
-- Python (Conda or Miniconda)
+- Python3
+$ sudo apt-get install python3
+- Conda or Miniconda
 - R (BioConductor)
 $ sudo apt install r-cran-littler
 
