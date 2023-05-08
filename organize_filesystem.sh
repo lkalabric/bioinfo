@@ -10,7 +10,7 @@
 # Version control
 
 # Declare an array with the directory's names to be created
-declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scripts')
+declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scripts' 'temp')
 
 # Change to home directory
 cd ${HOME}
@@ -26,11 +26,11 @@ done
 # export PATH="$HOME/scripts:$PATH"
 
 # Add directories to PATH (permanent change)
-if [-z $(grep -q organize_filesystem.sh .bashrc)]; then 
+if [ $(grep -q organize_filesystem.sh .bashrc) ]; then 
    echo "PATH already configured!"
 else
   echo -e "\n" >> ${HOME}/.bashrc
-  echo "# New directories in PATH included by script organize_filesystem.sh" >> ${HOME}/.bashrc
+  echo "# New directories included in PATH by script organize_filesystem.sh" >> ${HOME}/.bashrc
   echo "PATH="$HOME/bin:$HOME/scripts:$PATH"" >> ${HOME}/.bashrc
   echo "PATH configured successfully!"
   # Reload .bashrc without need to wait until next login
