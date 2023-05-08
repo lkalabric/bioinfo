@@ -10,7 +10,7 @@
 # Version control
 
 # Declare an array with the directory's names to be created
-declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' scripts')
+declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scripts')
 
 # Change to home directory
 cd ${HOME}
