@@ -40,7 +40,7 @@ $ cd repos                                                # change to directory 
 $ git clone https://github.com/lkalabric/biolinux.git     # clone biolinux git repo into the directory repos/biolinux/<br>
 $ cp biolinux/*.sh ~/scripts/                             # copy all scripts to the directory scripts/<br>
 $ cd                                                      # change to your home directory<br>
-$ chmod +x scripts/*                                      # change scripts mode to executable<br>
+$ chmod +x scripts/*.sh                                   # change scripts mode to executable<br>
 
 Third, this is optional. We recommend the following directory tree to organize your files and directories:<br>
 $ organize_filesystem.sh<br>
