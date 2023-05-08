@@ -10,14 +10,14 @@
 # Version control
 
 # Declare an array with the directory's names to be created
-declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scripts' 'temp')
+declare -a DIRECTORY_LIST=('bin' 'data' 'examples' 'logs' 'repos' 'results' 'scripts' 'temp' 'Downloads')
 
 # Change to home directory
 cd ${HOME}
 
 # Read each directory name from the array and try to create a directory
 for DIRECTORY_NAME in ${DIRECTORY_LIST[@]}; do 
-  [ -d ${DIRECTORY_NAME} ] && echo "Directory ${DIRECTORY_NAME} exists!" || mkdir ${DIRECTORY_NAME}
+  [ -d ${DIRECTORY_NAME} ] && echo "Directory ${DIRECTORY_NAME} exists!" || echo "Directory ${DIRECTORY_NAME} created!"; mkdir ${DIRECTORY_NAME}
 done
 
 # Adding a directory to your PATH (temporary solution)
