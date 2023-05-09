@@ -22,7 +22,7 @@ while IFS= read -r PACKAGE; do
 	echo $PACKAGE
 	if ! which $PACKAGE > /dev/null; then
 		echo -e "$PACKAGE is not found! Install? (y/n) \c"
-		read
+		read -r
 		echo $REPLY
 		if [[ $REPLY = "y" ]]; then
 			sudo apt-get install ${PACKAGE}
