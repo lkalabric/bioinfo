@@ -19,9 +19,11 @@ fi
 
 # Read package list and install linux command if not exists
 while IFS= read -r PACKAGE; do 
+	echo $PACKAGE
 	if ! which $PACKAGE > /dev/null; then
 		echo -e "$PACKAGE is not found! Install? (y/n) \c"
 		read
+		echo $REPLY
 		if [[ $REPLY = "y" ]]; then
 			sudo apt-get install ${PACKAGE}
 			echo -ne "`date` sudo apt-get install $PACKAGE\r" >> ${HOME}/logs/install_${PACKAGE}.log
