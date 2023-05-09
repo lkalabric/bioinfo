@@ -10,11 +10,15 @@
 
 # Linux packages listed in a file .packs
 PACKAGE_LIST=$1
+
+# Validate parameters
 if [ $# = 0 ]; then
 	echo "Sintax error: ./install_linuxpackages.sh <package_list .packs>"
 	exit 0
 fi
-while read -r PACKAGE; do 
+
+# Read package list and install linux command if not exists
+while IFS= read -r PACKAGE; do 
 	if ! which $PACKAGE > /dev/null; then
 		echo -e "${PACKAGE} is not found! Install? (y/n) \c\n"
 		read REPLY
