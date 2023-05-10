@@ -21,7 +21,7 @@ esac
 
 # If no parameter, assume all! 
 if [ $# = 0 ]; then
-	$PACKAGE_LIST="${HOME}/repos/biolinux/*.packs"
+	PACKAGE_LIST="${HOME}/repos/biolinux/*.packs"
 	else
 	PACKAGE_LIST=$1
 fi
