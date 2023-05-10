@@ -16,31 +16,30 @@ case $1 in
 	"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>" ;;
 	"-i") echo "Installation in progress..." ;;
 	"-a") echo "Listing packages names and descrition..." ;;
-	*) echo "Invalid option!" ;;
+#	*) echo "Invalid option!" ;;
 esac
 
 # If no parameter, assume all! 
 if [ $# = 0 ]; then
-	PACKAGE_LIST="${HOME}/repos/biolinux/*.packs"
+	PACKAGE_LIST=($(cat "${HOME}/repos/biolinux/*.packs"))
 	else
-	PACKAGE_LIST=$1
+	PACKAGE_LIST=($(cat "${HOME}/repos/biolinux/$1"))
 fi
 
 # Read package list(s) and install linux command if not exists
-while IFS= read -r PACKAGE; do 
-	echo $PACKAGE
-	if ! which $PACKAGE > /dev/null; then
-		echo -e "$PACKAGE is not found! Installation in progress..."
-		# echo -e "$PACKAGE is not found! Install? (y/n) \c"
+while IFS= read -r PACKAGE_NAME; do 	
+	if ! which $PACKAGE_NAME > /dev/null; then
+		echo -e "$PACKAGE_NAME is not found! Installation in progress..."
+		# echo -e "$PACKAGE_NAME is not found! Install? (y/n) \c"
 		# read -r
 		# echo $REPLY
 		#if [[ $REPLY = "y" ]]; then
-			sudo apt-get install ${PACKAGE}
-			echo -ne "`date` sudo apt-get install $PACKAGE\r" >> ${HOME}/logs/install_${PACKAGE}.log
+			sudo apt-get install ${PACKAGE_NAME}
+			echo -ne "`date` sudo apt-get install $PACKAGE_NAME\r" >> ${HOME}/logs/install_linuxpackages.log
 		#	else
 		#	echo "You can install it anytime!"
 		#fi
 		else
-		echo -e "$PACKAGE already installed in your Linux Distro!"
+		echo -e "$PACKAGE_NAME already installed in your Linux Distro!"
 	fi
 done < ${PACKAGE_LIST}
