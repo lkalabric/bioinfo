@@ -27,7 +27,7 @@ if [ $# = 0 ]; then
 fi
 
 # Read package list(s) and install linux command if not exists
-for PACKAGE_NAME in $PACKAGE_LIST[@]; do 	
+for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
 	if ! which $PACKAGE_NAME > /dev/null; then
 		echo -e "$PACKAGE_NAME is not found! Installation in progress..."
 		# echo -e "$PACKAGE_NAME is not found! Install? (y/n) \c"
