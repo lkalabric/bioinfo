@@ -21,9 +21,9 @@ esac
 
 # If no parameter, assume all! 
 if [ $# = 0 ]; then
-	PACKAGE_LIST=($(cat "${HOME}/repos/biolinux/*.packs"))
+	PACKAGE_LIST=($(cat ${HOME}/repos/biolinux/*.packs))
 	else
-	PACKAGE_LIST=($(cat "${HOME}/repos/biolinux/$1"))
+	PACKAGE_LIST=($(cat ${HOME}/repos/biolinux/$1))
 fi
 
 # Read package list(s) and install linux command if not exists
