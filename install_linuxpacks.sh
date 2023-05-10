@@ -13,7 +13,10 @@
 # Validate parameters
 case "$1" in
 	--help)
-		echo "Sintax: ./install_linuxpackages.sh <-i/-a> <package_list .packs>"
+		echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>"
+	;;
+	--h)
+		echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>"
 	;;
 	-i)
 		echo "Installation in progress..."
