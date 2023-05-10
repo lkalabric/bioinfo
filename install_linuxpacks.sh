@@ -12,11 +12,11 @@
 
 # Validate parameters
 case $1 in
-	"--help") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>" ;;
-	"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>" ;;
-	"-i") echo "Installation in progress..." ;;
-	"-a") echo "Listing packages names and descrition..." ;;
-#	*) echo "Invalid option!" ;;
+	"--help") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>"; exit 0 ;;
+	"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <package_list .packs>"; exit 0 ;;
+	"-i") echo "Installation in progress..."; exit 0 ;;
+	"-a") echo "Listing packages names and descrition..."; exit 0 ;;
+#	*) echo "Invalid option!"; exit 0 ;;
 esac
 
 # If no parameter, assume all! 
