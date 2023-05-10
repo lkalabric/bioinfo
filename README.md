@@ -17,7 +17,7 @@ or<br>
 $ sudo apt update<br>
 
 To see available updates, run:<br>
-$ sudo ap list --upgradable<br>
+$ sudo apt list --upgradable<br>
 
 Update software(s) i.e. apply updates and patches on Ubuntu Linux, type the following:<br>
 $ sudo apt-get upgrade<br>
