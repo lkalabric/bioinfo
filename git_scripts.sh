@@ -1,4 +1,4 @@
-cd repos/biolinux
+cd repos/bioinfo
 git pull
 cp *.sh ~/scripts/
 chmod +x ~/scripts/*
