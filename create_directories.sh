@@ -31,10 +31,11 @@ mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/results ${HOME}/scripts
 # To add scripts/ in PATH use the following command
 # $ export PATH="$HOME/bin:$PATH"
 # To make the change permanent, you need to define the $PATH variable in the shell configuration files
-# Ask a sudo user to edit your .bashrc file and append the following lines to you:
+# $ nano ~/.bashrc # and append the following lines:
 # # add scripts/ to PATH
 # export PATH="$HOME/bin:$PATH"
-
+# After save the changes, run:
+# $ source ~/.bashrc
 
 # Once all directories have been created one can install
 # our scritps into the scripts/ directory running the following:
