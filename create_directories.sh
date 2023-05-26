@@ -4,7 +4,7 @@
 # author: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 26 MAY 2023
-# objetive: Create standardized directories to the Linux filesystem
+# objetive: Create standardized directories and prepare your Linux filesystem
 # Syntax: ./create_directories.sh
 # Link: Not available
 
@@ -25,3 +25,8 @@
 # Command to create multiple directories at once in your HOME directory
 mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/results ${HOME}/scripts
 # Note: Feel free to include other directories of your choise
+
+# Once all directories have been created one can install
+# our scritps into the scripts/ directory running the following:
+# cd
+# $ bash repos/bioinfo/git_scripts.sh
