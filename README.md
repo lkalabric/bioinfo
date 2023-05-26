@@ -29,15 +29,16 @@ Programming languages, package repositories and bioinformatics packages themselv
 
 First, let´s check if git package is installed and install it if not?<br>
 $ dpkg -s git<br>
+Note: git package should be installed in Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish) by default. 
 
-NOTE: git package is installed in Ubuntu Linux 22.04.2 LTS (Jammy Jellyfish) by default. If this is not the case, type:<br>
+If this is not the case, run:<br>
 $ sudo apt install git<br>
 
 Second, let´s prepare our enviroment cloning bioinfo repository from github into our local machine and be able to execute all scripts.<br>
 $ git clone https://github.com/lkalabric/bioinfo.git repos/bioinfo    # clone bioinfo repo from github into the directory repos/<br>
 
 Third, this is optional. We recommend the following directory tree to organize your files and directories:<br>
-Note: Read docummentation in create_directories.sh for more details.
+Note: Read dthe ocummentation in create_directories.sh for more details.
 $ bash repos/bioinfo/create_directories.sh                            # create standardized directories and prepare your Linux filesystem
 
 Suggestion of a directory tree<br>
@@ -54,12 +55,18 @@ $ bash repos/bioinfo/git_scripts.sh bioinfo                           # git pull
 
 Fifth, last but not least, add scripts/ to PATH 
 Note: The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin<br>
+
 To add scripts/ to PATH, run:<br>
 export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
+
 To make the change permanent, you need to define the $PATH variable in the shell configuration files like ~/.bashrc.<br>
 $ echo 'export PATH="$HOME/scripts:$PATH" # add scripts/ to PATH' >> ~/.bashrc  # appends the export to ~/.bashrc file<br>
-After saving the file, execute it by running:<br>
+
+After saving the file, run to the export take effect:<br>
 $ source ~/.bashrc
+
+To test if everything is working so far, let´s do this:
+$  git_scripts.sh bioinfo                                             # this command also changes all script files modes to executable
 
 Programming languages and package repositories
 - Perl (CPAN)
