@@ -14,5 +14,5 @@
 USERNAME=$1
 
 # Basic Linux commands
-sudo useradd $USERNAME
+sudo useradd -m $USERNAME
 sudo passwd $USERNAME
