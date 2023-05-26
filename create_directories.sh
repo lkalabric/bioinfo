@@ -20,8 +20,7 @@
 # Since we need this command from bioinfo repository a priori, 
 # we need to create a local repos/ directory using  mkdir  and 
 # clone bioinfo using the following commands:
-# $ mkdir repos/
-# $ git clone https://github.com/lkalabric/bioinfo.git ./repos
+# $ git clone https://github.com/lkalabric/bioinfo.git repos/bioinfo
 
 # Command to create multiple directories at once in your HOME directory
 mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/logs ${HOME}/results ${HOME}/scripts
