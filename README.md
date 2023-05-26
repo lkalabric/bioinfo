@@ -57,11 +57,7 @@ Note: The most common directories that hold executable programs are /bin, /sbin,
 To add scripts/ to PATH, run:<br>
 export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
 To make the change permanent, you need to define the $PATH variable in the shell configuration files like ~/.bashrc.<br>
-Use a text editor to do that:<br>
-$ nano ~/.bashrc <br>
-Append the following lines to the end of the file:<br>
-'# add scripts/ to PATH                                                # this is just a comment<br>
-export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
+$ echo 'export PATH="$HOME/scripts:$PATH" # add scripts/ to PATH' >> ~/.bashrc  # appends the export to ~/.bashrc file<br>
 After saving the file, execute it by running:<br>
 $ source ~/.bashrc
 
