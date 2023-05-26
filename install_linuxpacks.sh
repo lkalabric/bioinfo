@@ -16,18 +16,20 @@ if [ $# = 0 ]; then
 	echo "Package name (single installation)  or package list filename (batch installation) required! Sintax: install_linuxpacks.sh <package name or list>"  
 	exit 0;
 else
-	case $1 in
-		"--help") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
-		"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
-		"-i") echo "Installation in progress..."; exit 0 ;;
-		"-a") echo "Listing packages names and descrition..."; exit 0 ;;
-	#	*) echo "Invalid option!"; exit 0 ;;
-	esac
-	if 
-	if [ "$2" == "*.packs" ]; then
-        	PACKAGE_LIST=($(cat ${HOME}/repos/bioinfo/$2))
+	if [ $# = 1 ]; then
+		case $1 in
+			"--help") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
+			"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
+			"-i") echo "Installation in progress..."; exit 0 ;;
+			"-a") echo "Listing packages names and descrition..."; exit 0 ;;
+		#	*) echo "Invalid option!"; exit 0 ;;
+		esac
 	else
-		PACKAGE_LIST=$2
+		if [ "$2" == "*.packs" ]; then
+        		PACKAGE_LIST=($(cat ${HOME}/repos/bioinfo/$2))
+		else
+			PACKAGE_LIST=$2
+		fi
 	fi
 fi
 
