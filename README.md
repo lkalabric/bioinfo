@@ -25,7 +25,8 @@ or<br>
 $ sudo apt upgrade<br>
 
 <b>Installation</b><br>
-Programming languages, package repositories and bioinformatics packages themselves will be installed by different scripts. Read their documentation before running them on your system. 
+Setup your filesystem, directory tree, PATH and start installing programming languages and bioinformatics packages. We intend to create different scripts for each step of the installation process.<br>
+Important: Read the documentation available in each script before running it on your system.<br> 
 
 First, let´s check if git package is installed and install it if not?<br>
 $ dpkg -s git<br>
@@ -38,7 +39,6 @@ Second, let´s prepare our enviroment cloning bioinfo repository from github int
 $ git clone https://github.com/lkalabric/bioinfo.git repos/bioinfo    # clone bioinfo repo from github into the directory repos/<br>
 
 Third, this is optional. We recommend the following directory tree to organize your files and directories:<br>
-Note: Read dthe ocummentation in create_directories.sh for more details.
 $ bash repos/bioinfo/create_directories.sh                            # create standardized directories and prepare your Linux filesystem
 
 Suggestion of a directory tree<br>
