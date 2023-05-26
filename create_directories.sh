@@ -16,5 +16,10 @@
 # results/ - your results
 # scripts/ - commands created in different scripting languages
 
+# Since we need to clone at least bioinfo repo from github
+# We need to create and clone this command a priori using
+# $ mkdir repos
+# $ git clone 
+
 # Command to create multiple directories at once in your HOME directory
 mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/repos ${HOME}/results ${HOME}/scripts
