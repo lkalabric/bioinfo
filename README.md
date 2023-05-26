@@ -53,16 +53,16 @@ Forth, let´s keep our repos/bioinfo and scripts up-to-date
 $ bash repos/bioinfo/git_scripts.sh bioinfo                           # git pull and copy all up-to-date scripts from repos/bioinfo to scripts/
 
 Fifth, last but not least, add scripts/ to PATH 
-Note: The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin
-To add scripts/ to PATH, run:
-export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH
+Note: The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin<br>
+To add scripts/ to PATH, run:<br>
+export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
 To make the change permanent, you need to define the $PATH variable in the shell configuration files like ~/.bashrc.<br>
-Use a text editor to do that:
-$ nano ~/.bashrc 
-Append the following lines to the end of the file:
-# add scripts/ to PATH                                                # this is just a comment
-export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH
-After saving the file, execute it by running:
+Use a text editor to do that:<br>
+$ nano ~/.bashrc <br>
+Append the following lines to the end of the file:<br>
+# add scripts/ to PATH                                                # this is just a comment<br>
+export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
+After saving the file, execute it by running:<br>
 $ source ~/.bashrc
 
 Programming languages and package repositories
