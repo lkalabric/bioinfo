@@ -23,7 +23,12 @@ else
 		"-a") echo "Listing packages names and descrition..."; exit 0 ;;
 	#	*) echo "Invalid option!"; exit 0 ;;
 	esac
-	PACKAGE_LIST=($(cat ${HOME}/repos/bioinfo/$2))
+	if 
+	if [ "$2" == "*.packs" ]; then
+        	PACKAGE_LIST=($(cat ${HOME}/repos/bioinfo/$2))
+	else
+		PACKAGE_LIST=$2
+	fi
 fi
 
 # Read package list files and install each linux command if not exists
