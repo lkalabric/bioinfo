@@ -60,7 +60,7 @@ To make the change permanent, you need to define the $PATH variable in the shell
 Use a text editor to do that:<br>
 $ nano ~/.bashrc <br>
 Append the following lines to the end of the file:<br>
-# add scripts/ to PATH                                                # this is just a comment<br>
+'# add scripts/ to PATH                                                # this is just a comment<br>
 export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
 After saving the file, execute it by running:<br>
 $ source ~/.bashrc
