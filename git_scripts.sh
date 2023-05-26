@@ -15,7 +15,7 @@ if [ $# = 0 ]; then
     echo "Repository name required! Sintax: git_scripts.sh <repository>"  
     exit 0;
 else
-	if [[ ! -d ${HOME}/repos/${REPO} ]]; then
+	if [ ! -d "${HOME}/repos/${REPO}" ]; then
 	    echo "Repository not present in repos/"
 	else
 	    cd ${HOME}/repos/${REPO}
@@ -25,4 +25,3 @@ else
 	    cd
 	fi
 fi
-
