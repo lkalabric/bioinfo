@@ -12,6 +12,7 @@
 # bin/ - binary executable files
 # data/ - your data files
 # examples/ - example files
+# logs/ - log files
 # repos/ - github repositories
 # results/ - your results
 # scripts/ - commands created in different scripting languages
@@ -23,7 +24,7 @@
 # $ git clone https://github.com/lkalabric/bioinfo.git ./repos
 
 # Command to create multiple directories at once in your HOME directory
-mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/results ${HOME}/scripts
+mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/logs ${HOME}/results ${HOME}/scripts
 # Note: Feel free to include other directories of your choise
 
 # Adding a directory to PATH 
