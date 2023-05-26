@@ -6,7 +6,7 @@
 # last update: 26 MAY 2023
 # objetive: Create standardized directories and prepare your Linux filesystem
 # Syntax: ./create_directories.sh
-# Link: Not available
+# Link: https://linuxize.com/post/how-to-add-directory-to-path-in-linux/
 
 # Suggestion of a directory tree
 # bin/ - binary executable files
@@ -25,6 +25,16 @@
 # Command to create multiple directories at once in your HOME directory
 mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/results ${HOME}/scripts
 # Note: Feel free to include other directories of your choise
+
+# Adding a directory to PATH 
+# The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin
+# To add scripts/ in PATH use the following command
+# $ export PATH="$HOME/bin:$PATH"
+# To make the change permanent, you need to define the $PATH variable in the shell configuration files
+# Ask a sudo user to edit your .bashrc file and append the following lines to you:
+# # add scripts/ to PATH
+# export PATH="$HOME/bin:$PATH"
+
 
 # Once all directories have been created one can install
 # our scritps into the scripts/ directory running the following:
