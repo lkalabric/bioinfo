@@ -11,7 +11,7 @@
 # Edit file sudo nano /etc/default/useradd to SHELL=/bin/bash
 
 # Receive the username from the command line and store in a variable
-USERNAME = $1
+USERNAME=$1
 
 # Basic Linux commands
 sudo useradd $USERNAME
