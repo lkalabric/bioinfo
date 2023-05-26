@@ -18,9 +18,11 @@
 # scripts/ - commands created in different scripting languages
 
 # Since we need this command from bioinfo repository a priori, 
-# we need to create a local repos/ directory using  mkdir  and 
-# clone bioinfo using the following commands:
+# we need to clone it into a local repos/bioinfo using the following commands:
 # $ git clone https://github.com/lkalabric/bioinfo.git repos/bioinfo
+
+# Now, let´s do the magic:
+# $ bash repos/bioinfo/create_directories.sh
 
 # Command to create multiple directories at once in your HOME directory
 mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/logs ${HOME}/results ${HOME}/scripts
