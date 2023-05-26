@@ -31,11 +31,11 @@ mkdir ${HOME}/bin ${HOME}/data ${HOME}/examples ${HOME}/logs ${HOME}/results ${H
 # Adding a directory to PATH 
 # The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin
 # To add scripts/ in PATH use the following command
-# $ export PATH="$HOME/bin:$PATH"
+# $ export PATH="$HOME/scripts:$PATH"
 # To make the change permanent, you need to define the $PATH variable in the shell configuration files
 # $ nano ~/.bashrc # and append the following lines:
 # # add scripts/ to PATH
-# export PATH="$HOME/bin:$PATH"
+# export PATH="$HOME/scripts:$PATH"
 # After save the changes, run:
 # $ source ~/.bashrc
 
