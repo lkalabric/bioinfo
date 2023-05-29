@@ -50,14 +50,14 @@ repos/ - github repositories<br>
 results/ - your results<br>
 scripts/ - commands created in different scripting languages<br>
 
-Forth, let´s keep our repos/bioinfo and scripts up-to-date
+Forth, let´s keep our repos/bioinfo and scripts up-to-date<br>
 $ bash repos/bioinfo/git_scripts.sh bioinfo                           # git pull and copy all up-to-date scripts from repos/bioinfo to scripts/
 
-Fifth, last but not least, add scripts/ to PATH 
+Fifth, last but not least, add scripts/ to PATH<br> 
 Note: The most common directories that hold executable programs are /bin, /sbin, /usr/sbin, /usr/local/bin and /usr/local/sbin<br>
 
 To add scripts/ to PATH, run:<br>
-export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
+$ export PATH="$HOME/scripts:$PATH"                                     # this exports $PATH<br>
 
 To make the change permanent, you need to define the $PATH variable in the shell configuration files like ~/.bashrc.<br>
 $ echo 'export PATH="$HOME/scripts:$PATH" # add scripts/ to PATH' >> ~/.bashrc  # appends the export to ~/.bashrc file<br>
@@ -66,7 +66,7 @@ After saving the file, run to the export take effect:<br>
 $ source ~/.bashrc
 
 To test if everything is working so far, let´s do this:
-$  git_scripts.sh bioinfo                                             # this command also changes all script files modes to executable
+$ git_scripts.sh bioinfo                                             # this command also changes all script files modes to executable
 
 Programming languages and package repositories
 - Perl (CPAN)
