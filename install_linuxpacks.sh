@@ -8,6 +8,9 @@
 # Syntax: ./install_linuxpacks.sh <-i/-a/-h/--help> <package_name/package_list.packs/*>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
+# This script is good to superuser or root user only!!!
+# Need to include an error message in case the user does not have privilegies!!!
+
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 
