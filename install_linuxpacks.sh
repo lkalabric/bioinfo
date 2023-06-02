@@ -10,6 +10,11 @@
 
 # This script is good to superuser or root user only!!!
 # Need to include an error message in case the user does not have privilegies!!!
+if [[ $(sudo -v) ]]; then
+    sudo -v
+    exit 0
+fi
+
 
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
