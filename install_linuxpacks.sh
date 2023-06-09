@@ -16,15 +16,19 @@ fi
 
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
-if [[ $2 == *.packs ]]; then
-	if [ -f "${PACKAGELIST_DIR}}/$2" ]; then
-		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
-	else
-	   echo "File $2 does not exist."
-	   exit 0
-	fi
+if [[ -z $2 ]]; then
+	echo "Package name or package list *.packs file is required!"
 else
-	PACKAGE_LIST=$2
+	if [[ $2 == *.packs ]]; then
+		if [ -f ${PACKAGELIST_DIR}}/$2 ]; then
+			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+		else
+		   echo "File $2 does not exist."
+		   exit 0
+		fi
+	else
+		PACKAGE_LIST=$2
+	fi
 fi
 
 echo $PACKAGE_LIST
