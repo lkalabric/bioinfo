@@ -5,7 +5,7 @@
 # URL:
 # last update: 13 OUT 2021
 # Objetive: Install Ubuntu packages and keep record of all installations
-# Syntax: ./install_linuxpacks.sh <-i/-a/-h/--help> <package_name/package_list.packs/*>
+# Syntax: ./install_linuxpacks.sh <-i/-l/-h/--help> <package_name/package_list.packs/*>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
 # This script is good to superuser or root user only!!!
@@ -16,24 +16,25 @@ fi
 
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
+if [ "$2" = "*.packs" ]; then
+	PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+else
+	PACKAGE_LIST=$2
+fi
+
 
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Package name (single installation)  or package list filename (batch installation) required! Sintax: install_linuxpacks.sh <package name or list>"  
+	echo "Package name (single installation) or package list filename (batch installation) required! Sintax: install_linuxpacks.sh <-i/-l/-h/--help> <package name or list>"  
 	exit 0;
 else
 	case $1 in
-		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
-		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
+		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
+		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
-		"-a" ) echo "Listing packages names and descrition..."; exit 0 ;;
+		"-l" ) echo -e "Listing packages names and descrition...\n"; echo ${PACKAGE_LIST}; exit 0 ;;
 		* ) echo "Invalid option!"; exit 0 ;;
 	esac
-	if [ "$2" = "*.packs" ]; then
-		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
-	else
-		PACKAGE_LIST=$2
-	fi
 fi
 
 # Read package list files and install each linux command if not exists
