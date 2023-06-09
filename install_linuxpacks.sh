@@ -46,16 +46,15 @@ fi
 # Read package list files and install each linux command if not exists
 for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
 	if ! which $PACKAGE_NAME > /dev/null; then
-		echo -e "$PACKAGE_NAME is not found! Installation in progress..."
-		# echo -e "$PACKAGE_NAME is not found! Install? (y/n) \c"
-		# read -r
-		# echo $REPLY
-		#if [[ $REPLY = "y" ]]; then
+		echo -e "$PACKAGE_NAME is not found! Install? (y/n) \c"
+		read -r
+		echo $REPLY
+		if [[ $REPLY = "y" ]]; then
 			sudo apt-get install ${PACKAGE_NAME}
 			echo -ne "`date` sudo apt-get install $PACKAGE_NAME\r" >> ${HOME}/logs/install_linuxpackages.log
-		#	else
-		#	echo "You can install it anytime!"
-		#fi
+			else
+			echo "You can install it anytime!"
+		fi
 		else
 		echo -e "$PACKAGE_NAME already installed in your Linux Distro!"
 	fi
