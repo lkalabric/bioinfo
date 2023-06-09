@@ -5,7 +5,7 @@
 # URL:
 # last update: 13 OUT 2021
 # Objetive: Install Ubuntu packages and keep record of all installations
-# Syntax: ./install_linuxpacks.sh <-i/-l/-h/--help> <package_name/package_list.packs/*>
+# Syntax: ./install_linuxpacks.sh <-i/-l/-h/--help> <package_name/package_list *.packs file>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
 # This script is good to superuser or root user only!!!
@@ -35,8 +35,8 @@ if [ $# = 0 ]; then
 	exit 0;
 else
 	case $1 in
-		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
-		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
+		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <package_name/package_list *.packs file>"; exit 0 ;;
+		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <package_name/package_list *.packs file>"; exit 0 ;;
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
 		"-l" ) echo "Listing packages names and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
 		* ) echo "Invalid option!"; exit 0 ;;
