@@ -18,6 +18,7 @@ fi
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 if [[ -z $2 ]]; then
 	echo "Package name or package list *.packs file is required!"
+	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
 	exit 0
 else
 	if [[ $2 == *.packs ]]; then
