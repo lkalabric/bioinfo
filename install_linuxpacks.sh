@@ -21,7 +21,7 @@ if [[ -z $2 ]]; then
 	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
 	exit 0
 else
-	if [ "${2: -5}" = ".packs" ]; then
+	if [ "${2: -5}" == ".packs" ]; then
 		if [ -f ${PACKAGELIST_DIR}}/$2 ]; then
 			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 		else
