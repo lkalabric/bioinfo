@@ -38,7 +38,7 @@ else
 		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
 		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-l/-h/--help> <filename.packs>"; exit 0 ;;
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
-		"-l" ) echo -e "Listing packages names and descrition...\n"; echo ${PACKAGE_LIST}; exit 0 ;;
+		"-l" ) echo "Listing packages names and descrition..."; echo ${PACKAGE_LIST}; exit 0 ;;
 		* ) echo "Invalid option!"; exit 0 ;;
 	esac
 fi
