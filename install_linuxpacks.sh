@@ -21,6 +21,7 @@ if [ "$2" = "*.packs" ]; then
 		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 	else
 	   echo "File $2 does not exist."
+	   exit 0
 	fi
 else
 	PACKAGE_LIST=$2
