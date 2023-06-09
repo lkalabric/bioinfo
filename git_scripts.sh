@@ -12,7 +12,9 @@ REPO=$1
 
 # Validate the parameter
 if [ $# = 0 ]; then
-    echo "Repository name required! Sintax: git_scripts.sh <repository>"  
+    echo "Repository name required! Sintax: git_scripts.sh <repository>"
+    echo "List of repositories cloned:"
+    ls ${HOME}/repos/
     exit 0;
 else
 	if [ ! -d "${HOME}/repos/${REPO}" ]; then
