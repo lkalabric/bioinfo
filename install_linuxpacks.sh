@@ -60,7 +60,7 @@ for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do
 			else
 			echo "You can install it anytime!"
 		fi
-		else
+	else
 		echo -e "$PACKAGE_NAME already installed in your Linux Distro!"
 	fi
 done
