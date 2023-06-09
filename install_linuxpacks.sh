@@ -9,12 +9,10 @@
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
 # This script is good to superuser or root user only!!!
-# Need to include an error message in case the user does not have privilegies!!!
 if [[ $(sudo -v) ]]; then
     sudo -v
     exit 0
 fi
-
 
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
@@ -24,20 +22,17 @@ if [ $# = 0 ]; then
 	echo "Package name (single installation)  or package list filename (batch installation) required! Sintax: install_linuxpacks.sh <package name or list>"  
 	exit 0;
 else
-	if [ $# = 1 ]; then
-		case $1 in
-			"--help") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
-			"-h") echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
-			"-i") echo "Installation in progress..."; exit 0 ;;
-			"-a") echo "Listing packages names and descrition..."; exit 0 ;;
-		#	*) echo "Invalid option!"; exit 0 ;;
-		esac
+	case $1 in
+		"--help" ) echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
+		"-h" ) echo "Sintax: ./install_linuxpackages.sh <-i/-a/-h/--help> <filename.packs>"; exit 0 ;;
+		"-i" ) echo "Installation in progress..."; exit 0 ;;
+		"-a" ) echo "Listing packages names and descrition..."; exit 0 ;;
+		* ) echo "Invalid option!"; exit 0 ;;
+	esac
+	if [ "$2" = "*.packs" ]; then
+		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 	else
-		if [ "$2" == "*.packs" ]; then
-        		PACKAGE_LIST=($(cat ${HOME}/repos/bioinfo/$2))
-		else
-			PACKAGE_LIST=$2
-		fi
+		PACKAGE_LIST=$2
 	fi
 fi
 
