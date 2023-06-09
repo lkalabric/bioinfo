@@ -27,6 +27,7 @@ else
 	PACKAGE_LIST=$2
 fi
 
+echo $PACKAGE_LIST
 
 # Validate parameters
 if [ $# = 0 ]; then
