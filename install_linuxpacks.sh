@@ -25,7 +25,8 @@ fi
 
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Package name (single installation) or package list filename (batch installation) required! Sintax: install_linuxpacks.sh <-i/-l/-h/--help> <package name or list>"  
+	echo -e "Parameter wrong or missing!\n"
+	echo "Sintax: install_linuxpacks.sh <-i/-l/-h/--help> <package name or list>"
 	exit 0;
 else
 	case $1 in
