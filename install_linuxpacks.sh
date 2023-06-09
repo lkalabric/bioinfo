@@ -25,7 +25,7 @@ else
 		if [ -f ${PACKAGELIST_DIR}}/$2 ]; then
 			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 		else
-		   echo "File $2 does not exist."
+		   echo "File $2 is not a .packs or does not exist."
 		   exit 0
 		fi
 	else
