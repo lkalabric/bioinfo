@@ -16,7 +16,7 @@ fi
 
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
-if [ "$2" = "*.packs" ]; then
+if [[ $2 == *.packs ]]; then
 	if [ -f ${PACKAGELIST_DIR}/$2 ]; then
 		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 	else
