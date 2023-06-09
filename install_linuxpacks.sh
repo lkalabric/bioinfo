@@ -18,6 +18,7 @@ fi
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 if [[ -z $2 ]]; then
 	echo "Package name or package list *.packs file is required!"
+	exit 0
 else
 	if [[ $2 == *.packs ]]; then
 		if [ -f ${PACKAGELIST_DIR}}/$2 ]; then
