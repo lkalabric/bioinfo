@@ -17,7 +17,11 @@ fi
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 if [ "$2" = "*.packs" ]; then
-	PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+	if [ -f ${PACKAGELIST_DIR}/$2 ]; then
+		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+	else
+	   echo "File $2 does not exist."
+	fi
 else
 	PACKAGE_LIST=$2
 fi
