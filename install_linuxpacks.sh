@@ -54,7 +54,7 @@ fi
 
 # Read package list and install each linux command if exists
 for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
-	if ! command $PACKAGE_NAME > /dev/null; then
+	if ! which $PACKAGE_NAME > /dev/null; then
 		echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
 		read -r
 		echo $REPLY
