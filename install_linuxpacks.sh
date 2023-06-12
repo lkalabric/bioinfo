@@ -52,7 +52,7 @@ else
 	echo $PACKAGE_LIST
 	case $1 in
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
-		"-l" ) echo "Listing packages names and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
+		"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
 		* ) echo "Invalid option!"; exit 0 ;;
 	esac
 fi
