@@ -15,9 +15,14 @@ if [[ $(sudo -v) ]]; then
 fi
 
 # Test if package exists in Debian
+#function package_exists() {
+#    return dpkg -l "$1" &> /dev/null
+#}
 function package_exists() {
-    return dpkg -l "$1" &> /dev/null
+    dpkg -s "$1" &> /dev/null
+    return $?
 }
+
 
 # Linux packages are listed in a files .packs at $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
