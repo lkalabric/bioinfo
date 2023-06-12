@@ -19,7 +19,6 @@ function package_exists() {
     return dpkg -l "$1" &> /dev/null
 }
 
-
 FILE=$2
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
@@ -28,21 +27,17 @@ if [[ -z $FILE ]]; then
 	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
 	exit 0
 else
-	if [[ $FILE == *.packs ]]; then
-		if [ -f ${PACKAGELIST_DIR}/$FILE ]; then
-			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$FILE))
-		else
-		   echo "File $FILE is not a .packs or does not exist."
-		   exit 0
-		fi
+	if [ -f ${PACKAGELIST_DIR}/$FILE ]; then
+		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$FILE))
 	else
-	PACKAGE_LIST=$FILE
+		PACKAGE_LIST=$FILE
 		if ! package_exists ${PACKAGE_LIST}; then
 			echo "Let´s install ${PACKAGE_LIST}!"
+		else
+			exit 0
 		fi
 	fi
 fi
-
 echo $PACKAGE_LIST
 
 # Validate parameters
