@@ -19,26 +19,8 @@ function package_exists() {
     return dpkg -l "$1" &> /dev/null
 }
 
-FILE=$2
-# Linux packages listed in a file .packs
+# Linux packages are listed in a files .packs at $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
-if [[ -z $FILE ]]; then
-	echo "Package name or package list *.packs file is required!"
-	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
-	exit 0
-else
-	if [ -f ${PACKAGELIST_DIR}/$FILE ]; then
-		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$FILE))
-	else
-		PACKAGE_LIST=$FILE
-		if ! package_exists ${PACKAGE_LIST}; then
-			echo "Let´s install ${PACKAGE_LIST}!"
-		else
-			exit 0
-		fi
-	fi
-fi
-echo $PACKAGE_LIST
 
 # Validate parameters
 if [ $# = 0 ]; then
@@ -46,6 +28,24 @@ if [ $# = 0 ]; then
 	echo "Sintax: install_linuxpacks.sh <-i/-l/-h/--help> <package name or list>"
 	exit 0;
 else
+	if [[ -z $2 ]]; then
+		echo "Package name or package list *.packs file is required!"
+		echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
+		exit 0
+	else
+		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
+			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+		else
+			PACKAGE_LIST=$2
+			if ! package_exists ${PACKAGE_LIST}; then
+				echo "Package does not exist in Debian Distro!"
+				exit 0				
+			else
+				echo "Let´s install ${PACKAGE_LIST}!"
+			fi
+		fi
+	fi
+	echo $PACKAGE_LIST
 	case $1 in
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
 		"-l" ) echo "Listing packages names and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
