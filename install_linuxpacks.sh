@@ -42,7 +42,7 @@ else
 		else
 			PACKAGE_LIST=$2
 			if ! package_exists ${PACKAGE_LIST}; then
-				echo "Package name wrong or not available in the Debian Distro!"
+				echo "Package name wrong or package list *.packs not found!"
 				exit 0				
 			else
 				echo "Package ${PACKAGE_LIST} is available in the Debian Distro!"
