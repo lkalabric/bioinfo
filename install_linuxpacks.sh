@@ -23,7 +23,6 @@ function package_exists() {
     return $?
 }
 
-
 # Linux packages are listed in a files .packs at $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 
@@ -43,10 +42,10 @@ else
 		else
 			PACKAGE_LIST=$2
 			if ! package_exists ${PACKAGE_LIST}; then
-				echo "Package does not exist in Debian Distro!"
+				echo "Package name wrong or not available in the Debian Distro!"
 				exit 0				
 			else
-				echo "Let´s install ${PACKAGE_LIST}!"
+				echo "Package ${PACKAGE_LIST} is available in the Debian Distro!"
 			fi
 		fi
 	fi
