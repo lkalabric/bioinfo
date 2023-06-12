@@ -45,7 +45,6 @@ else
 			fi
 		fi
 	fi
-	echo $PACKAGE_LIST
 	case $1 in
 		"-i" ) echo "Installation in progress..."; exit 0 ;;
 		"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
