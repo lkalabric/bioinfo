@@ -60,7 +60,7 @@ for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do
 		echo $REPLY
 		if [[ $REPLY = "y" ]]; then
 			sudo apt-get install ${PACKAGE_NAME}
-			echo -ne "`date` sudo apt-get install $PACKAGE_NAME\r" >> ${HOME}/logs/install_linuxpackages.log
+			echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 			else
 			echo "You can install it anytime!"
 		fi
