@@ -14,6 +14,12 @@ if [[ $(sudo -v) ]]; then
     exit 0
 fi
 
+# Test if package exists in Debian
+function package_exists() {
+    return dpkg -l "$1" &> /dev/null
+}
+
+
 FILE=$2
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
@@ -30,7 +36,10 @@ else
 		   exit 0
 		fi
 	else
-		PACKAGE_LIST=$FILE
+	PACKAGE_LIST=$FILE
+		if ! package_exists ${PACKAGE_LIST}; then
+			echo "Let´s install ${PACKAGE_LIST}!"
+		fi
 	fi
 fi
 
