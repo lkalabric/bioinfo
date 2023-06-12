@@ -14,27 +14,23 @@ if [[ $(sudo -v) ]]; then
     exit 0
 fi
 
-# Test if package exists in Debian
-#function package_exists() {
-#    return dpkg -l "$1" &> /dev/null
-#}
+# Function to test if package exists in Debian
 function package_exists() {
     dpkg -s "$1" &> /dev/null
     return $?
 }
 
-# Linux packages are listed in a files .packs at $PACKAGELIST_DIR
+# Linux packages are listed in a files *.packs at the following $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Parameter wrong or missing!"
-	echo "Sintax: install_linuxpacks.sh <-i/-l/-h/--help> <package name or list>"
+	echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 	exit 0;
 else
 	if [[ -z $2 ]]; then
 		echo "Package name or package list *.packs file is required!"
-		echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
+		echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
 	else
 		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
@@ -57,10 +53,10 @@ else
 	esac
 fi
 
-# Read package list files and install each linux command if not exists
+# Read package list and install each linux command if exists
 for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
 	if ! which $PACKAGE_NAME > /dev/null; then
-		echo -e "$PACKAGE_NAME is not found! Install? (y/n) \c"
+		echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
 		read -r
 		echo $REPLY
 		if [[ $REPLY = "y" ]]; then
@@ -70,6 +66,6 @@ for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do
 			echo "You can install it anytime!"
 		fi
 	else
-		echo -e "$PACKAGE_NAME already installed in your Linux Distro!"
+		echo "$PACKAGE_NAME already installed in your Linux Distro!"
 	fi
 done
