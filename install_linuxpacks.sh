@@ -22,7 +22,7 @@ if [[ -z $FILE ]]; then
 	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
 	exit 0
 else
-	if [[ $FILE == *.packs ]; then
+	if [[ $FILE == *.packs ]]; then
 		if [ -f ${PACKAGELIST_DIR}/$FILE ]; then
 			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$FILE))
 		else
