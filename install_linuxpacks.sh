@@ -14,22 +14,23 @@ if [[ $(sudo -v) ]]; then
     exit 0
 fi
 
+FILE=$2
 # Linux packages listed in a file .packs
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
-if [[ -z $2 ]]; then
+if [[ -z $FILE ]]; then
 	echo "Package name or package list *.packs file is required!"
 	echo "Syntax: ./install_linuxpacks.sh <-i/-l> <package name/package list *.packs file>"
 	exit 0
 else
-	if [ "${2: -5}" == ".packs" ]; then
-		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
-			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
+	if [ "${FILE: -5}" == ".packs" ]; then
+		if [ -f ${PACKAGELIST_DIR}/$FILE ]; then
+			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$FILE))
 		else
-		   echo "File $2 is not a .packs or does not exist."
+		   echo "File $FILE is not a .packs or does not exist."
 		   exit 0
 		fi
 	else
-		PACKAGE_LIST=$2
+		PACKAGE_LIST=$FILE
 	fi
 fi
 
