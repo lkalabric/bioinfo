@@ -23,7 +23,7 @@ chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
 bash Downloads/Miniconda3-latest-Linux-x86_64.sh
 # Configure PATH
 # To make the change permanent, you need to define the $PATH variable in a shell configuration files like ~/.bashrc.
-$ echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
+echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
 
 # Using Miniconda
 # Instalar pacotes Bioconda
