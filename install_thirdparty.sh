@@ -1,10 +1,26 @@
-# Atualizar o python 3.9
-# https://www.pythoncentral.io/how-to-update-python/
-# https://gist.github.com/patrickmmartin/5b6b2ddecd29d6a1b2ffee2d8eea31ec
+#!/bin/bash
 
-# Instalar e configurar o Miniconda
-# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads
-# bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
+# command name: install_thirdparty.sh
+# author: Luciano Kalabric Silva
+# institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
+# last update: 13 JUN 2023
+# objetive: Install thirdparty commands in Linux Ubuntu
+# Syntax: ./install_thirdparty.sh
+
+# Update & upgrade your Linux Distro
+echo "Updating & upgrading installed packages before starting any new installation..."
+sudo apt-get update
+sudo apt list --upgradable
+sudo apt-get upgrade
+
+# Install and configure Miniconda
+# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P Downloads/
+chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
+bash Downloads/Miniconda3-latest-Linux-x86_64.sh
+# Configure PATH
+
+# Using Miniconda
 # Instalar pacotes Bioconda
 # https://anaconda.org/
 # source activate base
