@@ -32,6 +32,7 @@ fi
 # Using Miniconda
 # To keep compatibility between Python versions, we strogly recommend to create different envs to each app
 # Installation of afterqc
+# Link: https://github.com/OpenGene/AfterQC
 # conda create -n afterqc
 # source activate afterqc
 # conda install -c bioconda afterqc
