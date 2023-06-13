@@ -10,6 +10,9 @@
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
 # Requirements: R
 
+# Using example data
+fastqc -o qc-results -f data/hbv/0001.1/*.fastq
+
 # 3) Software favorito de Gilmar
 # Link:
 # Requirements:
