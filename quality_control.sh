@@ -1,4 +1,4 @@
-# There are different alternatives methods in bioinfo to do the quality control. Let's see them both: 
+# There are different alternatives methods in bioinfo to do the quality control. Let's see some of them: 
 
 # 1) Fastqc
 # Link: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
