@@ -18,4 +18,5 @@ fastqc -o qc-results -f fastq -c data/hbv/0001.1/*.fastq
 # 3) Afterqc
 # Link: https://github.com/OpenGene/AfterQC
 # Requirements: Miniconda
-
+source activate afterqc
+after.py -1 data/hbv/0001.1/A24_S6_L001_R1_001.fastq -2 data/hbv/0001.1/A24_S6_L001_R2_001.fastq
