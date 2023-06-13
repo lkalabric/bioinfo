@@ -8,10 +8,13 @@
 # Syntax: ./install_thirdparty.sh
 
 # Update & upgrade your Linux Distro
-echo "Updating & upgrading installed packages before starting any new installation..."
-sudo apt-get update
-sudo apt list --upgradable
-sudo apt-get upgrade
+# This script is good to superuser or root user only!!!
+if [[ $(sudo -v) ]]; then
+	echo "Updating & upgrading installed packages before starting any new installation..."
+	sudo apt-get update
+	sudo apt list --upgradable
+	sudo apt-get upgrade
+fi
 
 # Install and configure Miniconda
 # Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
