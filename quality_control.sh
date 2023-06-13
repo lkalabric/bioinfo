@@ -8,15 +8,14 @@
 # $ sudo apt install fastqc
 
 # Using example data
-fastqc -o qc-results -f data/hbv/0001.1/*.fastq
-
+fastqc -o qc-results -f fatsq -c data/hbv/0001.1/*.fastq
 
 # 2) Fastqrc 
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
 # Requirements: R
 
 
-# 3) Software favorito de Gilmar
-# Link:
-# Requirements:
+# 3) Afterqc
+# Link: https://github.com/OpenGene/AfterQC
+# Requirements: Miniconda
 
