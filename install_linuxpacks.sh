@@ -13,12 +13,17 @@ if [[ $(sudo -v) ]]; then
     sudo -v
     exit 0
 fi
-
 # Function to test if package exists in Debian
 function package_exists() {
     dpkg -s "$1" &> /dev/null
     return $?
 }
+
+# Update & upgrade your Linux Distro
+echo "Updating & upgrading installed packages before starting any new installation..."
+sudo apt-get update
+sudo apt list --upgradable
+sudo apt-get upgrade
 
 # Linux packages are listed in a files *.packs at the following $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
