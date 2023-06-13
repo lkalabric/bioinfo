@@ -16,19 +16,27 @@ if [[ $(sudo -v) ]]; then
 	sudo apt-get upgrade
 fi
 
-# Install and configure Miniconda
-# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P Downloads/
-chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
-bash Downloads/Miniconda3-latest-Linux-x86_64.sh
-# Configure PATH
-# To make the change permanent, you need to define the $PATH variable in a shell configuration files like ~/.bashrc.
-echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
-#After saving the file, run the following command to the export take effect:
-source ~/.bashrc
+if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
+	# Install and configure Miniconda if not installed
+	# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P Downloads/
+	chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
+	bash Downloads/Miniconda3-latest-Linux-x86_64.sh
+	# Configure PATH
+	# To make the change permanent, you need to define the $PATH variable in a shell configuration files like ~/.bashrc.
+	echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
+	# After saving the file, run the following command to the export take effect:
+	source ~/.bashrc
+fi
 
 # Using Miniconda
-# Instalar pacotes Bioconda
+# To keep compatibility between Python versions, we strogly recommend to create different envs to each app
+# Installation of afterqc
+# conda create -n afterqc
+# source activate afterqc
+# conda install -c bioconda afterqc
+
+# Installation of other Bioconda packages
 # https://anaconda.org/
 # source activate base
 # conda install h5py
