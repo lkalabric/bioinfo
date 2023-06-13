@@ -8,7 +8,7 @@
 # $ sudo apt install fastqc
 
 # Using example data
-fastqc -o qc-results -f fatsq -c data/hbv/0001.1/*.fastq
+fastqc -o qc-results -f fastq -c data/hbv/0001.1/*.fastq
 
 # 2) Fastqrc 
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
