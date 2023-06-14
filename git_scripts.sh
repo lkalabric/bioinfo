@@ -28,7 +28,7 @@ else
 	else
 	    cd ${WD}/${REPO}
 	    git pull
-	    cp *.sh ${SD}
+	    cp *.sh *.R ${SD}
 	    chmod +x ${SD}/*.sh
 	    cd
      fi
