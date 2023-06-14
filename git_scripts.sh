@@ -11,7 +11,7 @@
 REPO=$1
 
 # Repository directory
-WD="${HOME}/repos"
+RD="${HOME}/repos"
 
 # Scripts diretory
 SD="${HOME}/scripts"
@@ -20,18 +20,19 @@ SD="${HOME}/scripts"
 if [ $# = 0 ]; then
 	echo "Repository name required! Sintax: git_scripts.sh <repository>"
 	echo "List of cloned repositories:"
-	ls $WD
+	ls $RD
 	exit 0;
 else
-	if [ ! -d "${WD}/${REPO}" ]; then
+	if [ ! -d "${RD}/${REPO}" ]; then
 		echo "Repository not present in repos/"
 	else
-		cd ${WD}/${REPO}
+		cd ${RD}/${REPO}
 		git pull
-		# Copy file if only if it exists and regular file:
-		[ -f ${WD}/${REPO}/*.sh ] && cp *.sh ${SD}
-  		chmod +x ${SD}/*.sh		
-    		[ -f ${WD}/${REPO}/*.R ] && cp *.R ${SD}
-		cd
+		# Copy files only if they exist
+  		find ${RD}/${REPO} -name '*.sh' -exec cp {} ${SD} \;
+		chmod +x ${SD}/*.sh
+  		# Copy files only if they exist
+    		find ${RD}/${REPO} -name '*.R' -exec cp {} ${SD} \;
+      		cd
 	fi
 fi
