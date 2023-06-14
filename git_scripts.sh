@@ -18,18 +18,20 @@ SD="${HOME}/scripts"
 
 # Validate the parameter
 if [ $# = 0 ]; then
-    echo "Repository name required! Sintax: git_scripts.sh <repository>"
-    echo "List of cloned repositories:"
-    ls $WD
-    exit 0;
+	echo "Repository name required! Sintax: git_scripts.sh <repository>"
+	echo "List of cloned repositories:"
+	ls $WD
+	exit 0;
 else
 	if [ ! -d "${WD}/${REPO}" ]; then
-	    echo "Repository not present in repos/"
+		echo "Repository not present in repos/"
 	else
-	    cd ${WD}/${REPO}
-	    git pull
-	    cp *.sh *.R ${SD}
-	    chmod +x ${SD}/*.sh
-	    cd
-     fi
+		cd ${WD}/${REPO}
+		git pull
+		# Copy file if only if it exists and regular file:
+		[ -f ${WD}/${REPO}/*.sh ] && cp *.sh ${SD}
+  		chmod +x ${SD}/*.sh		
+    		[ -f ${WD}/${REPO}/*.R ] && cp *.R ${SD}
+		cd
+	fi
 fi
