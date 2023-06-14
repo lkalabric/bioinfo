@@ -10,20 +10,26 @@
 # Passes repo name to the script
 REPO=$1
 
+# Repository directory
+WD="${HOME}/repos"
+
+# Scripts diretory
+SD="${HOME}/scripts"
+
 # Validate the parameter
 if [ $# = 0 ]; then
     echo "Repository name required! Sintax: git_scripts.sh <repository>"
-    echo "List of repositories cloned:"
-    ls ${HOME}/repos/
+    echo "List of cloned repositories:"
+    ls $WD
     exit 0;
 else
-	if [ ! -d "${HOME}/repos/${REPO}" ]; then
+	if [ ! -d "${WD}/${REPO}" ]; then
 	    echo "Repository not present in repos/"
 	else
-	    cd ${HOME}/repos/${REPO}
+	    cd ${WD}/${REPO}
 	    git pull
-	    cp *.sh ~/scripts/
-	    chmod +x ~/scripts/*
+	    cp *.sh ${SD}
+	    chmod +x ${SD}/*.sh
 	    cd
-	fi
+     fi
 fi
