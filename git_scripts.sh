@@ -11,7 +11,7 @@
 REPO=$1
 
 # Repository directory
-RD="${HOME}/repos"
+RD="${HOME}/repos/${REPO}"
 
 # Scripts diretory
 SD="${HOME}/scripts"
@@ -23,10 +23,10 @@ if [ $# = 0 ]; then
 	ls $RD
 	exit 0;
 else
-	if [ ! -d "${RD}/${REPO}" ]; then
+	if [ ! -d ${RD} ]; then
 		echo "Repository not present in repos/"
 	else
-		cd ${RD}/${REPO}
+		cd ${RD}
 		git pull
 		# Copy files only if they exist
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SD} \;
