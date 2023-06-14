@@ -29,7 +29,7 @@ else
 		cd ${RD}/${REPO}
 		git pull
 		# Copy files only if they exist
-  		find . (-name '*.sh' -o -name '*.R' \) -exec cp {} ${SD} \;
+  		find . \(-name '*.sh' -o -name '*.R' \) -exec cp {} ${SD} \;
 		chmod +x ${SD}/*.sh
   		# Copy files only if they exist
     		# find . -name '*.R' -exec cp {} ${SD} \;
