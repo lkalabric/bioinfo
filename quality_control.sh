@@ -39,7 +39,7 @@ fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
 # Installation:
 # $ install_thirdparty.sh
 source activate afterqc
-after.py -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
+after.py --qc_only -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
 
 # Quality filtering
 
