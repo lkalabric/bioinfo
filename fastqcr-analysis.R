@@ -1,3 +1,6 @@
+#!/usr/bin/env Rscript
+
+# 
 # Projeto: Bioinfo
 # Autor: Luciano Kalabric
 # Data: 13/06/2023
@@ -14,7 +17,8 @@ library(fastqcr)
 
 # Environment preparation
 SAMPLE = '0001.1'
-
+print SAMPLE
+quit()
 
 # Set working directory in Linux
 setwd("~/") # You only need to do this once
