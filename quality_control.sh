@@ -6,7 +6,6 @@
 # last update: 14 JUN 2023
 # objetive: Give examples of quality control apps
 # Syntax: ./quality_control.sh
-# 
 
 # This is the very first step after basecalling and demux steps which are undergone in apps from each NGS tech.
 # There are different methods in bioinfo to do quality control. Let's see some of them: 
@@ -18,8 +17,11 @@ OUTPUT_DIR="${HOME}/qc-results/${SAMPLE}"
 [ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
-# Preliminary data quality
+# Quality control only
 
+##
+# Illumina data
+##
 # 1) Fastqc
 # Link: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 # Requirements: Java
@@ -32,7 +34,6 @@ fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
 # Requirements: R
 # Installation:
-
 
 # 3) Afterqc
 # Link: https://github.com/OpenGene/AfterQC
@@ -48,7 +49,19 @@ after.py --qc_only -d ${INPUT_DIR} -2 *R2*
 # Pair-ended analysis
 after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
-# Quality filtering
-after.py -d ${INPUT_DIR} -1 *R1* -2 *R2*
+##
+# MinIon data
+##
+1) pycoQC
+# Link: https://hpc.nih.gov/apps/pycoQC.html
+
+# Requirements: Miniconda (Python)
+# Installation:
+# $ install_thirdparty.sh
+# Or: If you already have Conda env, run this
+# $ conda create -n pycoqc
+# $ source activate pycoqc
+# $ conda install -c bioconda pycoqc
+source activate pycoqc
 
 # The next step continues in quality_filter.sh
