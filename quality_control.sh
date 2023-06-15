@@ -51,4 +51,4 @@ after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 # Quality filtering
 after.py -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
-# Next step continues in quality_filter.sh
+# The next step continues in quality_filter.sh
