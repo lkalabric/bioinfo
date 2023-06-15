@@ -42,6 +42,7 @@ source activate afterqc
 after.py --qc_only -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
 
 # Quality filtering
+after.py -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
 
 # Use of timmomatic for Illumina data
 
