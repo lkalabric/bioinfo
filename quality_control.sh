@@ -8,7 +8,8 @@
 # Syntax: ./quality_control.sh
 # 
 
-# There are different methods in bioinfo to do the quality control. Let's see some of them: 
+# This is the very first step after basecalling and demux steps which are undergone in apps from each NGS tech.
+# There are different methods in bioinfo to do quality control. Let's see some of them: 
 
 # Example data
 SAMPLE="0001.1"
@@ -39,12 +40,15 @@ fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
 # Installation:
 # $ install_thirdparty.sh
 source activate afterqc
-after.py --qc_only -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
+# Quality control only
+cd ${OUTPUT_DIR}
+# Single-ended analysis
+after.py --qc_only -d ${INPUT_DIR} -1 *R1*
+after.py --qc_only -d ${INPUT_DIR} -2 *R2*
+# Pair-ended analysis
+after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
 # Quality filtering
-after.py -1 ${INPUT_DIR}/*R1* -2 ${INPUT_DIR}/*R2*
+after.py -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
-# Use of timmomatic for Illumina data
-
-
-# Use of Nanofilt for MinIon data
+# Next step continues in quality_filter.sh
