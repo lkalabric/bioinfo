@@ -38,7 +38,12 @@ else
 		echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
 	else
-		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
+		case $1 in
+			"-i" ) echo "Installation in progress...";;
+			"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
+			* ) echo "Invalid option!"; exit 0 ;;
+		esac	
+  		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
 			PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/$2))
 		else
 			PACKAGE_LIST=$2
@@ -50,11 +55,6 @@ else
 			fi
 		fi
 	fi
-	case $1 in
-		"-i" ) echo "Installation in progress...";;
-		"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
-		* ) echo "Invalid option!"; exit 0 ;;
-	esac
 fi
 
 # Read package list and install each linux command if exists
