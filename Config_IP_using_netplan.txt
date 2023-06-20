@@ -1,0 +1,21 @@
+Link: https://blog.clusterweb.com.br/?p=4611
+After install a virtual machine which shares the same network card under DHCP, one may need to configure a static IP using netplan as described below:
+$ sudo nano /etc/netplan/*.yaml
+
+Edit this configuration file to look like this:
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    eth0:
+      addresses:
+      - 10.71.17.54/18
+      gateway4: 10.71.0.100
+      nameservers:
+        addresses:
+        - 10.71.10.10
+        search:
+        - fiocruz.local
+  version: 2
+  
+Run to apply changes:
+$ sudo netplan apply
