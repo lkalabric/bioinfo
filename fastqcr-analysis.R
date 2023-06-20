@@ -17,8 +17,8 @@ library(fastqcr)
 
 # Environment preparation
 SAMPLE = '0001.1'
-print SAMPLE
-quit()
+#print SAMPLE
+#quit()
 
 # Set working directory in Linux
 setwd("~/") # You only need to do this once
@@ -30,13 +30,13 @@ OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
 #INPUT_DIR = paste(getwd(),SAMPLE,sep="/")
 #OUTPUT_DIR = paste(getwd(),'qc-results',SAMPLE,sep="/")
 
-
 # Run FastQC to generation FastQC Reports 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fastqc(fq.dir = INPUT_DIR, # FASTQ files directory
        qc.dir = OUTPUT_DIR, # Results direcory
        threads = 4                    # Number of threads
 )
+quit()
 
 # Aggregating Multiple FastQC Reports into a Data Frame 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
