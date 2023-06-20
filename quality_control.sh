@@ -30,10 +30,11 @@ cd ${OUTPUT_DIR}
 # $ sudo apt install fastqc
 fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
 
-# 2) Fastqrc 
+# 2) Fastqcr 
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
 # Requirements: R
 # Installation:
+Rscript fastqcr-analysis.R
 
 # 3) Afterqc
 # Link: https://github.com/OpenGene/AfterQC
