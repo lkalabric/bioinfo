@@ -7,8 +7,10 @@
 
 # Installation from CRAN
 # You only need to do this once
-# One may need sudo help here to install R and Rscript dependencies
-# install.packages("fastqcr")
+# Link: https://stackoverflow.com/questions/18306362/run-r-script-from-command-line
+# To install to the default location:
+# R -e 'install.packages(c("package1", "package2"))'
+# R -e 'install.packages("fastqcr")'
 
 # Or, install the latest version from GitHub:
 # if(!require(devtools)) install.packages("devtools")
