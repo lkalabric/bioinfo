@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+##!/usr/bin/env Rscript
 
 # 
 # Projeto: Bioinfo
@@ -6,7 +6,8 @@
 # Data: 13/06/2023
 
 # Installation from CRAN
-install.packages("fastqcr")
+# You only need to do this once
+# install.packages("fastqcr")
 
 # Or, install the latest version from GitHub:
 # if(!require(devtools)) install.packages("devtools")
