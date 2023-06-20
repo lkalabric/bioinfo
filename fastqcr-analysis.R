@@ -7,6 +7,7 @@
 
 # Installation from CRAN
 # You only need to do this once
+# One may need sudo help here to install R and Rscript dependencies
 # install.packages("fastqcr")
 
 # Or, install the latest version from GitHub:
