@@ -23,7 +23,7 @@ SAMPLE = '0001.1'
 # Set working directory in Linux
 setwd("~/") # You only need to do this once
 INPUT_DIR = paste('data/hbv/',SAMPLE,sep="")
-OUTPUT_DIR = paste('qc-results/',SAMPLE,sep="")
+OUTPUT_DIR = paste('qc-results/R/',SAMPLE,sep="")
 
 # Set working directory in Windows
 #setwd("C:/Users/kalabric/Downloads") # You only need to do this once
