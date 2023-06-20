@@ -53,7 +53,7 @@ after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 ##
 # MinIon data
 ##
-1) pycoQC
+# 1) pycoQC
 # Link: https://hpc.nih.gov/apps/pycoQC.html
 
 # Requirements: Miniconda (Python)
