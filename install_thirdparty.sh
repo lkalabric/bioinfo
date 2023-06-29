@@ -42,9 +42,13 @@ fi
 # source activate base
 # conda install h5py
 # conda install -c bioconda iqtree
-conda create -n pycoqc
-source activate pycoqc
-conda install -c "bioconda/label/cf201901" pycoqc
+conda create -n pycoQC python=3.6
+conda activate pycoQC
+conda install -c aleg -c anaconda -c bioconda -c conda-forge
+# Link: https://a-slide.github.io/pycoQC/installation/
+# conda create -n pycoqc
+# source activate pycoqc
+# conda install -c "bioconda/label/cf201901" pycoqc
 conda create -n trimmomatic
 source activate trimmomatic
 conda install -c bioconda trimmomatic
