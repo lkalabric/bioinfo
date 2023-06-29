@@ -42,6 +42,9 @@ fi
 # source activate base
 # conda install h5py
 # conda install -c bioconda iqtree
+conda create -n pycoqc
+source activate pycoqc
+conda install -c bioconda pycoqc
 conda create -n trimmomatic
 source activate trimmomatic
 conda install -c bioconda trimmomatic
