@@ -17,6 +17,7 @@ MINLENTGH=100
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
     echo "Syntax: quality_filter.sh <SAMPLE_NAME> <-illumina | -minion>"
+    exit 0    
 fi
 
 case $2 in
@@ -63,7 +64,7 @@ case $2 in
   ;;
   *)
   echo "Invalid parameter!"
-  exit 0
+  exit 1
 esac
   
 
