@@ -44,7 +44,7 @@ fi
 # conda install -c bioconda iqtree
 conda create -n pycoqc
 source activate pycoqc
-conda install -c bioconda pycoqc
+conda install -c "bioconda/label/cf201901" pycoqc
 conda create -n trimmomatic
 source activate trimmomatic
 conda install -c bioconda trimmomatic
