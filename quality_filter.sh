@@ -15,7 +15,7 @@ MINLENTGH=100
 
 # Validate arguments
 if ["$#" -ne 2]; then
-    echo "illegal number of parameters"
+    echo "Illegal number of parameters"
     echo "Syntax: quality_filter.sh <SAMPLE_NAME> <-illumina | -minion>"
 fi
 
