@@ -8,7 +8,7 @@
 # Syntax: ./quality_filter.sh
 
 INPUTDIR="${HOME}/data/hbv/0001.1"
-OUTPUTDIR="${HOME}/qc-filtar/hbv/0001.1"
+OUTPUTDIR="${HOME}/qc-filter/hbv/0001.1"
 [ ! -d $OUTPUTDIR ] && mkdir -p $OUTPUTDIR
 
 ##
