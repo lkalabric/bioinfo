@@ -7,6 +7,10 @@
 # objetive: Give examples of quality filter apps
 # Syntax: ./quality_filter.sh
 
+INPUTDIR="${HOME}/data/hbv/0001.1"
+OUTPUTDIR="${HOME}/qc-filtar/hbv/0001.1"
+[ ! -d $OUTPUTDIR ] && mkdir -p $OUTPUTDIR
+
 ##
 # Illumina data
 ##
@@ -17,15 +21,17 @@
 # $ install_thirdparty.sh
 source activate afterqc
 # Single-ended analysis
-after.py -d ${INPUT_DIR} -1 *R1*
-after.py -d ${INPUT_DIR} -2 *R2*
+# after.py -d ${INPUT_DIR} -1 *R1*
+# after.py -d ${INPUT_DIR} -2 *R2*
 # Pair-ended analysis
-after.py -d ${INPUT_DIR} -1 *R1* -2 *R2*
+# after.py -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
 # 2) Trimmomatic
 # Use: Filtering and trimming Illumina data
 # Link: http://www.usadellab.org/cms/?page=trimmomatic
-java -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
+# java -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
+source activate trimmomatic
+trimmomatic PE ${INPUTDIR}/A24_S6_L001_R1_001.fastq.gz ${INPUTDIR}/A24_S6_L001_R2_001.fastq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
 
 ##
 # MinIon data
@@ -40,7 +46,6 @@ java -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output
 # $ conda create -n nanofilt
 # $ source activate nanofilt
 # $ conda install -c bioconda nanofilt
-source activate nanofilt
+# source activate nanofilt
 # NanoFilt -l 100 -q 9 ...
-
 # The next step continues in other_filters.sh
