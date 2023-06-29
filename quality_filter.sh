@@ -14,7 +14,7 @@ OUTPUTDIR="${HOME}/qc-filter/hbv/$1"
 MINLENTGH=100
 
 # Validate arguments
-if ["$#" -ne 2]; then
+if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
     echo "Syntax: quality_filter.sh <SAMPLE_NAME> <-illumina | -minion>"
 fi
