@@ -34,6 +34,7 @@ fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
 # Link: https://rpkgs.datanovia.com/fastqcr/index.html
 # Requirements: R
 # Installation:
+# Being developed
 Rscript fastqcr-analysis.R
 
 # 3) Afterqc
@@ -55,7 +56,6 @@ after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 ##
 # 1) pycoQC
 # Link: https://hpc.nih.gov/apps/pycoQC.html
-
 # Requirements: Miniconda (Python)
 # Installation:
 # $ install_thirdparty.sh
@@ -63,6 +63,5 @@ after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 # $ conda create -n pycoqc
 # $ source activate pycoqc
 # $ conda install -c bioconda pycoqc
-source activate pycoqc
-
+# source activate pycoqc
 # The next step continues in quality_filter.sh
