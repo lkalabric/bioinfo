@@ -23,14 +23,14 @@ if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
 	bash Downloads/Miniconda3-latest-Linux-x86_64.sh
 	# Configure PATH
-	# To make the change permanent, you need to define the $PATH variable in a shell configuration files like ~/.bashrc.
+	# To make the change permanent, you need to define the $PATH variable in a shell configuration file like ~/.bashrc.
 	echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
 	# After saving the file, run the following command to the export take effect:
 	source ~/.bashrc
 fi
 
 # Using Miniconda
-# To keep compatibility between Python versions, we strogly recommend to create different envs to each app
+# To keep compatibility between Python versions, we strongly recommend creating different envs for each app
 # Installation of afterqc
 # Link: https://github.com/OpenGene/AfterQC
 # conda create -n afterqc
@@ -42,7 +42,9 @@ fi
 # source activate base
 # conda install h5py
 # conda install -c bioconda iqtree
-# conda install -c bioconda trimmomatic
+conda create -n trimmomatic
+source activate trimmomatic
+conda install -c bioconda trimmomatic
 # conda install -c bioconda cutadapt # Requer gcc 9
 # conda install -c bioconda nanofilt
 # conda install -c bioconda hmmer
