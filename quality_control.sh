@@ -10,20 +10,21 @@
 # This is the very first step after basecalling and demux steps which are undergone in apps from each NGS tech.
 # There are different methods in bioinfo to do quality control. Let's see some of them: 
 
-# Variable definitions
-SAMPLE_DIR = $1
-INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
-OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
-[ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
-cd ${OUTPUT_DIR}
 
-# Validate arguments
+# Validating arguments
+SAMPLE_DIR = $1
 [ -z ${SAMPLE_ID} ] && SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
     echo "Syntax: quality_control.sh <SAMPLE_ID> <-illumina | -minion>"
     exit 0    
 fi
+
+# Declaring variables
+INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
+OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
+[ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
+cd ${OUTPUT_DIR}
 
 case $2 in
   "-illumina")
