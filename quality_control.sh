@@ -12,21 +12,21 @@
 
 
 # Validating arguments
-SAMPLE_DIR=$1
-[ -z ${SAMPLE_ID} ] && SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: quality_control.sh <SAMPLE_ID> <-illumina | -minion>"
+    echo "Syntax: quality_control.sh <-illumina | -minion> <SAMPLE_ID>"
     exit 0    
 fi
 
 # Declaring variables
+SAMPLE_DIR=$2
+[ -z ${SAMPLE_ID} ] && echo "Using example data 0001.1"; SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
 OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
 [ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
-case $2 in
+case $1 in
   "-illumina")
     # Quality control only
     
@@ -46,7 +46,7 @@ case $2 in
     # Requirements: R
     # Installation:
     # Being developed
-    Rscript fastqcr-analysis.R
+    # Rscript fastqcr-analysis.R # Need to be written!!!
     
     # 3) Afterqc
     # Link: https://github.com/OpenGene/AfterQC
