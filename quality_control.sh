@@ -20,8 +20,8 @@ fi
 
 # Declaring variables
 SAMPLE_DIR=$2
-[ -z ${SAMPLE_ID} ] && echo "Using example data 0001.1"; SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
+[ ! -d ${INPUT_DIR} ] && echo "Using example data 0001.1"; INPUT_DIR="${HOME}/data/hbv/0001.1" # If a bash variable is empty, let's use an example data
 OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
 [ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
