@@ -10,58 +10,74 @@
 # This is the very first step after basecalling and demux steps which are undergone in apps from each NGS tech.
 # There are different methods in bioinfo to do quality control. Let's see some of them: 
 
-# Example data
+# Variable definitions
 SAMPLE="0001.1"
 INPUT_DIR="${HOME}/data/hbv/${SAMPLE}"
 OUTPUT_DIR="${HOME}/qc-results/${SAMPLE}"
 [ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
-# Quality control only
+# Validate arguments
+if [[ $# -ne 2 ]]; then
+    echo "Illegal number of parameters"
+    echo "Syntax: quality_control.sh <SAMPLE_NAME> <-illumina | -minion>"
+    exit 0    
+fi
 
-##
-# Illumina data
-##
-# 1) Fastqc
-# Link: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
-# Requirements: Java
-# Installation:
-# $ sudo apt install default-jre
-# $ sudo apt install fastqc
-fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
+case $2 in
+  "-illumina")
+    # Quality control only
+    
+    ##
+    # Illumina data
+    ##
+    # 1) Fastqc
+    # Link: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+    # Requirements: Java
+    # Installation:
+    # $ sudo apt install default-jre
+    # $ sudo apt install fastqc
+    fastqc -o ${OUTPUT_DIR} -f fastq -c ${INPUT_DIR}/*.fastq
+    
+    # 2) Fastqcr 
+    # Link: https://rpkgs.datanovia.com/fastqcr/index.html
+    # Requirements: R
+    # Installation:
+    # Being developed
+    Rscript fastqcr-analysis.R
+    
+    # 3) Afterqc
+    # Link: https://github.com/OpenGene/AfterQC
+    # Requirements: Miniconda (Python)
+    # Installation:
+    # $ install_thirdparty.sh
+    source activate afterqc
+    # Quality control only
+    cd ${OUTPUT_DIR}
+    # Single-ended analysis
+    after.py --qc_only -d ${INPUT_DIR} -1 *R1*
+    after.py --qc_only -d ${INPUT_DIR} -2 *R2*
+    # Pair-ended analysis
+    after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
 
-# 2) Fastqcr 
-# Link: https://rpkgs.datanovia.com/fastqcr/index.html
-# Requirements: R
-# Installation:
-# Being developed
-Rscript fastqcr-analysis.R
-
-# 3) Afterqc
-# Link: https://github.com/OpenGene/AfterQC
-# Requirements: Miniconda (Python)
-# Installation:
-# $ install_thirdparty.sh
-source activate afterqc
-# Quality control only
-cd ${OUTPUT_DIR}
-# Single-ended analysis
-after.py --qc_only -d ${INPUT_DIR} -1 *R1*
-after.py --qc_only -d ${INPUT_DIR} -2 *R2*
-# Pair-ended analysis
-after.py --qc_only -d ${INPUT_DIR} -1 *R1* -2 *R2*
-
-##
-# MinIon data
-##
-# 1) pycoQC
-# Link: https://hpc.nih.gov/apps/pycoQC.html
-# Requirements: Miniconda (Python)
-# Installation:
-# $ install_thirdparty.sh
-# Or: If you already have Conda env, run this
-# $ conda create -n pycoqc
-# $ source activate pycoqc
-# $ conda install -c bioconda pycoqc
-# source activate pycoqc
-# The next step continues in quality_filter.sh
+;;
+  "-minion")
+  ##
+  # MinIon data
+  ##
+  # 1) pycoQC
+  # Link: https://hpc.nih.gov/apps/pycoQC.html
+  # Requirements: Miniconda (Python)
+  # Installation:
+  # $ install_thirdparty.sh
+  # Or: If you already have Conda env, run this
+  # $ conda create -n pycoqc
+  # $ source activate pycoqc
+  # $ conda install -c bioconda pycoqc
+  # source activate pycoqc
+  # The next step continues in quality_filter.sh
+ ;;
+  *)
+    echo "Invalid parameter!"
+    exit 1
+esac
