@@ -11,16 +11,17 @@
 # There are different methods in bioinfo to do quality control. Let's see some of them: 
 
 # Variable definitions
-SAMPLE="0001.1"
-INPUT_DIR="${HOME}/data/hbv/${SAMPLE}"
-OUTPUT_DIR="${HOME}/qc-results/${SAMPLE}"
+SAMPLE_DIR = $1
+INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
+OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
 [ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
 # Validate arguments
+[ -z ${SAMPLE_ID} ] && SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: quality_control.sh <SAMPLE_NAME> <-illumina | -minion>"
+    echo "Syntax: quality_control.sh <SAMPLE_ID> <-illumina | -minion>"
     exit 0    
 fi
 
