@@ -12,7 +12,7 @@
 
 
 # Validating arguments
-SAMPLE_DIR = $1
+SAMPLE_DIR=$1
 [ -z ${SAMPLE_ID} ] && SAMPLE_ID="0001.1" # If a bash variable is empty, let's use an example data
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
