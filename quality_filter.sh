@@ -7,20 +7,26 @@
 # objetive: Give examples of quality filter apps
 # Syntax: ./quality_filter.sh
 
-# Variable definitions
-INPUTDIR="${HOME}/data/hbv/$1"
-OUTPUTDIR="${HOME}/qc-filter/hbv/$1"
-[ ! -d ${OUTPUTDIR} ] && mkdir -p ${OUTPUTDIR}
-MINLENTGH=100
-
 # Validate arguments
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: quality_filter.sh <SAMPLE_NAME> <-illumina | -minion>"
+    echo "Syntax: quality_filter.sh <-illumina | -minion> <SAMPLE_ID> " 
     exit 0    
 fi
 
-case $2 in
+# Declaring variables
+SAMPLE_ID=$2
+INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
+if [ ! -d ${INPUT_DIR} ]; then
+    echo "Sample not identified. Using example data 0001.1 instead!"
+    INPUT_DIR="${HOME}/data/hbv/0001.1" # If a bash variable is empty, let's use an example data
+fi
+#OUTPUT_DIR="${HOME}/qc-filter/${SAMPLE_ID}"
+OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/qc-filter"
+[ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
+MINLENTGH=100
+
+case $1 in
   "-illumina")
       ##
     # Illumina data
