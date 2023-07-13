@@ -19,7 +19,7 @@ if [[ $# -ne 2 ]]; then
 fi
 
 # Declaring variables
-SAMPLE_DIR=$2
+SAMPLE_ID=$2
 INPUT_DIR="${HOME}/data/hbv/${SAMPLE_ID}"
 if [ ! -d ${INPUT_DIR} ]; then
     echo "Sample not identified. Using example data 0001.1 instead!"
