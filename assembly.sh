@@ -29,9 +29,11 @@ cd ${OUTPUT_DIR}
 case $1 in
   "-illumina")
     # De Novo Assembly
+    # Decompress input files from qc-filter dir
+    gzip -d ${INPUT_DIR}/*.gz
     # Use of spades
     source activate spades
-    spades.py -1 ${INPUT_DIR}/output_forward_paired.fq.gz -2 ${INPUT_DIR}/output_reverse_paired.fq.gz -o ${OUTPUT_DIR}
+    spades.py -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     
     # Assembly by reference
     # Use of bwa    
