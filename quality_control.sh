@@ -27,7 +27,7 @@ if [ ! -d ${INPUT_DIR} ]; then
 fi
 #OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
 OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/qc-control"
-[ -d ${OUTPUT_DIR} ] || mkdir ${OUTPUT_DIR}
+[ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
 case $1 in
