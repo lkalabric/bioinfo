@@ -33,7 +33,7 @@ case $1 in
     gzip -d ${INPUT_DIR}/*.gz
     # Use of spades
     source activate spades
-    spades.py -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+    spades.py -pe1 ${INPUT_DIR}/output_forward_paired.fq -pe2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     
     # Assembly by reference
     # Use of bwa    
