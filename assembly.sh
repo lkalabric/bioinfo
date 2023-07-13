@@ -31,7 +31,7 @@ case $1 in
     # De Novo Assembly
     # Use of spades
     source activate spades
-    spades.py -o ${OUTPUT_DIR} -1 ${INPUT_DIR}/output_forward_paired.fq.gz -2 ${INPUT_DIR}/output_reverse_paired.fq.gz
+    spades.py -1 ${INPUT_DIR}/output_forward_paired.fq.gz -2 ${INPUT_DIR}/output_reverse_paired.fq.gz -o ${OUTPUT_DIR}
     
     # Assembly by reference
     # Use of bwa    
