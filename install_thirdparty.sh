@@ -37,24 +37,27 @@ fi
 # source activate afterqc
 # conda install -c bioconda afterqc
 
-# Installation of other Bioconda packages
+# Installation Bioconda packages
 # https://anaconda.org/
-# source activate base
+
+# This process is divied into three basic step per app
+# 1) Create an environment for the new app: conda create -n <app_environment_name>
+# 2) Activate this environment: source activate <app_environment_name>
+# 3) Install the app: conda install -c bioconda <app_name>
+# source activate base # base enviroment
 # conda install h5py
-# conda install -c bioconda iqtree
-conda create -n pycoQC python=3.6
-conda activate pycoQC
-conda install -c aleg -c anaconda -c bioconda -c conda-forge
-# Link: https://a-slide.github.io/pycoQC/installation/
-# conda create -n pycoqc
-# source activate pycoqc
-# conda install -c "bioconda/label/cf201901" pycoqc
-conda create -n trimmomatic
-source activate trimmomatic
-conda install -c bioconda trimmomatic
-# conda install -c bioconda cutadapt # Requer gcc 9
+# conda install -c bioconda iqtree # iqtree app
+# conda create -n trimmomatic # trimmomatic app
+# source activate trimmomatic
+# conda install -c bioconda trimmomatic
+conda create -n spades
+source activate spades
+conda install -c bioconda spades
+# conda install -c bioconda cutadapt # Requires gcc 9or more
 # conda install -c bioconda nanofilt
 # conda install -c bioconda hmmer
+
+
 
 # Configurar miniconda para outros usuários
 #https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/admin-multi-user-install.html
