@@ -15,7 +15,7 @@ if [[ $(sudo -v) ]]; then
 fi
 # Function to test if package exists in Debian
 function package_exists() {
-    dpkg -s "$1" &> /dev/null
+    dpkg -s "$2" &> /dev/null
     return $?
 }
 
