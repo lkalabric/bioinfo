@@ -4,7 +4,7 @@
 # author: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 14 JUN 2023
-# objetive: Give examples of quality control apps
+# objetive: Give examples of assembly apps
 # Syntax: ./assembly.sh
 
 # Validating arguments
@@ -32,8 +32,10 @@ case $1 in
     # Decompress input files from qc-filter dir
     gzip -d ${INPUT_DIR}/*.gz
     # Use of spades
+    # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
+    # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.  
     source activate spades
-    spades.py --pe1-1 ${INPUT_DIR}/output_forward_paired.fq --pe1-2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+    spades.py -s ${INPUT_DIR}/output_forward_paired.fq --pe1-2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     
     # Assembly by reference
     # Use of bwa    
