@@ -33,9 +33,9 @@ case $1 in
     gzip -d ${INPUT_DIR}/*.gz
     # Use of spades
     # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
-    # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.  
-    source activate spades
-    spades.py -s ${INPUT_DIR}/output_forward_paired.fq --pe1-2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+    # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
+    # Note: We decided to avoid unpaired reads!!!!
+    spades --pe1-1 ${INPUT_DIR}/output_forward_paired.fq --pe1-2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     
     # Assembly by reference
     # Use of bwa    
