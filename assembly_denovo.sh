@@ -26,7 +26,7 @@ OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_denovo"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
-REFSEQ="${HOME}/data/hbv/REFSEQ/hbv/NC_003977.2.fasta"
+REFSEQ="${HOME}/data/REFSEQ/hbv/NC_003977.2.fasta"
 
 case $1 in
   "-illumina")
