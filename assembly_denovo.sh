@@ -26,11 +26,7 @@ OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_denovo"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
-#OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
-RE_ASSEMBLY_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/reassembly"
-[ -d ${RE_ASSEMBLY_DIR} ] || mkdir -p ${RE_ASSEMBLY_DIR}
-cd ${RE_ASSEMBLY_DIR}
-
+REFSEQ="${HOME}/data/hbv/REFSEQ/hbv/NC_003977.2.fasta"
 
 case $1 in
   "-illumina")
@@ -42,12 +38,11 @@ case $1 in
     # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
     # Note: We decided to avoid unpaired reads!!!!
     # For single lib use -1 and -2
-    spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     # For single lib all reads paired and unpaired use -s
     # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
-    # Re-assembly
-    spades -s ${OUTPUT_DIR}/contigs.fasta -o ${RE_ASSEMBLY_DIR} --only-assembler
-        # Assembly by reference
+    # Assembly by reference
+    spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR} --trusted-contigs ${REFSEQ}
     # Use of bwa    
     
 ;;
