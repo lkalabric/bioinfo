@@ -42,7 +42,7 @@ case $1 in
     # For single lib all reads paired and unpaired use -s
     # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
     # Assembly by reference
-    spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR} --trusted-contigs ${REFSEQ}
+    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR} --trusted-contigs ${REFSEQ}
     # 2) Use of bwa
     bwa index ${REFSEQ}
     bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq gzip -3 > aln-pe.sam.gz
