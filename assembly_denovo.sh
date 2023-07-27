@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# command name: assembly.sh
+# command name: assembly_denovo.sh
 # author: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 14 JUN 2023
 # objetive: Give examples of assembly apps
-# Syntax: ./assembly.sh
+# Syntax: ./assembly_denovo.sh
 
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: assembly.sh <-illumina | -minion> <SAMPLE_ID>"
+    echo "Syntax: assembly_denovo.sh <-illumina | -minion> <SAMPLE_ID>"
     exit 0    
 fi
 
