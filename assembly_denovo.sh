@@ -33,7 +33,7 @@ case $1 in
     # De Novo Assembly
     # Decompress input files from qc-filter dir
     gzip -d ${INPUT_DIR}/*.gz
-    # Use of spades
+    # 1) Use of spades
     # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
     # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
     # Note: We decided to avoid unpaired reads!!!!
@@ -43,7 +43,9 @@ case $1 in
     # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
     # Assembly by reference
     spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR} --trusted-contigs ${REFSEQ}
-    # Use of bwa    
+    # 2) Use of bwa
+    bwa index ${REFSEQ}
+    bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq gzip -3 > aln-pe.sam.gz
     
 ;;
   "-minion")
