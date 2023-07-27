@@ -42,9 +42,9 @@ case $1 in
     # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
     # Note: We decided to avoid unpaired reads!!!!
     # For single lib use -1 and -2
-    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+    spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     # For single lib all reads paired and unpaired use -s
-    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR} --only-assembler
+    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
     # Re-assembly
     spades -s ${OUTPUT_DIR}/contigs.fasta -o ${RE_ASSEMBLY_DIR} --only-assembler
         # Assembly by reference
