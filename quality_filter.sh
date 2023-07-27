@@ -36,7 +36,7 @@ case $1 in
     # Requirements: Miniconda (Python)
     # Installation:
     # $ install_thirdparty.sh
-    source activate afterqc
+    # source activate afterqc
     # Single-ended analysis
     # after.py -d ${INPUT_DIR} -1 *R1*
     # after.py -d ${INPUT_DIR} -2 *R2*
