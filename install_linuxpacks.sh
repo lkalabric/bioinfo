@@ -22,6 +22,13 @@ function package_exists() {
 # Linux packages are listed in a files *.packs at the following $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 
+# Pior to any installation it is recommended to update-upgrade your Linux Distro
+# Update & upgrade your Linux Distro
+echo "Updating & upgrading installed packages before starting any new installation..."
+sudo apt-get update
+sudo apt list --upgradable
+sudo apt-get upgrade
+
 # Validate parameters
 if [ $# = 0 ]; then
 	echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
@@ -32,12 +39,6 @@ else
 		echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
 	else
-		# Pior to any installation it is recommended to update-upgrade your Linux Distro
-  		# Update & upgrade your Linux Distro
-		echo "Updating & upgrading installed packages before starting any new installation..."
-		sudo apt-get update
-		sudo apt list --upgradable
-		sudo apt-get upgrade
 		case $1 in
 			"-i" ) echo "Installation in progress...";;
 			"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
