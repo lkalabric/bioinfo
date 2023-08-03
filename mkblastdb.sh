@@ -17,6 +17,7 @@ DBNAME=$3
 DBDIR=data/BLASTDB
 
 [ -d $DBDIR/$DBNAME ] || mkdir $DBDIR/$DBNAME
+DBDIR=$DBDIR/$DBNAME
 
 # Makeblastdb
 makeblastdb -in $DATASET -parse_seqids -dbtype $DBTYPE -out $DBDIR/$DBNAME
