@@ -13,8 +13,11 @@
 # Define variables
 DATASET=$1
 DBTYPE=$2
-DBNAME=data/BLASTDB/$3
+DBNAME=$3
+DBDIR=data/BLASTDB
+
+[ ! -d $DBDIR/$DBNAME ] || mkdir $DBDIR/$DBNAME
 
 # Makeblastdb
-makeblastdb -in $DATASET -parse_seqids -dbtype $DBTYPE -out $DBNAME
+makeblastdb -in $DATASET -parse_seqids -dbtype $DBTYPE -out $DBDIR/$DBNAME
 
