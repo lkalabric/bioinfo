@@ -70,7 +70,7 @@ case $1 in
     # NanoFilt -l 100 -q 9 ...
     # The next step continues in other_filters.sh
 
-    # 2) Porechop
+    # 2) Porechop -barecode_threshold 85
   ;;
   *)
   echo "Invalid parameter!"
