@@ -71,6 +71,7 @@ case $1 in
     # The next step continues in other_filters.sh
 
     # 2) Porechop -barecode_threshold 85
+    # Link: https://github.com/rrwick/Porechop
   ;;
   *)
   echo "Invalid parameter!"
