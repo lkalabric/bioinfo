@@ -59,6 +59,10 @@ case $1 in
     # Assembly by reference
     # Use of bwa
 
+# By reference
+# 1) Use of minimap
+# Link: https://timkahlke.github.io/LongRead_tutorials/ASS_M.html
+
   
  ;;
   *)
