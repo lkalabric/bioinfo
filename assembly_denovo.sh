@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# command name: assembly_denovo.sh
+# command name: assembly_de_novo.sh
 # author: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 14 JUN 2023
 # objetive: Give examples of assembly apps
-# Syntax: ./assembly_denovo.sh
+# Syntax: ./assembly_de_novo.sh
 
 # Validating arguments
 if [[ $# -ne 2 ]]; then
