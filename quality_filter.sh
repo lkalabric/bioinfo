@@ -69,6 +69,8 @@ case $1 in
     # source activate nanofilt
     # NanoFilt -l 100 -q 9 ...
     # The next step continues in other_filters.sh
+
+    # 2) Porechop
   ;;
   *)
   echo "Invalid parameter!"
