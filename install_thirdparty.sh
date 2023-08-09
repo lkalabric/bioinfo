@@ -156,3 +156,21 @@ conda install -c bioconda spades
 # gmapl -d GRCh38_p13 -A barcode01.fasta - t ${THREADS} -O ### Para genomas grandes usar gmapl
 # gsnap -d GRCh38_p13 barcode01.fastq ou cat barcode01.fastq | gsnap -d GRCh38_p13
 # samtools view -f 4 file.bam > unmapped.sam
+
+# Instalar musket
+# Link: https://musket.sourceforge.net/homepage.htm
+# Download wget https://sourceforge.net/projects/musket/files/latest/download/musket-1.1.tar -P ~/Downloads
+# cd ~/Downloads
+# tar xzvf musket-1.1.tar
+# cd musket-1.1
+# make
+# cp musket ~/bin
+
+# Instalar flash
+# Link: http://ccb.jhu.edu/software/FLASH/
+# Download wget http://ccb.jhu.edu/software/FLASH/FLASH-1.2.11.tar.gz -P ~/Downloads
+# cd ~/Downloads
+# tar xzvf FLASH-1.2.11.tar.gz
+# cd FLASH-1.2.11
+# make
+# cp flash ~/bin
