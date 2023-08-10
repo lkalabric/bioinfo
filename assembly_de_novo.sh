@@ -38,11 +38,11 @@ case $1 in
     # For single lib use -1 and -2
     # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
     # For single lib all reads paired and unpaired use -s
-    spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
+    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
     
     # 2) Use of velvet
     # Link: https://github.com/dzerbino/velvet
-    
+    velveth ${OUTPUT_DIR} 21 -fastq -sort ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq contig.fasta
     
 ;;
   "-minion")
