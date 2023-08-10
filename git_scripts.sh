@@ -37,5 +37,11 @@ if [ $# = 1 ]; then
 	for dir in ${REPO_DIR}/*/; do
  		dir=${dir%*/}      # remove the trailing "/"
 		echo "${dir##*/}"    # print everything after the final "/"
+  		cd ${REPO_DIR}/${dir}
+		git pull
+		# Copy files only if they exist
+  		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
+		chmod +x ${SCRIPT_DIR}/*.sh
+  		cd
 	done
  fi
