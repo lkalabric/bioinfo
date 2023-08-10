@@ -34,10 +34,10 @@ if [ $# = 1 ]; then
 	# echo "List of cloned repositories:"
 	# ls $REPO_DIR
 	# exit 0;
-	for dir in ${REPO_DIR}/*/; do
- 		dir=${dir%*/}      # remove the trailing "/"
-		echo "${dir##*/}"    # print everything after the final "/"
-  		cd ${dir}
+	for dir in ${REPO_DIR}/*; do
+ 		echo ${dir}    # print everything after the final "/"
+  		exit 0
+    		cd ${dir}
 		git pull
 		# Copy files only if they exist
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
