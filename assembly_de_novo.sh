@@ -42,7 +42,7 @@ case $1 in
     
     # 2) Use of velvet
     # Link: https://github.com/dzerbino/velvet
-    velveth ${OUTPUT_DIR} 21 -fastq -sort ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq contig.fasta
+    velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq contig.fasta
     
 ;;
   "-minion")
