@@ -35,7 +35,7 @@ if [ $# = 1 ]; then
 	ls $REPO_DIR
 	# Git put all repos
 	for dir in ${REPO_DIR}/*; do
- 		echo ${dir}    # print everything after the final "/"
+ 		echo "Git pulling ${dir}..."
   		cd ${dir}
 		git pull
 		# Copy files only if they exist
