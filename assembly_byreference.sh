@@ -22,7 +22,7 @@ if [ ! -d ${INPUT_DIR} ]; then
     INPUT_DIR="${HOME}/bioinfo-results/0001.1/qc-filter" # If a bash variable is empty, let's use an example data
 fi
 #OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
-OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_denovo"
+OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_byreference"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
