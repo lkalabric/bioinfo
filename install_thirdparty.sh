@@ -159,8 +159,8 @@ conda install -c bioconda spades
 
 # Instalar musket
 # Link: https://musket.sourceforge.net/homepage.htm
-# Download wget https://sourceforge.net/projects/musket/files/latest/download/musket-1.1.tar -P ~/Downloads
 # cd ~/Downloads
+# wget https://sourceforge.net/projects/musket/files/latest/download/musket-1.1.tar -P ~/Downloads
 # tar xzvf musket-1.1.tar
 # cd musket-1.1
 # make
@@ -168,8 +168,8 @@ conda install -c bioconda spades
 
 # Instalar flash
 # Link: http://ccb.jhu.edu/software/FLASH/
-# Download wget http://ccb.jhu.edu/software/FLASH/FLASH-1.2.11.tar.gz -P ~/Downloads
 # cd ~/Downloads
+# wget http://ccb.jhu.edu/software/FLASH/FLASH-1.2.11.tar.gz -P ~/Downloads
 # tar xzvf FLASH-1.2.11.tar.gz
 # cd FLASH-1.2.11
 # make
