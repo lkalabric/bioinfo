@@ -5,12 +5,12 @@
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 14 JUN 2023
 # objetive: Give examples of assembly apps
-# Syntax: ./assembly_byreference.sh
+# Syntax: ./assembly_by_reference.sh
 
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: assembly_byreference.sh <-illumina | -minion> <SAMPLE_ID>"
+    echo "Syntax: assembly_by_reference.sh <-illumina | -minion> <SAMPLE_ID>"
     exit 0    
 fi
 
@@ -22,7 +22,7 @@ if [ ! -d ${INPUT_DIR} ]; then
     INPUT_DIR="${HOME}/bioinfo-results/0001.1/qc-filter" # If a bash variable is empty, let's use an example data
 fi
 #OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
-OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_byreference"
+OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_by_reference"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
