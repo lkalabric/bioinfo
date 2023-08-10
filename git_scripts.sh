@@ -22,11 +22,11 @@ if [ $# = 1 ]; then
 	if [ ! -d ${REPO_DIR}/${REPO} ]; then
 		echo "Repository not present in repos/"
 	else
-		cd ${REPO_DIR}
+		cd ${REPO_DIR}/${REPO}
 		git pull
 		# Copy files only if they exist
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
-		chmod +x ${SD}/*.sh
+		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
 	fi	
  else
