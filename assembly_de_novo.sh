@@ -33,7 +33,7 @@ case $1 in
     "-spades")
         # Decompress input files from qc-filter dir
         # gzip -d ${INPUT_DIR}/*.gz
-        # 1) Use of spades for Illumina data
+        # 1) Use of spades
         # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
         # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
         # Note: We decided to avoid unpaired reads!!!!
