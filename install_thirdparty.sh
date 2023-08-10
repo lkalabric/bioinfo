@@ -174,3 +174,11 @@ conda install -c bioconda spades
 # cd FLASH-1.2.11
 # make
 # cp flash ~/bin
+
+# Instalar velvet
+# Link: https://github.com/dzerbino/velvet
+# cd repos
+# git clone https://github.com/dzerbino/velvet.git
+# cd velvet/
+# make 
+# cp velvet* ~/bin
