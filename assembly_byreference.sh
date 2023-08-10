@@ -31,8 +31,9 @@ REFSEQ="${HOME}/data/REFSEQ/hbv/NC_003977.2.fasta"
 case $1 in
   "-illumina")
   # 1) Use of bwa
+  # Link: https://github.com/lh3/bwa
   bwa index ${REFSEQ}
-  bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq gzip -3 > aln-pe.sam.gz
+  bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq | gzip -3 > aln-pe.sam.gz
     
 ;;
   "-minion")
