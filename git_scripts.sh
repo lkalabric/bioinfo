@@ -22,7 +22,8 @@ if [ $# = 1 ]; then
 	if [ ! -d ${REPO_DIR}/${REPO} ]; then
 		echo "Repository not present in repos/"
 	else
-		cd ${REPO_DIR}/${REPO}
+		# Git pull REPO
+  		cd ${REPO_DIR}/${REPO}
 		git pull
 		# Copy files only if they exist
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
@@ -30,10 +31,9 @@ if [ $# = 1 ]; then
   		cd
 	fi	
  else
- 	# echo "Repository name required! Sintax: git_scripts.sh <repository>"
-	# echo "List of cloned repositories:"
-	# ls $REPO_DIR
-	# exit 0;
+ 	echo "List of cloned repositories:"
+	ls $REPO_DIR
+	# Git put all repos
 	for dir in ${REPO_DIR}/*; do
  		echo ${dir}    # print everything after the final "/"
   		cd ${dir}
