@@ -32,15 +32,22 @@ case $1 in
   "-illumina")
   # 1) Use of bwa
   # Link: https://github.com/lh3/bwa
+  # Link: https://www.htslib.org/workflow/fastq.html
   bwa index ${REFSEQ}
-  bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq | gzip -3 > aln-pe.sam.gz
-    
+  # bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq | gzip -3 > aln-pe.sam.gz
+  # Mapping
+  bwa mem ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq | \ 
+  samtools view -bS -F4 - | \
+  samtools sort - -o ${OUTPUT_DIR}/out.bam
 ;;
   "-minion")
 # 1) Use of minimap
 # Link: https://timkahlke.github.io/LongRead_tutorials/ASS_M.html
-
-  
+# Link: https://www.htslib.org/workflow/fastq.html
+    minimap2 -t 8 -a -x sr ${REFSEQ} ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq  | \
+    samtools fixmate -u -m - - | \
+    samtools sort -u -@2 -T /tmp/example_prefix - | \
+    samtools markdup -@8 --reference ${REFSEQ} - final.cram
  ;;
   *)
     echo "Invalid parameter!"
