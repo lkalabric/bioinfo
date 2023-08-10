@@ -45,8 +45,7 @@ case $1 in
     velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq \
     ${INPUT_DIR}/output_reverse_paired.fq \ 
     ${INPUT_DIR}/output_forward_unpaired.fq \
-    ${INPUT_DIR}/output_reverse_unpaired.fq \ 
-    contig.fasta
+    ${INPUT_DIR}/output_reverse_unpaired.fq
     
 ;;
   "-minion")
