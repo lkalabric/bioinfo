@@ -4,13 +4,13 @@
 # author: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # last update: 14 JUN 2023
-# objetive: Give examples of assembly apps
+# objetive: Give examples of de novo assembly apps
 # Syntax: ./assembly_de_novo.sh
 
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
-    echo "Syntax: assembly_denovo.sh <-illumina | -minion> <SAMPLE_ID>"
+    echo "Syntax: assembly_denovo.sh <-spades | -velvet | -minimap> <SAMPLE_ID>"
     exit 0    
 fi
 
@@ -27,46 +27,39 @@ OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_de_novo"
 cd ${OUTPUT_DIR}
 
 case $1 in
-  "-illumina")
-    # De Novo Assembly
-    # Decompress input files from qc-filter dir
-    # gzip -d ${INPUT_DIR}/*.gz
-    # 1) Use of spades
-    # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
-    # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
-    # Note: We decided to avoid unpaired reads!!!!
-    # For single lib use -1 and -2
-    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
-    # For single lib all reads paired and unpaired use -s
-    # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
+    ##
+    # Illumina data
+    ##
+    "-spades")
+        # Decompress input files from qc-filter dir
+        # gzip -d ${INPUT_DIR}/*.gz
+        # 1) Use of spades for Illumina data
+        # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
+        # They recommend running SPAdes with BayesHammer/IonHammer to obtain high-quality assemblies.
+        # Note: We decided to avoid unpaired reads!!!!
+        # For single lib use -1 and -2
+        # spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -o ${OUTPUT_DIR}
+        # For single lib all reads paired and unpaired use -s
+        spades -1 ${INPUT_DIR}/output_forward_paired.fq -2 ${INPUT_DIR}/output_reverse_paired.fq -s ${INPUT_DIR}/output_forward_unpaired.fq -s ${INPUT_DIR}/output_reverse_unpaired.fq -o ${OUTPUT_DIR}
+    ;;
+    "-velvet")
+        # 2) Use of velvet
+        # Link: https://github.com/dzerbino/velvet
+        velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq ${INPUT_DIR}/output_forward_unpaired.fq ${INPUT_DIR}/output_reverse_unpaired.fq
+        velvetg ${OUTPUT_DIR} -cov_cutoff 4 -min_contig_lgth 100
     
-    # 2) Use of velvet
-    # Link: https://github.com/dzerbino/velvet
-    velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq
-    # ${INPUT_DIR}/output_forward_unpaired.fq \
-    # ${INPUT_DIR}/output_reverse_unpaired.fq
-    velvetg ${OUTPUT_DIR} -cov_cutoff 4 -min_contig_lgth 100
-    
-;;
-  "-minion")
-  ##
-  # MinIon data
-  ##
-  # De Novo Assembly
-  # Use of spades
-  # source activate spades
-  # spades.py -o ${OUTPUT_DIR} --nanopore ${INPUT_DIR}/Filename
-    # Assembly by reference
-    # Use of bwa
-
-# By reference
-# 1) Use of minimap
-# Link: https://timkahlke.github.io/LongRead_tutorials/ASS_M.html
+    ;;
+    ##
+    # MinIon data
+    ##
+    "-minimap")
+        # 1) Use of minimap
+        # Link: https://timkahlke.github.io/LongRead_tutorials/ASS_M.html
 
   
- ;;
-  *)
-    echo "Invalid parameter!"
-    exit 1
+    ;;
+    *)
+        echo "Invalid parameter!"
+        exit 1
 esac
 
