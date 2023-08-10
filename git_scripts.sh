@@ -30,12 +30,12 @@ if [ $# = 1 ]; then
   		cd
 	fi	
  else
- 	echo "Repository name required! Sintax: git_scripts.sh <repository>"
-	echo "List of cloned repositories:"
-	ls $REPO_DIR
-	exit 0;
+ 	# echo "Repository name required! Sintax: git_scripts.sh <repository>"
+	# echo "List of cloned repositories:"
+	# ls $REPO_DIR
+	# exit 0;
 	for dir in ${REPO_DIR}/*/; do
- 	dir=${dir%*/}      # remove the trailing "/"
+ 		dir=${dir%*/}      # remove the trailing "/"
 		echo "${dir##*/}"    # print everything after the final "/"
 	done
  fi
