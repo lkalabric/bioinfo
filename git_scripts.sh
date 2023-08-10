@@ -7,30 +7,35 @@
 # Syntax: ./git_scripts.sh <repo>
 # Link: 
 
+
 # Passes repo name to the script
 REPO=$1
 
 # Repository directory
-RD="${HOME}/repos/${REPO}"
+REPO_DIR=${HOME}/repos
 
-# Scripts diretory
-SD="${HOME}/scripts"
+# Scripts directory
+SCRIPT_DIR="${HOME}/scripts"
 
 # Validate the parameter
-if [ $# = 0 ]; then
-	echo "Repository name required! Sintax: git_scripts.sh <repository>"
-	echo "List of cloned repositories:"
-	ls $RD
-	exit 0;
-else
-	if [ ! -d ${RD} ]; then
+if [ $# = 1 ]; then
+	if [ ! -d ${REPO_DIR}/${REPO} ]; then
 		echo "Repository not present in repos/"
 	else
-		cd ${RD}
+		cd ${REPO_DIR}
 		git pull
 		# Copy files only if they exist
-  		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SD} \;
+  		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SD}/*.sh
   		cd
-	fi
-fi
+	fi	
+ else
+ 	echo "Repository name required! Sintax: git_scripts.sh <repository>"
+	echo "List of cloned repositories:"
+	ls $REPO_DIR
+	exit 0;
+	for dir in ${REPO_DIR}/*/; do
+ 	dir=${dir%*/}      # remove the trailing "/"
+		echo "${dir##*/}"    # print everything after the final "/"
+	done
+ fi
