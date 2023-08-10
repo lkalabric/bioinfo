@@ -46,7 +46,7 @@ case $1 in
     ${INPUT_DIR}/output_reverse_paired.fq \ 
     ${INPUT_DIR}/output_forward_unpaired.fq \
     ${INPUT_DIR}/output_reverse_unpaired.fq \ 
-    -long contig.fasta
+    contig.fasta
     
 ;;
   "-minion")
