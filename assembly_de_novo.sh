@@ -45,7 +45,7 @@ case $1 in
     "-velvet")
         # 2) Use of velvet
         # Link: https://github.com/dzerbino/velvet
-        velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq ${INPUT_DIR}/output_reverse_paired.fq ${INPUT_DIR}/output_forward_unpaired.fq ${INPUT_DIR}/output_reverse_unpaired.fq
+        velveth ${OUTPUT_DIR} 21 -fastq -short ${INPUT_DIR}/output_forward_paired.fq.gz ${INPUT_DIR}/output_reverse_paired.fq.gz ${INPUT_DIR}/output_forward_unpaired.fq.gz ${INPUT_DIR}/output_reverse_unpaired.fq.gz
         velvetg ${OUTPUT_DIR} -cov_cutoff 4 -min_contig_lgth 100
     
     ;;
@@ -55,8 +55,8 @@ case $1 in
     "-minimap")
         # 1) Use of minimap
         # Link: https://timkahlke.github.io/LongRead_tutorials/ASS_M.html
-
-  
+        echo "Procedure under development..."
+        exit 0;  
     ;;
     *)
         echo "Invalid parameter!"
