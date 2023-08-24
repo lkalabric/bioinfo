@@ -22,7 +22,7 @@ if [ ! -d ${INPUT_DIR} ]; then
     INPUT_DIR="${HOME}/data/hbv/0001.1" # If a bash variable is empty, let's use an example data
 fi
 #OUTPUT_DIR="${HOME}/qc-filter/${SAMPLE_ID}"
-OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/qc-filter"
+OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/quality-filter"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 MINLENTGH=100
 
