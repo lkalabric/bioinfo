@@ -76,6 +76,18 @@ Programming languages and package repositories
 - Python3
 $ sudo apt-get install python3
 - Conda or Miniconda
+Link: https://docs.conda.io/en/latest/miniconda.html
+$ mkdir -p ~/miniconda3
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o ~/miniconda3/miniconda.sh
+$ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+$ rm -rf ~/miniconda3/miniconda.sh
+$ ~/miniconda3/bin/conda init bash
+$ ~/miniconda3/bin/conda init zsh
 - R (BioConductor)
 $ sudo apt install r-cran-littler
 
+<b>Pipeline</b><br>
+- organize_filesystem.sh
+- quality_control.sh
+- quality_filter.sh
+- assembly_de_novo.sh <-spades / -velvet>
