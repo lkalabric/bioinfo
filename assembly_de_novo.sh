@@ -16,10 +16,10 @@ fi
 
 # Declaring variables
 SAMPLE_ID=$2
-INPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/qc-filter"
+INPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/quality-filter"
 if [ ! -d ${INPUT_DIR} ]; then
     echo "Qc-filter results absent. Using qc-filter results from sample 0001.1 instead!"
-    INPUT_DIR="${HOME}/bioinfo-results/0001.1/qc-filter" # If a bash variable is empty, let's use an example data
+    INPUT_DIR="${HOME}/bioinfo-results/0001.1/quality-filter" # If a bash variable is empty, let's use an example data
 fi
 #OUTPUT_DIR="${HOME}/qc-results/${SAMPLE_ID}"
 OUTPUT_DIR="${HOME}/bioinfo-results/${SAMPLE_ID}/assembly_de_novo"
@@ -31,7 +31,7 @@ case $1 in
     # Illumina data
     ##
     "-spades")
-        # Decompress input files from qc-filter dir
+        # Decompress input files from quality-filter dir
         # gzip -d ${INPUT_DIR}/*.gz
         # 1) Use of spades
         # Link: https://github.com/ablab/spades/blob/spades_3.15.5/README.md
