@@ -88,6 +88,7 @@ $ sudo apt install r-cran-littler
 
 <b>Pipeline</b><br>
 - organize_filesystem.sh
+- basecalling_demux.sh (MinIon only)
 - quality_control.sh
 - quality_filter.sh
 - assembly_de_novo.sh <-spades / -velvet>
