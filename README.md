@@ -86,7 +86,7 @@ $ ~/miniconda3/bin/conda init zsh
 - R (BioConductor)
 $ sudo apt install r-cran-littler
 
-<b>Pipeline</b><br>
+<b>Pipeline (MinIon & Illumina)</b><br>
 - organize_filesystem.sh
 - basecalling_demux.sh (MinIon only)
 - quality_control.sh
