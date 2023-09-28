@@ -39,7 +39,6 @@ fi
 
 # Installation Bioconda packages
 # https://anaconda.org/
-
 # This process is divied into three basic step per app
 # 1) Create an environment for the new app: conda create -n <app_environment_name>
 # 2) Activate this environment: source activate <app_environment_name>
@@ -50,14 +49,12 @@ fi
 # conda create -n trimmomatic # trimmomatic app
 # source activate trimmomatic
 # conda install -c bioconda trimmomatic
-conda create -n spades
-source activate spades
-conda install -c bioconda spades
+# conda create -n spades
+# source activate spades
+# conda install -c bioconda spades
 # conda install -c bioconda cutadapt # Requires gcc 9or more
 # conda install -c bioconda nanofilt
 # conda install -c bioconda hmmer
-
-
 
 # Configurar miniconda para outros usuários
 #https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/admin-multi-user-install.html
@@ -66,6 +63,23 @@ conda install -c bioconda spades
 #sudo chgrp -R conda /home/kalabric/miniconda3
 #sudo chmod 770 -R /home/kalabric/miniconda3
 #sudo adduser bioinfo conda
+
+# Instalar Guppy (ONT)
+echo "Installing Guppy (ONT)..."
+sudo apt-get update
+sudo apt-get install wget lsb-release
+export PLATFORM=$(lsb_release -cs)
+wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub | sudo apt-key add -
+echo "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" | sudo tee /etc/apt/sources.list.d/nanoporetech.sources.list
+sudo apt-get update
+# 1. To install the .deb for Guppy, use the following command:
+sudo apt update
+sudo apt install ont-guppy
+# This will install the GPU version of Guppy.
+# or:
+sudo apt update
+sudo apt install ont-guppy-cpu
+# To install the CPU-only version of Guppy
 
 # Instalar Star
 #https://github.com/alexdobin/STAR
