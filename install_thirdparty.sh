@@ -16,6 +16,7 @@ if [[ $(sudo -v) ]]; then
 	sudo apt-get upgrade
 fi
 
+# Install Miniconda, if not present
 if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	# Install and configure Miniconda if not installed
 	# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
@@ -64,22 +65,42 @@ fi
 #sudo chmod 770 -R /home/kalabric/miniconda3
 #sudo adduser bioinfo conda
 
-# Instalar Guppy (ONT)
-echo "Installing Guppy (ONT)..."
-sudo apt-get update
-sudo apt-get install wget lsb-release
-export PLATFORM=$(lsb_release -cs)
-wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub | sudo apt-key add -
-echo "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" | sudo tee /etc/apt/sources.list.d/nanoporetech.sources.list
-sudo apt-get update
+# Instalar Guppy (ONT) - este procedimento não funcionou corretamente em 09/28/2023. Possívelmente, o guppy foi descontinuado e substituido por dorado!
+#echo "Installing Guppy (ONT)..."
+#sudo apt-get update
+#sudo apt-get install wget lsb-release
+#export PLATFORM=$(lsb_release -cs)
+#wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub | sudo apt-key add -
+#echo "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" | sudo tee /etc/apt/sources.list.d/nanoporetech.sources.list
+#sudo apt-get update
 # 1. To install the .deb for Guppy, use the following command:
-sudo apt update
-sudo apt install ont-guppy
+#sudo apt update
+#sudo apt install ont-guppy
 # This will install the GPU version of Guppy.
 # or:
-sudo apt update
-sudo apt install ont-guppy-cpu
+#sudo apt update
+#sudo apt install ont-guppy-cpu
 # To install the CPU-only version of Guppy
+
+# Instalar dorado (ONT)
+# Link: https://github.com/nanoporetech/dorado
+#echo "Installing Dorado (ONT)..."
+#cd Downloads\
+# 1) First method:
+#wget https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.3.4-linux-x64.tar.gz
+#tar -xf dorado-0.3.4-linux-x64.tar.gz
+# Copy all bin and lib file to your path
+# 2) Second method:
+# Requeriment:
+sudo apt install cmake
+# Clone and build
+#cd repos
+#git clone https://github.com/nanoporetech/dorado.git dorado
+#cd dorado
+#cmake -S . -B cmake-build
+#cmake --build cmake-build --config Release -j
+#ctest --test-dir cmake-build
+#cmake --install cmake-build --prefix ${HOME}/bin
 
 # Instalar Star
 #https://github.com/alexdobin/STAR
