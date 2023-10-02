@@ -19,7 +19,7 @@ function package_exists() {
     return $?
 }
 
-# Linux packages are listed in a files *.packs at the following $PACKAGELIST_DIR
+# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
 PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 
 
