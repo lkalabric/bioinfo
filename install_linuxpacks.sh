@@ -33,7 +33,7 @@ else
 		echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
 	else
- 		PACKAGE_LIST = $(cat ${PACKAGELIST_DIR}/$2)
+ 		PACKAGE_LIST=$(cat ${PACKAGELIST_DIR}/$2)
 		case $1 in
 			"-i" ) echo "Installation in progress..."
 				# Pior to any installation it is recommended to update-upgrade your Linux Distro
