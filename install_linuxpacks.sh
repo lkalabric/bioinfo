@@ -43,7 +43,13 @@ else
 				sudo apt list --upgradable
 				sudo apt-get upgrade
     			;;
-			"-l" ) echo "Listing package(s) name(s) and descrition..."; for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do apt-cache search ^${PACKAGE_NAME}$; done; exit 0 ;;
+			"-l" ) echo "Listing package(s) name(s) and descrition..."
+   				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
+       					# apt-cache search ^${PACKAGE_NAME}$
+	    				apt-cache search ${PACKAGE_NAME}
+	    			done
+				exit 0
+    			;;
 			* ) echo "Invalid option!"; exit 0 ;;
 		esac	
   		if [ -f ${PACKAGELIST_DIR}/$2 ]; then
