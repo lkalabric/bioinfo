@@ -7,7 +7,6 @@
 # Syntax: ./git_scripts.sh <repo>
 # Link: 
 
-
 # Passes repo name to the script
 REPO=$1
 
@@ -20,9 +19,10 @@ SCRIPT_DIR="${HOME}/scripts"
 # Validate the parameter
 if [ $# = 1 ]; then
 	if [ ! -d ${REPO_DIR}/${REPO} ]; then
-		echo "Repository not present in repos/"
+		echo "Repository not present in repos/. Git clone it first!"
 	else
 		# Git pull REPO
+  		echo "Git pulling ${REPO} repo..."
   		cd ${REPO_DIR}/${REPO}
 		git pull
 		# Copy files only if they exist
@@ -35,7 +35,7 @@ if [ $# = 1 ]; then
 	ls $REPO_DIR
 	# Git put all repos
 	for dir in ${REPO_DIR}/*; do
- 		echo "Git pulling ${dir}..."
+ 		echo "Git pulling ${dir} repo..."
   		cd ${dir}
 		git pull
 		# Copy files only if they exist
