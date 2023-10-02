@@ -1,0 +1,15 @@
+# If necessary, you may increase the size of your disk so more space is available for your VM. Reducing the size of your disk in not supported in some cases!
+# First, alter the size of the disk in the VM.
+# Second, a install a software for partitioning the disk in Linux suck as like gparted
+sudo apt update
+sudo apt install gparted -y
+# Note: GParted is a GTK-based graphical user interface for GNU Parted. If you do not have a Linux Desktop, enable X11 forwarding in Putty under the options Connection -> SSH -> X11, and run XLaucher in your Windows machine to tunnel the Gparted graphical interface.
+# Third, authenticate gparted using sudo privilegies
+sudo cp .Xauthority /root/
+sudo gparted
+# Fourth, resize your partition in Gparted and Apply
+# Link: https://linux.how2shout.com/how-to-install-gparted-on-ubuntu-20-04-22-04-lts-linux/
+# Fifth, correct possible differences you may find in df - h
+# Link: https://www.reddit.com/r/linuxquestions/comments/1205sxe/how_much_disk_space_do_i_have_gparted_and_df_h/?onetap_auto=true
+lvresize -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
