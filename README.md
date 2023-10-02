@@ -69,9 +69,9 @@ After saving the file, run the export take effect:<br>
 $ source ~/.bashrc
 
 To test if everything is working so far, let´s do this:
-$ git_scripts.sh bioinfo                                             # This command also changes all script files modes to executable
+$ git_scripts.sh bioinfo                                             # This command pull all files from bioinfo repo, copy all *.sh files to the script/ diretory and changes their mode to executable
 
-Programming languages and package repositories
+Most used packages from different repository
 - Perl (CPAN)
 - Python3
 $ sudo apt-get install python3
@@ -85,6 +85,10 @@ $ ~/miniconda3/bin/conda init bash
 $ ~/miniconda3/bin/conda init zsh
 - R (BioConductor)
 $ sudo apt install r-cran-littler
+
+To make it simpler, one can install all packages runnnig:
+$ install_linuxpacks.sh -i *.packs
+$ install_thirdparty.sh
 
 <b>Pipeline (MinIon & Illumina)</b><br>
 - organize_filesystem.sh
