@@ -27,7 +27,7 @@ if [ $# = 0 ]; then
 	echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 	exit 0;
 else
-	if [[ -z $2 ]]; then
+	if [[ ! -f ${PACKAGELIST_DIR}/$2 ]]; then
 		echo "Package name or package list *.packs file is required!"
 		echo "Sintax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
