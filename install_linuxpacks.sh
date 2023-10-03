@@ -34,7 +34,7 @@ else
 		echo "Syntax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
 		exit 0
 	else
- 		mapfile PACKAGE_LIST < ${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}
+ 		mapfile PACKAGE_LIST < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
 		case $1 in
 			"-i" ) echo "Installation in progress..."
 				# Pior to any installation it is recommended to update-upgrade your Linux Distro
