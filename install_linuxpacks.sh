@@ -44,7 +44,7 @@ else
 				sudo apt-get upgrade
     				# Check if package is installed and install it if not
 				PACKAGE_NAME=$2
- 				if ! is_installed ${PACKAGE_NAME}; then
+ 				if ! package_exist ${PACKAGE_NAME}; then
 					echo "Package name wrong or package list *.packs not found!"
 					exit 0				
 				else
