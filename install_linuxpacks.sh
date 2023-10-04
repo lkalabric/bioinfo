@@ -16,7 +16,7 @@ fi
 
 # Function to test if package exists in Debian
 function package_exist() {
-    dpkg -s $2 &> /dev/null
+    dpkg -s $1 &> /dev/null
     return $?
 }
 
