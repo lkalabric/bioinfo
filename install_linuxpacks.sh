@@ -67,31 +67,25 @@ else
 				PACKAGELIST_FILENAME=$2
    				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
        					apt-cache search ^${PACKAGE_NAME}$
+					if ! which $PACKAGE_NAME > /dev/null; then
+						echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
+						read -r
+						echo $REPLY
+						if [[ $REPLY = "y" ]]; then
+							sudo apt-get install ${PACKAGE_NAME}
+							echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+							else
+							echo "You can install it anytime!"
+						fi
+					else
+						echo "$PACKAGE_NAME already installed in your Linux Distro!"
+					fi
 	    			done
 				exit 0
     			;;
 			* ) echo "Invalid option!"; exit 0;;
 		esac	
   			
-		fi
+	
 	fi
 fi
-
-PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}))
-			
-# Read the package list and install each Linux command if it exists
-for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
-	if ! which $PACKAGE_NAME > /dev/null; then
-		echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
-		read -r
-		echo $REPLY
-		if [[ $REPLY = "y" ]]; then
-			sudo apt-get install ${PACKAGE_NAME}
-			echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
-			else
-			echo "You can install it anytime!"
-		fi
-	else
-		echo "$PACKAGE_NAME already installed in your Linux Distro!"
-	fi
-done
