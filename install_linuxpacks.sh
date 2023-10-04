@@ -20,6 +20,20 @@ function package_exists() {
     return $?
 }
 
+function is_installed() {
+    if [ -n $(dpkg -l | awk "/^ii  $1/")]; then
+        echo 1;
+    fi
+    echo 0;
+}
+
+if is_installed "xclock"; then
+    echo "xclock installed";
+else
+    echo "xclock not installed";
+fi
+exit 0;
+
 # Validate parameters
 if [ $# = 0 ]; then
 	echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
