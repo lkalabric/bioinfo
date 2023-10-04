@@ -15,9 +15,13 @@ if [[ $(sudo -v) ]]; then
 fi
 
 # Function to test if package exists in Debian
-function is_installed() {
+function package_exist() {
     dpkg -s $2 &> /dev/null
     return $?
+}
+
+function is_installed() {
+     dpkg --verify "$1" 2>/dev/null
 }
 
 # Validate parameters
@@ -46,7 +50,7 @@ else
 				else
 					echo "Package ${PACKAGE_NAME} is available in the Debian Distro!"
 				fi   				
-				if ! which $PACKAGE_NAME > /dev/null; then
+				if ! is_installed $PACKAGE_NAME; then
 					echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
 					read -r
 					echo $REPLY
