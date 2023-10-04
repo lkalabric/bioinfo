@@ -15,24 +15,10 @@ if [[ $(sudo -v) ]]; then
 fi
 
 # Function to test if package exists in Debian
-function package_exists() {
-    dpkg -s ${PACKAGE_NAME} &> /dev/null
+function is_installed() {
+    dpkg -s $2 &> /dev/null
     return $?
 }
-
-function is_installed() {
-    if [ -n $(dpkg -l | awk "/^ii  $1/")]; then
-        echo 1;
-    fi
-    echo 0;
-}
-
-if is_installed "xclock"; then
-    echo "xclock installed";
-else
-    echo "xclock not installed";
-fi
-exit 0;
 
 # Validate parameters
 if [ $# = 0 ]; then
@@ -54,7 +40,7 @@ else
 				sudo apt-get upgrade
     				# Check if package is installed and install it if not
 				PACKAGE_NAME=$2
- 				if ! package_exists ${PACKAGE_NAME}; then
+ 				if ! is_installed ${PACKAGE_NAME}; then
 					echo "Package name wrong or package list *.packs not found!"
 					exit 0				
 				else
