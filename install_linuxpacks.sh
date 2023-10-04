@@ -20,22 +20,17 @@ function package_exists() {
     return $?
 }
 
-# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
-PACKAGELIST_DIR="${HOME}/repos/bioinfo"
-PACKAGELIST_FILENAME=$2
-
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Syntax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
+	echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 	exit 0;
 else
-	if [[ -z ${PACKAGELIST_FILENAME} ]]; then
+	if [[ -z $2 ]]; then
 		echo "Package name or package list *.packs file is required!"
-		echo "Syntax: install_linuxpacks.sh <-i to install/-l to list> <package name or package list *.packs file>"
+		echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 		exit 0
 	else
- 		mapfile PACKAGE_LIST < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
-		case $1 in
+ 		case $1 in
 			"-i" ) echo "Installation in progress..."
 				# Pior to any installation it is recommended to update-upgrade your Linux Distro
 				# Update & upgrade your Linux Distro
@@ -43,8 +38,33 @@ else
 				sudo apt-get update
 				sudo apt list --upgradable
 				sudo apt-get upgrade
+    				# Check if package is installed and install it if not
+				PACKAGE_NAME=$2
+ 				if ! package_exists ${PACKAGE_NAME}; then
+					echo "Package name wrong or package list *.packs not found!"
+					exit 0				
+				else
+					echo "Package ${PACKAGE_NAME} is available in the Debian Distro!"
+				fi   				
+				if ! which $PACKAGE_NAME > /dev/null; then
+					echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
+					read -r
+					echo $REPLY
+					if [[ $REPLY = "y" ]]; then
+						sudo apt-get install ${PACKAGE_NAME}
+						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+					else
+						echo "You can install it anytime!"
+					fi
+				else
+					echo "$PACKAGE_NAME already installed in your Linux Distro!"
+				fi
     			;;
 			"-l" ) echo "Listing package(s) name(s) and descrition..."
+   				mapfile PACKAGE_LIST < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
+   				# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
+				PACKAGELIST_DIR="${HOME}/repos/bioinfo"
+				PACKAGELIST_FILENAME=$2
    				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
        					apt-cache search ^${PACKAGE_NAME}$
 	    			done
@@ -52,17 +72,13 @@ else
     			;;
 			* ) echo "Invalid option!"; exit 0;;
 		esac	
-  		PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}))
-			if ! package_exists ${PACKAGE_LIST}; then
-				echo "Package name wrong or package list *.packs not found!"
-				exit 0				
-			else
-				echo "Package ${PACKAGE_LIST} is available in the Debian Distro!"
-			fi
+  			
 		fi
 	fi
 fi
 
+PACKAGE_LIST=($(cat ${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}))
+			
 # Read the package list and install each Linux command if it exists
 for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 	
 	if ! which $PACKAGE_NAME > /dev/null; then
