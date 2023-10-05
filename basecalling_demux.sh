@@ -23,7 +23,7 @@ INPUT_DIR="${HOME}/data/fast5/${RUN_ID}"
 
 # OUTPUT dir
 echo "Prepering folders to the analysis..."
-OUTPUT_DIR="${HOME}/bioinfo-results/${RUN_ID}/"
+OUTPUT_DIR="${HOME}/results/${RUN_ID}/"
 [ ! -d "${OUTPUT_DIR}" ] && mkdir -vp ${OUTPUT_DIR}
 BASECALLDIR="${OUTPUT_DIR}/BASECALL"
 DEMUXDIR="${OUTPUT_DIR}/DEMUX"
