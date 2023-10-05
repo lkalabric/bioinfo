@@ -66,8 +66,8 @@ case $BASECALLER in
         esac
         # Cria a pasta BASECALLDIR e faz o basecalling
         [ ! -d $BASECALLDIR ] && mkdir -vp $BASECALLDIR
-        fi
-        echo -e "Running guppy_basecaller...\n"
+        
+        echo -e "Running Guppy (ONT) basecaller...\n"
         # Comando para guppy_basecaller usando GPU
         guppy_basecaller -r -i ${INPUT_DIR} -s "${BASECALLDIR}" -c ${CONFIG} -x auto --min_qscore ${QSCORE} --gpu_runners_per_device ${GPUPERDEVICE} --chunk_size ${CHUNCKSIZE} --chunks_per_runner ${CHUNKPERRUNNER} --verbose_logs
         
@@ -93,6 +93,7 @@ case $BASECALLER in
         ;;
     -d)
         CONFIG="dna_r10.4.1_e8.2_400bps_${MODEL}.cfg" #dna_r10.4.1_e8.2_400bps_fast.cfg dna_r10.4.1_e8.2_400bps_hac.cfg dna_r10.4.1_e8.2_400bps_sup.cfg
+        echo -e "Running Dorado (ONT) basecaller...\n"
         dorado download --model ${CONFIG}@v4.1.0
         dorado basecaller ${CONFIG}@v4.1.0 $INPUT_DIR > $OUTPUT_DIR/calls.bam
         exit 0
