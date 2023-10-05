@@ -9,7 +9,7 @@
 # Link: https://timkahlke.github.io/LongRead_tutorials/BS_G.html
 
 # Validating arguments
-if [[ $# -ne 2 ]]; then
+if [[ $# -ne 3 ]]; then
     echo "Illegal number of parameters"
     echo "Syntax: basecalling_demux.sh <BASECALLER: -g/-d> <RUN_ID> <MODEL: fast/hac/sup>"
     exit 0    
