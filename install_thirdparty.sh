@@ -82,7 +82,7 @@ fi
 #sudo apt install ont-guppy-cpu
 # To install the CPU-only version of Guppy
 
-# Instalar dorado (ONT)
+# Instalar Dorado (ONT)
 # Link: https://github.com/nanoporetech/dorado
 #echo "Installing Dorado (ONT)..."
 #cd Downloads\
