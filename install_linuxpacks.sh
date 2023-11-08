@@ -8,6 +8,9 @@
 # Syntax: ./install_linuxpacks.sh <-i/-l> <package_name/package_list *.packs file>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
+# Packages files dir
+PACKAGE_DIR="${HOME}/repos/bioinfo/"
+
 # This script is good for superuser or root user only!!!
 if [[ $(sudo -v) ]]; then
     sudo -v
@@ -43,7 +46,7 @@ else
 				sudo apt list --upgradable
 				sudo apt-get upgrade
     				# Check if package is installed and install it if not
-				PACKAGE_NAME=$2
+				PACKAGE_NAME="${PACKAGE_DIR}/$2"
  				if ! package_exist ${PACKAGE_NAME}; then
 					echo "Package name wrong or package list *.packs not found!"
 					exit 0				
