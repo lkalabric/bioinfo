@@ -1,4 +1,4 @@
-# bioinfo
+# Project bioinfo
 <b>Repository Goal</b><br>
 Our main goal is to make different scripts available to help users install bioinformatics packages, discuss their usage by providing example data and actually analyze this data. Simply creating this repository will be a great opportunity for all of us to learn by doing, by programming Linux's own bash scripting language, by running the packages themselves, or by creating scripts to run them individually or in a pipeline!
 
