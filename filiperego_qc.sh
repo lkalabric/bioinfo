@@ -10,20 +10,20 @@ if [[ $# -ne 2 ]]; then
     echo "Examplo: filiperego_qc.sh kalabric 292879835_S26_L001"
     exit 0    
 fi
+USERNAME_DIR=$1
+RUNAME=$2
 
-USERNAME=kalabric
-#scp -r bioinfo@200.128.7.33:filiperego/qc/ ${USERNAME}/qc/
-#scp -r bioinfo@192.168.34.4:filiperego/qc/ ${USERNAME}/qc/
-cp -r filiperego/qc/ ${USERNAME}/qc/
+[ ! -d "${HOME}/${USERNAME_DIR}" ] && echo "Directório inexistente ${USERNAME_DIR} não existe."; exit 0;
+cp -r ${HOME}/filiperego/qc/ ${USERNAME_dir}/qc/
 
-RUNNAME="292879835_S26_L001"
+#RUNNAME="292879835_S26_L001"
 QUALITY=30
 LENGTH=50
 HEAD=14
 TAIL_R1=1
 TAIL_R2=1
 
-cd ${USERNAME}/qc
+
 source activate fastp
 fastp -i ${RUNNAME}_R1_001.fastq.gz -I ${RUNNAME}_R2_001.fastq.gz -o ${RUNNAME}_R1_trimmed.fastq.gz -O ${RUNNAME}_R2_trimmed.fastq.gz -q ${QUALITY} -l ${LENGTH} -f ${HEAD} -t ${TAIL_R1} -T ${TAIL_R2} -h 292879935.html
 conda deactivate
