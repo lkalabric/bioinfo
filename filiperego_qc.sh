@@ -24,7 +24,7 @@ conda deactivate
 bwa index sars_cov_2_ref.fasta
 
 # Monta por referência das reads
-bwa mem sars_cov_2_ref.fasta ${FILENAME}_R1_trimmed.gz ${FILENAME}_R2_trimmed.gz | gzip -3 > aln-pe_${FILENAME}
+bwa mem sars_cov_2_ref.fasta ${FILENAME}_R1_trimmed.fastq.gz ${FILENAME}_R2_trimmed.fastq.gz | gzip -3 > aln-pe_${FILENAME}
 
 exit 0
 
