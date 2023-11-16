@@ -13,8 +13,12 @@ fi
 USERNAME_DIR=$1
 RUNAME=$2
 
-[ ! -d "${HOME}/${USERNAME_DIR}" ] && echo "Directório inexistente ${USERNAME_DIR} não existe."; exit 0;
-cp -r ${HOME}/filiperego/qc/ ${USERNAME_dir}/qc/
+if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
+    echo "Directório ${USERNAME_DIR}/ não existe."
+    exit 0
+else
+    cp -r ${HOME}/filiperego/qc/ ${USERNAME_dir}/qc/
+fi
 
 #RUNNAME="292879835_S26_L001"
 QUALITY=30
