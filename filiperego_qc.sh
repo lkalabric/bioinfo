@@ -17,7 +17,8 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     echo "Directório ${USERNAME_DIR}/ não existe."
     exit 0
 else
-    cp -r "${HOME}/filiperego/qc/" "${USERNAME_DIR}/qc/"
+    cp -r "${HOME}/filiperego/qc/" "${USERNAME_DIR}"
+    cd "${USERNAME_DIR}/qc/"
 fi
 
 #RUNNAME="292879835_S26_L001"
