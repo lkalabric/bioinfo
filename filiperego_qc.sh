@@ -26,9 +26,7 @@ bwa index sars_cov_2_ref.fasta
 # Monta por referência das reads
 bwa mem sars_cov_2_ref.fasta ${FILENAME}_R1_trimmed.fastq.gz ${FILENAME}_R2_trimmed.fastq.gz | gzip -3 > aln-pe_${FILENAME}
 
-exit 0
-
-#gere a sequencia consenso
+# Gere a sequencia consenso
 #transforma o bam em sorted bam
 samtools view -bS aln-pe_${FILENAME} | samtools sort - -o ${FILENAME}.bam
 
