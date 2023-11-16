@@ -11,7 +11,7 @@ if [[ $# -ne 2 ]]; then
     exit 0    
 fi
 USERNAME_DIR=$1
-RUNAME=$2
+RUNNAME=$2
 
 if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     echo "Directório ${USERNAME_DIR}/ não existe."
