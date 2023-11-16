@@ -3,7 +3,6 @@
 USERNAME=kalabric
 #scp -r bioinfo@200.128.7.33:filiperego/qc/ ${USERNAME}/qc/
 #scp -r bioinfo@192.168.34.4:filiperego/qc/ ${USERNAME}/qc/
-
 cp -r filiperego/qc/ ${USERNAME}/qc/
 
 FILENAME="292879835_S26_L001"
@@ -17,6 +16,8 @@ cd ${USERNAME}/qc
 source activate fastp
 fastp -i ${FILENAME}_R1_001.fastq.gz -I ${FILENAME}_R2_001.fastq.gz -o ${FILENAME}_R1_trimmed.fastq.gz -O ${FILENAME}_R2_trimmed.fastq.gz -q ${QUALITY} -l ${LENGTH} -f ${HEAD} -t ${TAIL_R1} -T ${TAIL_R2} -h 292879935.html
 conda deactivate
+
+exit 0
 
 bwa index sars_cov_2_ref.fasta
 bwa mem sars_cov_2_ref.fasta ${FILENAME}_R1_trimmed.gz ${FILENAME}_R2_trimmed.gz | gzip -3 > aln-pe_${FILENAME}
