@@ -45,8 +45,6 @@ samtools view -bS aln-pe_${RUNNAME} | samtools sort - -o ${RUNNAME}.bam
 #cria a consenso fastq
 samtools mpileup -uf sars_cov_2_ref.fasta ${RUNNAME}.bam | bcftools call -c | vcfutils.pl vcf2fq > ${RUNNAME}.fastq
 
-exit 0
-
 #cria a consenso fasta (não faremos pois esqueci de pedir para instalar o programa)
 seqtk seq -aQ64 -q20 -n ${RUNNAME}.fastq > ${RUNNAME}.fasta
 
