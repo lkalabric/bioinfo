@@ -17,4 +17,16 @@ fastp -i ${FILENAME}R1_001.fastq.gz -I ${FILENAME}R2_001.fastq.gz -o ${FILENAME}
 conda deactivate
 
 bwa index sars_cov_2_ref.fasta
-bwa mem sars_cov_2_ref.fasta ${FILENAME}R1_trimmed.gz ${FILENAME}R2_trimmed.gz | gzip -3 > aln-pe_292879835
+bwa mem sars_cov_2_ref.fasta ${FILENAME}R1_trimmed.gz ${FILENAME}R2_trimmed.gz | gzip -3 > aln-pe_${FILENAME}
+
+#gere a sequencia consenso
+#transforma o bam em sorted bam
+samtools view -bS aln-pe_${FILENAME} | samtools sort - -o ${FILENAME}.bam
+
+#cria a consenso fastq
+samtools mpileup -uf sars_cov_2_ref.fasta ${FILENAME}.bam | bcftools call -c | vcfutils.pl vcf2fq > ${FILENAME}.fastq
+
+#cria a consenso fasta (não faremos pois esqueci de pedir para instalar o programa)
+seqtk seq -aQ64 -q20 -n ${FILENAME}.fastq > ${FILENAME}.fasta
+
+#importe a sequencia consenso no formato fastq e abra no aliview
