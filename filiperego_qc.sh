@@ -38,11 +38,11 @@ bwa index sars_cov_2_ref.fasta
 # Monta por referência das reads
 bwa mem sars_cov_2_ref.fasta ${RUNNAME}_R1_trimmed.fastq.gz ${RUNNAME}_R2_trimmed.fastq.gz | gzip -3 > aln-pe_${RUNNAME}
 
-exit 0
-
 # Gere a sequencia consenso
 #transforma o bam em sorted bam
 samtools view -bS aln-pe_${RUNNAME} | samtools sort - -o ${RUNNAME}.bam
+
+exit 0
 
 #cria a consenso fastq
 samtools mpileup -uf sars_cov_2_ref.fasta ${RUNNAME}.bam | bcftools call -c | vcfutils.pl vcf2fq > ${RUNNAME}.fastq
