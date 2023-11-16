@@ -1,8 +1,8 @@
 #!/bin/bash
 
 USERNAME=kalabric
-
-cp -r filiperego/qc/ ${USERNAME}/qc/
+#scp -r bioinfo@200.128.7.33:filiperego/qc/ ${USERNAME}/qc/
+scp -r bioinfo@192.168.34.4:filiperego/qc/ ${USERNAME}/qc/
 
 FILENAME="292879835_S26_L001"
 QUALITY=30
