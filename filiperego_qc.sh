@@ -36,11 +36,11 @@ conda deactivate
 bwa index sars_cov_2_ref.fasta
 
 # Montagem por referência das reads
-bwa mem sars_cov_2_ref.fasta ${RUNNAME}_R1_trimmed.fastq.gz ${RUNNAME}_R2_trimmed.fastq.gz | gzip -3 > aln-pe_${RUNNAME}.sam
+bwa mem sars_cov_2_ref.fasta ${RUNNAME}_R1_trimmed.fastq.gz ${RUNNAME}_R2_trimmed.fastq.gz | gzip -3 > aln-pe_${RUNNAME}.sam.gz
 
 # Gere a sequencia consenso
 #transforma o sam->bam em sorted bam
-samtools view -bS aln-pe_${RUNNAME}.sam | samtools sort - -o ${RUNNAME}.bam
+samtools view -bS aln-pe_${RUNNAME}.sam.gz | samtools sort - -o ${RUNNAME}.bam
 # cria um indice para o arquivo bam
 #samtools index ${RUNNAME}.bam ${RUNNAME}.bam.bai
 
