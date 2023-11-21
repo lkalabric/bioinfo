@@ -42,4 +42,7 @@ else
 fi
 
 # Realiza a busca por similaridade utilizando BLASTN e retorna report do apenas do best hit (e-value <= 1E-6, cobertura >= 90%, formato tabular)
+echo "Realizando a busca da query ${CONTIG} no banco de sequências virome..." 
 blastn -db blastdb/virome -query queries/${CONTIG} -out results/${CONTIG}.e-6c90hsp1.blastn -evalue 0.000001 -qcov_hsp_perc 90 -max_target_seqs 1 -outfmt "6 sacc staxid"
+cat results/${CONTIG}.e-6c90hsp1.blastn
+
