@@ -25,7 +25,7 @@ else
     mkdir queries
     mkdir results
     # Copia os dados de exemplo para a pasta queries/
-    cp ${HOME}/examples/blast/*.fasta ${USERNAME_DIR}/blast-analysis/queries
+    cp ${HOME}/examples/blast/*.fasta blast-analysis/queries/
 fi
 
 # Cria o banco de dados apenas uma vez
