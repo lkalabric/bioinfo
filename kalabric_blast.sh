@@ -20,7 +20,7 @@ else
     if [ ! -d "${HOME}/${USERNAME_DIR}/blast-analysis" ]; then
         # Cria a árvore de diretórios e copia os dados para realização das análises
         echo "Criando árvore de diretórios para análise BLAST CLI..."
-        cd "${USERNAME_DIR}"
+        cd ${USERNAME_DIR}
         mkdir blast-analysis
         cd blast-analysis/
         mkdir blastdb
@@ -30,7 +30,7 @@ else
         cp "${HOME}/examples/blast/*.fasta" queries/
     else
         echo "Árvore de diretórios criada com sucesso..."
-        cd "${USERNAME_DIR}"
+        cd ${USERNAME_DIR}
         cd blast-analysis/
         cp "${HOME}/examples/blast/*.fasta" queries/
     fi
