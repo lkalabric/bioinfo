@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Autor: Filipe Rego
+# Autor: Filipe Rego & Luciano Kalabric
 # Uso: Quality control
 
 # Validating arguments
