@@ -61,6 +61,6 @@ samtools index ${RUNNAME}.bam ${RUNNAME}.bam.bai
 samtools mpileup -uf sars_cov_2_ref.fasta ${RUNNAME}.bam | bcftools call -c | vcfutils.pl vcf2fq > ${RUNNAME}.fastq
 
 #cria a consenso fasta (não faremos pois esqueci de pedir para instalar o programa)
-seqtk seq -aQ64 -q20 -n ${RUNNAME}.fastq > ${RUNNAME}.fasta
+seqtk seq -aQ64 -q20 -n N ${RUNNAME}.fastq > ${RUNNAME}.fasta
 
 #importe a sequencia consenso no formato fastq e abra no aliview
