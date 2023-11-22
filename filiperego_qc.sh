@@ -3,6 +3,8 @@
 # Autor: Filipe Rego & Luciano Kalabric
 # Uso: Quality control
 
+cd
+
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Número de parametros ilegal."
@@ -17,8 +19,10 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     echo "Directório ${USERNAME_DIR}/ não existe."
     exit 0
 else
-    cp -r "${HOME}/filiperego/qc/" "${USERNAME_DIR}"
-    cd "${USERNAME_DIR}/qc/"
+    cd ${USERNAME_DIR}
+    mkdir qc
+    cd qc
+    cp -r ${HOME}/examples/ngs-qc/* qc/
 fi
 
 #RUNNAME="292879835_S26_L001"
