@@ -7,7 +7,7 @@
 if [[ $# -ne 2 ]]; then
     echo "Número de parametros ilegal."
     echo "Síntaxe: kalabric_blast.sh <username_dir> <dataset_contig.fasta>"
-    echo "Exemplo: kalabric_blast.sh kalabric dataset1_contig1.fasta"
+    echo "Exemplo: kalabric_blast.sh kalabric dataset1-contig1.fasta"
     exit 0    
 fi
 USERNAME_DIR=$1
