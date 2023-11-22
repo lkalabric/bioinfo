@@ -19,10 +19,18 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     echo "Directório ${USERNAME_DIR}/ não existe."
     exit 0
 else
-    cd ${USERNAME_DIR}
-    mkdir qc/
-    cp ${HOME}/examples/ngs-qc/* qc/
-    cd qc/
+    if [ ! -d "${HOME}/${USERNAME_DIR}/qc" ]; then
+        # Cria a árvore de diretórios e copia os dados para realização das análises
+        echo "Criando árvore de diretórios para análise QC..."
+        cd ${USERNAME_DIR}
+        mkdir qc
+        cp ${HOME}/examples/ngs-qc/* qc/
+        cd qc/
+    else
+        echo "Árvore de diretórios criada com sucesso..."
+        cd ${USERNAME_DIR}
+        cp ${HOME}/examples/ngs-qc/* qc/
+        cd qc/
 fi
 
 #RUNNAME="292879835_S26_L001"
