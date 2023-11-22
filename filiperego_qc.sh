@@ -21,7 +21,6 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
 else
     cd ${USERNAME_DIR}
     mkdir qc/
-    cd qc/
     cp ${HOME}/examples/ngs-qc/* qc/
 fi
 
