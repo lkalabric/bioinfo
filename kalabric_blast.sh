@@ -3,6 +3,8 @@
 # Autor: Luciano Kalabric
 # Uso: BLAST CLI
 
+cd
+
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Número de parametros ilegal."
