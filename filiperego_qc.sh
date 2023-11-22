@@ -20,9 +20,9 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     exit 0
 else
     cd ${USERNAME_DIR}
-    mkdir qc
-    cd qc
-    cp -r ${HOME}/examples/ngs-qc/* qc/
+    mkdir qc/
+    cd qc/
+    cp ${HOME}/examples/ngs-qc/* qc/
 fi
 
 #RUNNAME="292879835_S26_L001"
