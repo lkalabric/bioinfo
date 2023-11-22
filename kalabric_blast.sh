@@ -17,7 +17,7 @@ if [ ! -d "${HOME}/${USERNAME_DIR}" ]; then
     echo "Directório ${USERNAME_DIR}/ não existe."
     exit 0
 else
-    if [ ! -d "${HOME}/${USERNAME_DIR/blast-analysis}" ]; then
+    if [ ! -d "${HOME}/${USERNAME_DIR}/blast-analysis" ]; then
         # Cria a árvore de diretórios e copia os dados para realização das análises
         cd "${USERNAME_DIR}"
         mkdir blast-analysis
@@ -28,6 +28,8 @@ else
         # Copia os dados de exemplo para a pasta queries/
         cp "${HOME}/examples/blast/*.fasta" queries/
     else
+        cd "${USERNAME_DIR}"
+        cd blast-analysis/
         cp "${HOME}/examples/blast/*.fasta" queries/
     fi
 fi
