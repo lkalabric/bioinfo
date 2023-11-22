@@ -22,6 +22,7 @@ else
     cd ${USERNAME_DIR}
     mkdir qc/
     cp ${HOME}/examples/ngs-qc/* qc/
+    cd qc/
 fi
 
 #RUNNAME="292879835_S26_L001"
