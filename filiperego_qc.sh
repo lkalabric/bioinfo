@@ -41,7 +41,7 @@ HEAD=14
 TAIL_R1=1
 TAIL_R2=1
 
-source activate fastp
+conda activate fastp
 fastp -i ${RUNNAME}_R1_001.fastq.gz -I ${RUNNAME}_R2_001.fastq.gz -o ${RUNNAME}_R1_trimmed.fastq.gz -O ${RUNNAME}_R2_trimmed.fastq.gz -q ${QUALITY} -l ${LENGTH} -f ${HEAD} -t ${TAIL_R1} -T ${TAIL_R2} -h 292879935.html
 conda deactivate
 
