@@ -25,8 +25,6 @@ fi
 # Salvar os arquivos contendo as sequencias referências no formato Fasta (obtidos do Genbank) 
 # individualmente ou no formato multiseq Fasta neste diretório ou em sub-diretórios. Os arquivos
 # serão contatenados recursivamente em um único arquivo refseq.fasta para criação do banco de dados
-REFSEQDIR=${HOME}/data/REFSEQ   	# Habitualmente, podemos concentrar as REFSEQs aqui
-# TAXDIR=${HOME}/data/REFSEQ/HEV   	# Se quisermos análisar o genoma do HEV apenas, por exemplo
 
 # Diretório onde será criado o novo banco de dados refseq
 BLASTDBDIR=${HOME}/data/BLASTDB/${BLASTDBNAME}
@@ -36,51 +34,48 @@ BLASTDBDIR=${HOME}/data/BLASTDB/${BLASTDBNAME}
 [[ -d ${BLASTDBDIR} ]] && rm -r ${BLASTDBDIR}
 [[ ! -d ${BLASTDBDIR} ]] && mkdir -vp ${BLASTDBDIR}
 
-# Remove o arquivo contendo as sequencias referência, se houver, antes de criar um novo
-[[ -f ${REFSEQDIR}/${BLASTDBNAME}.fasta ]] && rm ${REFSEQDIR}/${BLASTDBNAME}.fasta
-
 # Se TAXON for um diretório, concatena todos os arquivos .fasta em ${BLASTDBNAME}.fasta
-# Exceto o arquivo ${BLASTDBNAME}.fasta que é gerado pelo make_refgen.sh
-echo "Concatenando as sequencias referências em ${BLASTDBNAME}.fasta..."
+# Exceto o arquivo ${BLASTDBNAME}/refseq.fasta que é gerado pelo make_refgen.sh
+echo "Concatenando as sequencias referências em ${BLASTDBNAME}/refseq.fasta..."
 if [ -f ${TAXON} ]; then
-	cat ${TAXON} > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
+	cat ${TAXON} > "${BLASTDBDIR}/refseq.fasta"
 else
-	# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
-	find ${TAXON} -name '*.fasta' -exec cat {} + > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
+	# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${BLASTDBDIR}/refseq.fasta"
+	find ${TAXON} -name '*.fasta' -exec cat {} + > "${BLASTDBDIR}/refseq.fasta"
 fi
 
 # Processa a linha de descrição das sequencias referências para conter apenas o número de acesso sem espaços
 echo "Processando os labels do arquivo ${BLASTDBNAME}.fasta..."
-[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.old ]] && rm ${BLASTDBDIR}/${BLASTDBNAME}.old
-mv ${BLASTDBDIR}/${BLASTDBNAME}.fasta ${BLASTDBDIR}/${BLASTDBNAME}.old
+[[ -f ${BLASTDBDIR}/refseq.old ]] && rm ${BLASTDBDIR}/refseq.old
+mv ${BLASTDBDIR}/refseq.fasta ${BLASTDBDIR}/refseq.old
 while read -r line; do
 	if echo "$line" | grep ">"; then
-    		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
+    		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/refseq.fasta
 	else
-		echo "$line" >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
+		echo "$line" >> ${BLASTDBDIR}/refseq.fasta
 	fi
-done < "${BLASTDBDIR}/${BLASTDBNAME}.old"
+done < "${BLASTDBDIR}/refseq.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
 echo "Criando o arquivo BLASTDBDIR.acc..."
-[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.acc ]] && rm  ${BLASTDBDIR}/${BLASTDBNAME}.acc
-grep ">" ${BLASTDBDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBDIR}/${BLASTDBNAME}.acc
+[[ -f ${BLASTDBDIR}/refseq.acc ]] && rm  ${BLASTDBDIR}/refseq.acc
+grep ">" ${BLASTDBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBDIR}/refseq.acc
 
 # Cria a lista de taxid a partir nos números de acc Genbank
-[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.map ]] && rm  ${BLASTDBDIR}/${BLASTDBNAME}.map
+[[ -f ${BLASTDBDIR}/refseq.map ]] && rm  ${BLASTDBDIR}/refseq.map
 # Retrive Taxid
- echo "Criando o arquivo ${BLASTDBNAME}.map..."
+ echo "Criando o arquivo refseq.map..."
  while read -r line; do
- # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/${BLASTDBNAME}.map
-	echo "$line "$(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid) >>${BLASTDBDIR}/${BLASTDBNAME}.map
-done < ${BLASTDBDIR}/${BLASTDBNAME}.acc
+ # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
+	echo "$line "$(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid) >>${BLASTDBDIR}/refseq.map
+done < ${BLASTDBDIR}/refseq.acc
 
 # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
 # esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
 
 # Cria o banco de dados refseq para busca pelos programas Blast a partir de um arquivo .fasta
 echo "Criando o banco de dados data/blastdb/${BLASTDBNAME}..."
-makeblastdb -in ${BLASTDBDIR}/${BLASTDBNAME}.fasta -parse_seqids -taxid_map ${BLASTDBDIR}/${BLASTDBNAME}.map -dbtype ${DBTYPE} -out ${BLASTDBDIR}/refseq
+makeblastdb -in ${BLASTDBDIR}/refseq.fasta -parse_seqids -taxid_map ${BLASTDBDIR}/refseq.map -dbtype ${DBTYPE} -out ${BLASTDBDIR}/refseq
 echo "Banco de dados criado com sucesso!"
 
 # Faz o donwload do taxdb
