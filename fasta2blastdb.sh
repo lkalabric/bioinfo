@@ -71,8 +71,10 @@ grep ">" ${BLASTDBDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${
 # Retrive Taxid
  echo "Criando o arquivo ${BLASTDBNAME}.map..."
  while read -r line; do
- 	echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/${BLASTDBNAME}.map
+ # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/${BLASTDBNAME}.map
+	echo "$line "$(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid) >>${BLASTDBDIR}/${BLASTDBNAME}.map
 done < ${BLASTDBDIR}/${BLASTDBNAME}.acc
+
 # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
 # esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
 
