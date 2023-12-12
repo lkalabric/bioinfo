@@ -43,23 +43,23 @@ BLASTDBDIR=${HOME}/data/BLASTDB/${BLASTDBNAME}
 # Exceto o arquivo ${BLASTDBNAME}.fasta que é gerado pelo make_refgen.sh
 echo "Concatenando as sequencias referências em ${BLASTDBNAME}.fasta..."
 if [ -f ${TAXON} ]; then
-	cat ${TAXON} > "${REFSEQDIR}/${BLASTDBNAME}.fasta"
+	cat ${TAXON} > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
 else
-	# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${REFSEQDIR}/${BLASTDBNAME}.fasta"
-	find ${TAXON} -name '*.fasta' -exec cat {} + > "${REFSEQDIR}/${BLASTDBNAME}.fasta"
+	# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
+	find ${TAXON} -name '*.fasta' -exec cat {} + > "${BLASTDBDIR}/${BLASTDBNAME}.fasta"
 fi
 
 # Processa a linha de descrição das sequencias referências para conter apenas o número de acesso sem espaços
 echo "Processando os labels do arquivo ${BLASTDBNAME}.fasta..."
-[[ -f ${REFSEQDIR}/${BLASTDBNAME}.old ]] && rm ${REFSEQDIR}/${BLASTDBNAME}.old
-mv ${REFSEQDIR}/${BLASTDBNAME}.fasta ${REFSEQDIR}/${BLASTDBNAME}.old
+[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.old ]] && rm ${BLASTDBDIR}/${BLASTDBNAME}.old
+mv ${BLASTDBDIR}/${BLASTDBNAME}.fasta ${BLASTDBDIR}/${BLASTDBNAME}.old
 while read -r line; do
 	if echo "$line" | grep ">"; then
     		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
 	else
 		echo "$line" >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
 	fi
-done < "${REFSEQDIR}/${BLASTDBNAME}.old"
+done < "${BLASTDBDIR}/${BLASTDBNAME}.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
 echo "Criando o arquivo BLASTDBDIR.acc..."
