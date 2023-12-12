@@ -29,8 +29,8 @@ REFSEQDIR=${HOME}/data/REFSEQ   	# Habitualmente, podemos concentrar as REFSEQs 
 # TAXDIR=${HOME}/data/REFSEQ/HEV   	# Se quisermos análisar o genoma do HEV apenas, por exemplo
 
 # Diretório onde será criado o novo banco de dados refseq
-BLASTDBDIR=${HOME}/data/blastdb/${BLASTDBNAME}
-# BLASTDBDIR=${HOME}/data/blastdb/HEV_DB      	# # Se quisermos análisar o genoma do HEV apenas, por exemplo
+BLASTDBDIR=${HOME}/data/BLASTDB/${BLASTDBNAME}
+# BLASTDBDIR=${HOME}/data/BLASTDB/HEV_DB      	# # Se quisermos análisar o genoma do HEV apenas, por exemplo
 
 # Reseta o diretório antes de criar um novo banco de dados
 [[ -d ${BLASTDBDIR} ]] && rm -r ${BLASTDBDIR}
