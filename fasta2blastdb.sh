@@ -72,6 +72,8 @@ grep ">" ${REFSEQDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${REFSEQDIR
  while read -r line; do
  	echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${REFSEQDIR}/refseq.map
 done < ${REFSEQDIR}/refseq.acc
+# Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
+# esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
 
 # Cria o banco de dados refseq para busca pelos programas Blast a partir de um arquivo .fasta
 echo "Criando o banco de dados BLAST_DB/refseq..."
