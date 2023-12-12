@@ -1,3 +1,6 @@
-ncbi-blast+
-khmer
+artemis
+bwa
+fastqc
 figtree
+ncbi-blast+
+samtools
