@@ -55,30 +55,30 @@ echo "Processando os labels do arquivo ${BLASTDBNAME}.fasta..."
 mv ${REFSEQDIR}/${BLASTDBNAME}.fasta ${REFSEQDIR}/${BLASTDBNAME}.old
 while read -r line; do
 	if echo "$line" | grep ">"; then
-    		echo "$line" | cut -d "." -f 1 >> ${REFSEQDIR}/${BLASTDBNAME}.fasta
+    		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
 	else
-		echo "$line" >> ${REFSEQDIR}/${BLASTDBNAME}.fasta
+		echo "$line" >> ${BLASTDBDIR}/${BLASTDBNAME}.fasta
 	fi
 done < "${REFSEQDIR}/${BLASTDBNAME}.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
 echo "Criando o arquivo BLASTDBDIR.acc..."
-[[ -f ${REFSEQDIR}/${BLASTDBNAME}.acc ]] && rm  ${REFSEQDIR}/${BLASTDBNAME}.acc
-grep ">" ${REFSEQDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${REFSEQDIR}/${BLASTDBNAME}.acc
+[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.acc ]] && rm  ${BLASTDBDIR}/${BLASTDBNAME}.acc
+grep ">" ${BLASTDBDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBDIR}/${BLASTDBNAME}.acc
 
 # Cria a lista de taxid a partir nos números de acc Genbank
-[[ -f ${REFSEQDIR}/${BLASTDBNAME}.map ]] && rm  ${REFSEQDIR}/${BLASTDBNAME}.map
+[[ -f ${BLASTDBDIR}/${BLASTDBNAME}.map ]] && rm  ${BLASTDBDIR}/${BLASTDBNAME}.map
 # Retrive Taxid
  echo "Criando o arquivo ${BLASTDBNAME}.map..."
  while read -r line; do
- 	echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${REFSEQDIR}/refseq.map
-done < ${REFSEQDIR}/${BLASTDBNAME}.acc
+ 	echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/${BLASTDBNAME}.map
+done < ${BLASTDBDIR}/${BLASTDBNAME}.acc
 # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
 # esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
 
 # Cria o banco de dados refseq para busca pelos programas Blast a partir de um arquivo .fasta
 echo "Criando o banco de dados data/blastdb/${BLASTDBNAME}..."
-makeblastdb -in ${REFSEQDIR}/${BLASTDBNAME}.fasta -parse_seqids -taxid_map ${REFSEQDIR}/${BLASTDBNAME}.map -dbtype ${DBTYPE} -out ${BLASTDBDIR}/refseq
+makeblastdb -in ${BLASTDBDIR}/${BLASTDBNAME}.fasta -parse_seqids -taxid_map ${BLASTDBDIR}/${BLASTDBNAME}.map -dbtype ${DBTYPE} -out ${BLASTDBDIR}/refseq
 echo "Banco de dados criado com sucesso!"
 
 # Faz o donwload do taxdb
