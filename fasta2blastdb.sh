@@ -25,8 +25,8 @@ fi
 # Salvar os arquivos contendo as sequencias referências no formato Fasta (obtidos do Genbank) 
 # individualmente ou no formato multiseq Fasta neste diretório ou em sub-diretórios. Os arquivos
 # serão contatenados recursivamente em um único arquivo refseq.fasta para criação do banco de dados
-REFSEQDIR=${HOME}/data/REFSEQ   	# Para análise do genoma do HEV apenas
-# TAXDIR=${HOME}/data/REFSEQ/HEV   	# Para análise do genoma do HEV apenas
+REFSEQDIR=${HOME}/data/REFSEQ   	# Habitualmente, podemos concentrar as REFSEQs aqui
+# TAXDIR=${HOME}/data/REFSEQ/HEV   	# Se quisermos análisar o genoma do HEV apenas, por exemplo
 
 # Diretório onde será criado o novo banco de dados refseq
 # BLASTDBDIR=${HOME}/data/HEV_DB      # Para análise do genoma do HEV apenas
