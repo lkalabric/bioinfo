@@ -66,12 +66,11 @@ grep ">" ${BLASTDBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBD
 # Retrive Taxid
  echo "Criando o arquivo refseq.map..."
  while read -r line; do
- # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
-	echo "$line "$(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid) >>${BLASTDBDIR}/refseq.map
-done < ${BLASTDBDIR}/refseq.acc
-
+# echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
 # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
 # esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
+	echo "$line "$(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid) >>${BLASTDBDIR}/refseq.map
+done < ${BLASTDBDIR}/refseq.acc
 
 # Cria o banco de dados refseq para busca pelos programas Blast a partir de um arquivo .fasta
 echo "Criando o banco de dados data/blastdb/${BLASTDBNAME}..."
