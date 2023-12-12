@@ -55,16 +55,16 @@ echo "Processando os labels do arquivo ${BLASTDBNAME}.fasta..."
 mv ${REFSEQDIR}/${BLASTDBNAME}.fasta ${REFSEQDIR}/${BLASTDBNAME}.old
 while read -r line; do
 	if echo "$line" | grep ">"; then
-    		echo "$line" | cut -d "." -f 1 >> ${REFSEQDIR}/${BLASTDBNAME}.tmp
+    		echo "$line" | cut -d "." -f 1 >> ${REFSEQDIR}/${BLASTDBNAME}.fasta
 	else
-		echo "$line" >> ${REFSEQDIR}/${BLASTDBNAME}.tmp
+		echo "$line" >> ${REFSEQDIR}/${BLASTDBNAME}.fasta
 	fi
 done < "${REFSEQDIR}/${BLASTDBNAME}.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
 echo "Criando o arquivo refseq.acc..."
 [[ -f ${REFSEQDIR}/${BLASTDBNAME}.acc ]] && rm  ${REFSEQDIR}/${BLASTDBNAME}.acc
-grep ">" ${REFSEQDIR}/${BLASTDBNAME}.tmp | sed 's/>//' | cut -d " " -f 1 > ${REFSEQDIR}/${BLASTDBNAME}.acc
+grep ">" ${REFSEQDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${REFSEQDIR}/${BLASTDBNAME}.acc
 
 # Cria a lista de taxid a partir nos números de acc Genbank
 [[ -f ${REFSEQDIR}/${BLASTDBNAME}.map ]] && rm  ${REFSEQDIR}/${BLASTDBNAME}.map
