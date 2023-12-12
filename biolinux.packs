@@ -12,7 +12,10 @@ clustalw
 dotter
 fastqc
 fasttree
+figtree
 glam2
+khmer
+ncbi-blast+
 nhmmer
 phmmer
 jaligner
