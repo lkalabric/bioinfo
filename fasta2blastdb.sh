@@ -62,7 +62,7 @@ while read -r line; do
 done < "${REFSEQDIR}/${BLASTDBNAME}.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
-echo "Criando o arquivo refseq.acc..."
+echo "Criando o arquivo BLASTDBDIR.acc..."
 [[ -f ${REFSEQDIR}/${BLASTDBNAME}.acc ]] && rm  ${REFSEQDIR}/${BLASTDBNAME}.acc
 grep ">" ${REFSEQDIR}/${BLASTDBNAME}.fasta | sed 's/>//' | cut -d " " -f 1 > ${REFSEQDIR}/${BLASTDBNAME}.acc
 
