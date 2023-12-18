@@ -24,7 +24,7 @@ fi
 # individualmente ou no formato multiseq Fasta neste diretório ou em sub-diretórios. Os arquivos
 # serão contatenados recursivamente em um único arquivo refseq.fasta para criação do banco de dados
 ACC2TAXIDDIR="${HOME}/data/TAXID"
-[[ -d ${ACC2TAXIDDIR} ]] && mkdir ${ACC2TAXIDDIR}
+[[ -d "${ACC2TAXIDDIR}" ]] && mkdir ${ACC2TAXIDDIR}
 
 # Se TAXON for um diretório, concatena todos os arquivos .fasta em ${BLASTDBNAME}.fasta
 # Exceto o arquivo ${BLASTDBNAME}/refseq.fasta que é gerado pelo make_refgen.sh
