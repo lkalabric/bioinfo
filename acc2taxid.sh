@@ -51,6 +51,6 @@ echo "Criando o arquivo ${ACC2TAXIDDIR}/taxons.map..."
 while read -r line; do
   # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
   # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
-  # esearch -db assembly -q 'M62321.1' | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid
-	echo "$line $(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
+  esearch -db assembly -q $line | esummary | xtract -pattern DocumentSummary -element AssemblyAccession,Taxid >> ${ACC2TAXIDDIR}/taxons.map
+	# echo "$line $(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
 done < ${ACC2TAXIDDIR}/taxons.acc
