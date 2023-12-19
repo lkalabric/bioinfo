@@ -114,22 +114,29 @@ sudo apt install cmake
 
 # Instalar phred-phrap-consed
 #http://www.phrap.org/consed/consed.html#howToGet
-#mkdir /home/kalabric/bin/phred-phrap-consed/
-#cd ~/Downloads/phred-phrap-cap3-consed
-#mkdir consed
-#cp consed_linux.tar.gz consed
-#cd consed/
-#tar xzvf consed_linux.tar.gz
-#./installConsed.perl consed_linux32bit /home/kalabric/bin/phred-phrap-consed/
-#cd ~/Downloads/phred-phrap-cap3-consed
-#mkdir phred
-#cp phred-dist-020425.c-acd.tar.Z phred
-#cd phred
-#tar xzvf phred-dist-020425.c-acd.tar.Z
-#Refer to the resulting file called 'INSTALL' for instructions on how to build and install phred
+#cd ~/Downloads/
+#mkdir phred-phrap-cap3-consed
+#tar xzvf phred-dist-020425.c-acd.tar.Z --one-top-level
+#cd phred-dist-020425.c-acd
+#make
+#cd ..
+#find phred-dist-020425.c-acd/ -perm /a+x -exec cp {} ~/bin/ \;
+#tar -xvf distrib.tar.Z --one-top-level
+#cd distrib
+#make
+#cd ..
+#find distrib/ -perm /a+x -exec cp {} ~/bin/ \;
+#tar xzvf consed_linux.tar.gz --one-top-level
+#cd consed_linux
+#make
+#cp phred ~/bin
+#cp phredpar.dat ~/bin
+#cd ~/Downloads/
+
+
 #make
 #cp phred ~/bin/phred-phrap-consed/bin
-#cp phredpar.dat ~/bin
+
 #nano .profile
 	# set PATH and CONSED_HOME
 	#CONSED_HOME=/home/kalabric/bin/phred-phrap-consed/bin
@@ -149,6 +156,7 @@ sudo apt install cmake
 #cp distrib.tar.Z phrap/
 #cd phrap/
 #tar xzvf distrib.tar.Z
+# Compilar phrad-swat-cross_match
 #make
 #cp phrap ~/bin/phred-phrap-consed/bin
 #cp cluster ~/bin/phred-phrap-consed/bin
@@ -156,6 +164,8 @@ sudo apt install cmake
 #cp cross_match ~/bin/phred-phrap-consed/bin
 #cp swat ~/bin/phred-phrap-consed/bin
 #cp phrapview ~/bin/phred-phrap-consed/bin
+
+
 
 # Instalar RepeatMasker
 # Link: https://www.repeatmasker.org/RepeatMasker/
