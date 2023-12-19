@@ -95,5 +95,5 @@ $ install_thirdparty.sh
 - basecalling_demux.sh (MinIon only)
 - quality_control.sh
 - quality_filter.sh
-- assembly_de_novo.sh <-spades / -velvet>
-Note: Our goal is to develop a pipeline generator using different software and take advantage of the codes already written.
+- assembly_de_novo.sh <-spades / -velvet><br>
+Note: We intend to develop a code to generate full pipelines using different software and take advantage of the codes already written so far.
