@@ -90,9 +90,10 @@ To make it simpler, one can install all packages runnnig:
 $ install_linuxpacks.sh -i *.packs
 $ install_thirdparty.sh
 
-<b>Pipeline (MinIon & Illumina)</b><br>
+<b>Pipeline ready-to-use steps (MinIon & Illumina)</b><br>
 - organize_filesystem.sh
 - basecalling_demux.sh (MinIon only)
 - quality_control.sh
 - quality_filter.sh
 - assembly_de_novo.sh <-spades / -velvet>
+Note: Our goal is to develop a pipeline generator using different software and take advantage of the codes already written.
