@@ -36,7 +36,7 @@ BLASTDBDIR=${HOME}/data/BLASTDB/${BLASTDBNAME}
 
 # Se TAXON for um diretório, concatena todos os arquivos .fasta em ${BLASTDBNAME}.fasta
 # Exceto o arquivo ${BLASTDBNAME}/refseq.fasta que é gerado pelo make_refgen.sh
-echo "Concatenando as sequencias referências em ${BLASTDBNAME}/refseq.fasta..."
+echo "Concatenando as sequencias referências em ${BLASTDBDIR}/refseq.fasta..."
 if [ -f ${TAXON} ]; then
 	cat ${TAXON} > "${BLASTDBDIR}/refseq.fasta"
 else
@@ -45,7 +45,7 @@ else
 fi
 
 # Processa a linha de descrição das sequencias referências para conter apenas o número de acesso sem espaços
-# echo "Processando os labels do arquivo ${BLASTDBNAME}.fasta..."
+# echo "Processando os labels do arquivo ${BLASTDBDIR}/refseq.fasta..."
 # [[ -f ${BLASTDBDIR}/refseq.old ]] && rm ${BLASTDBDIR}/refseq.old
 # mv ${BLASTDBDIR}/refseq.fasta ${BLASTDBDIR}/refseq.old
 # while read -r line; do
@@ -57,20 +57,20 @@ fi
 # done < "${BLASTDBDIR}/refseq.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
-echo "Criando o arquivo refseq.acc..."
+echo "Criando o arquivo ${BLASTDBDIR}/refseq.acc..."
 [[ -f ${BLASTDBDIR}/refseq.acc ]] && rm  ${BLASTDBDIR}/refseq.acc
 grep ">" ${BLASTDBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBDIR}/refseq.acc
 
 # Cria a lista de taxid a partir nos números de acc Genbank
 [[ -f ${BLASTDBDIR}/refseq.map ]] && rm  ${BLASTDBDIR}/refseq.map
 # Retrive Taxid
- echo "Criando o arquivo refseq.map..."
+ echo "Criando o arquivo ${BLASTDBDIR}/refseq.map..."
 while read -r line; do
 	echo "$line "$(esearch -db assembly -q "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${BLASTDBDIR}/refseq.map
 done < ${BLASTDBDIR}/refseq.acc
 
 # Cria o banco de dados refseq para busca pelos programas Blast a partir de um arquivo .fasta
-echo "Criando o banco de dados data/blastdb/${BLASTDBNAME}..."
+echo "Criando o banco de dados data/BLASTDB/${BLASTDBNAME}..."
 makeblastdb -in ${BLASTDBDIR}/refseq.fasta -parse_seqids -taxid_map ${BLASTDBDIR}/refseq.map -dbtype ${DBTYPE} -out ${BLASTDBDIR}/refseq
 echo "Banco de dados criado com sucesso!"
 
