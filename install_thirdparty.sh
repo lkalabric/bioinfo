@@ -46,16 +46,13 @@ fi
 # 3) Install the app: conda install -c bioconda <app_name>
 # source activate base # base enviroment
 # conda install h5py
-# conda install -c bioconda iqtree # iqtree app
-# conda create -n trimmomatic # trimmomatic app
-# source activate trimmomatic
-# conda install -c bioconda trimmomatic
-# conda create -n spades
-# source activate spades
-# conda install -c bioconda spades
-# conda install -c bioconda cutadapt # Requires gcc 9or more
-# conda install -c bioconda nanofilt
-# conda install -c bioconda hmmer
+# 4) List of packages included in condaapps.packs: iqtree trimmomatic spades cutadapt nanofilt hmmer multiqc
+while IFS= read -r line; do
+  conda create -n "$line" 
+  conda activate "$line"
+  conda install -c bioconda "$line"
+  conda deactivate
+done < condaapps.packs
 
 # Configurar miniconda para outros usuários
 #https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/admin-multi-user-install.html
