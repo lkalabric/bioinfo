@@ -7,6 +7,9 @@
 # objetive: Give examples of de novo assembly apps
 # Syntax: ./assembly_de_novo.sh
 
+# montadores mais utilizados para análise transcrptômica: trinity, spades, soapdenovo-trans
+# montadores mais utilizados para genômica: spades
+
 # Validating arguments
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
