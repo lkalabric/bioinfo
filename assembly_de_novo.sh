@@ -8,7 +8,7 @@
 # Syntax: ./assembly_de_novo.sh
 
 # montadores mais utilizados para análise transcrptômica: trinity, spades, soapdenovo-trans
-# montadores mais utilizados para genômica: spades
+# montadores mais utilizados para genômica: spades, velvet
 
 # Validating arguments
 if [[ $# -ne 2 ]]; then
