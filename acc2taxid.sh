@@ -48,10 +48,9 @@ grep ">" ${ACC2TAXIDDIR}/taxons.old | cut -d "." -f 1 | cut -c 2-10 > ${ACC2TAXI
 [[ -f ${ACC2TAXIDDIR}/taxons.map ]] && rm ${ACC2TAXIDDIR}/taxons.map
 # Retrive Taxid
 echo "Criando o arquivo ${ACC2TAXIDDIR}/taxons.map..."
-while read -r line; do
+while IFS= read -r line; do
   # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
   # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
   echo "Buscando acc $line..."
-  	echo "$line $(esearch -db assembly -q $line | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
-	# echo "$line $(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
+  #echo "$line $(esearch -db assembly -q "$line" | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
 done < ${ACC2TAXIDDIR}/taxons.acc
