@@ -57,7 +57,7 @@ fi
 # done < "${BLASTDBDIR}/refseq.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
-echo "Criando o arquivo BLASTDBDIR.acc..."
+echo "Criando o arquivo refseq.acc..."
 [[ -f ${BLASTDBDIR}/refseq.acc ]] && rm  ${BLASTDBDIR}/refseq.acc
 grep ">" ${BLASTDBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${BLASTDBDIR}/refseq.acc
 
