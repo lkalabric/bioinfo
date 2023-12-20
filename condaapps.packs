@@ -1,7 +1,8 @@
+cutadapt
+hmmer
 iqtree
+multiqc
+nanofilt
 trimmomatic
 spades
-cutadapt
-nanofilt
-hmmer
-multiqc
+velvet
