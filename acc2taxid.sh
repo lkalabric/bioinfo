@@ -52,5 +52,5 @@ while IFS= read -r line; do
   # echo "$line "$(efetch -db nuccore -id "$line" -format docsum | xtract -pattern DocumentSummary -element TaxId) >>${BLASTDBDIR}/refseq.map
   # Alternativamente, podemos obter o Taxid usado esearch em combinação com esummary
   echo "Buscando acc $line..."
-  echo "$line $(esearch -db assembly < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
+  echo "$line $(esearch -db assembly -q < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid)" >> ${ACC2TAXIDDIR}/taxons.map
 done < ${ACC2TAXIDDIR}/taxons.acc
