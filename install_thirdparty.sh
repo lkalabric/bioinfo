@@ -47,12 +47,14 @@ fi
 # source activate base # base enviroment
 # conda install h5py
 # 4) List of packages included in condaapps.packs: iqtree trimmomatic spades cutadapt nanofilt hmmer multiqc
+# IMPORTANTE: Por um app em cada ambiente, ou seja um app por linha
 while IFS= read -r line; do
-  conda create -n "$line" 
-  conda activate "$line"
-  conda install -c bioconda "$line"
-  conda deactivate
+  conda create -n "$line" "$line" -c bioconda -yq
+  conda activate "$line" && "$line"
 done < condaapps.packs
+
+# Fim!
+exit 0
 
 # Configurar miniconda para outros usuários
 #https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/admin-multi-user-install.html
