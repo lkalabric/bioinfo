@@ -19,8 +19,9 @@ fi
 # Install Miniconda, if not present
 if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	# Install and configure Miniconda if not installed
-	# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P Downloads/
+ 	# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
+	echo "Downloading and installing Conda in your system..."
+ 	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P Downloads/
 	chmod +x Downloads/Miniconda3-latest-Linux-x86_64.sh
 	bash Downloads/Miniconda3-latest-Linux-x86_64.sh
 	# Configure PATH
@@ -32,22 +33,17 @@ fi
 
 # Using Miniconda
 # To keep compatibility between Python versions, we strongly recommend creating different envs for each app
-# Installation of afterqc
-# Link: https://github.com/OpenGene/AfterQC
-# conda create -n afterqc
-# source activate afterqc
-# conda install -c bioconda afterqc
-
 # Installation Bioconda packages
 # https://anaconda.org/
-# This process is divied into three basic step per app
+# This process is divided into three basic step per app
 # 1) Create an environment for the new app: conda create -n <app_environment_name>
 # 2) Activate this environment: source activate <app_environment_name>
 # 3) Install the app: conda install -c bioconda <app_name>
-# source activate base # base enviroment
-# conda install h5py
-# 4) List of packages included in condaapps.packs: iqtree trimmomatic spades cutadapt nanofilt hmmer multiqc
+# 4) A list of packages was included in  the file condaapps.packs
 # IMPORTANTE: Por um app em cada ambiente, ou seja um app por linha
+echo "Installing Bioconda packages..."
+source activate base # base environment
+conda install h5py #  lets you store and manipulate huge amounts of numerical data from NumPy
 while IFS= read -r line; do
   conda create -n "$line" "$line" -c bioconda -yq
   conda activate "$line" && "$line"
