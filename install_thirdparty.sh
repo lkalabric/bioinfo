@@ -47,7 +47,7 @@ conda install h5py #  lets you store and manipulate huge amounts of numerical da
 while IFS= read -r line; do
   conda create -n "$line" "$line" -c bioconda -yq
   conda activate "$line" && "$line"
-done < scripts/condaapps.packs
+done < repos/bioinfo/condaapps.packs
 
 # Fim!
 exit 0
