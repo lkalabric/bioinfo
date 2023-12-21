@@ -72,7 +72,7 @@ case $1 in
       done < ${DBDIR}/refseq.acc
 
       # Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
-      echo "Criando o banco de dados data/BLASTDB/${DBNAME}..."
+      echo "Criando o banco de dados ${DBNAME}..."
       makeblastdb -in ${DBDIR}/refseq.fasta -parse_seqids -taxid_map ${DBDIR}/refseq.map -dbtype ${DBTYPE} -out ${DBDIR}/refseq
       echo "Banco de dados criado com sucesso!"
 
@@ -98,7 +98,7 @@ case $1 in
 
       conda activate diamond
       # Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
-      echo "Criando o banco de dados data/BLASTDB/${BLASTDBNAME}..."
+      echo "Criando o banco de dados ${DBNAME}..."
       diamond makedb --in ${DBDIR}/refseq.fasta --db refseq
       cp refseq.* ${DBDIR}/
 
