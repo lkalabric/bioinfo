@@ -103,6 +103,8 @@ case $1 in
       cp refseq.* ${DBDIR}/
 
       exit 2
+    ;;
+    
     *)
         echo "Invalid parameter!"
         exit 3
