@@ -7,6 +7,8 @@
 # objetive: Install thirdparty commands in Linux Ubuntu
 # Syntax: ./install_thirdparty.sh
 
+echo "Tem erro aqui?!"
+
 # Update & upgrade your Linux Distro
 # This script is good to superuser or root user only!!!
 if [[ $(sudo -v) ]]; then
