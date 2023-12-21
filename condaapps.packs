@@ -6,5 +6,6 @@ iqtree
 multiqc
 nanofilt
 trimmomatic
+soapdenovo2
 spades
 velvet
