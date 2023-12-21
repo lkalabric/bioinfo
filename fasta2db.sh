@@ -88,7 +88,7 @@ case $1 in
       [[ ! -d ${DBDIR} ]] && mkdir -vp ${DBDIR}
 
       # Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBNAME}/refseq.fasta antes de montar o banco de dados
-      echo "Concatenando as sequencias referências em ${DBDIR}/refseq.fasta..."
+      echo "Concatenando as sequencias referências em ${DBNAME}/refseq.fasta..."
       if [ -f ${TAXON} ]; then
         cat ${TAXON} > "${DBDIR}/refseq.fasta"
       else
@@ -98,7 +98,7 @@ case $1 in
 
       conda activate diamond
       # Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
-      echo "Criando o banco de dados ${DBNAME}..."
+      echo "Criando o banco de dados ${DBNAME}/refseq..."
       diamond makedb --in ${DBDIR}/refseq.fasta --db refseq
       cp refseq.* ${DBDIR}/
 
