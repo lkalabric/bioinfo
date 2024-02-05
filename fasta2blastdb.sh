@@ -45,16 +45,16 @@ else
 fi
 
 # Processa a linha de descrição das sequencias referências para conter apenas o número de acesso sem espaços
-# echo "Processando os labels do arquivo ${BLASTDBDIR}/refseq.fasta..."
-# [[ -f ${BLASTDBDIR}/refseq.old ]] && rm ${BLASTDBDIR}/refseq.old
-# mv ${BLASTDBDIR}/refseq.fasta ${BLASTDBDIR}/refseq.old
-# while read -r line; do
-#	if echo "$line" | grep ">"; then
-#    		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/refseq.fasta
-#	else
-#		echo "$line" >> ${BLASTDBDIR}/refseq.fasta
-#	fi
-# done < "${BLASTDBDIR}/refseq.old"
+echo "Processando os labels do arquivo ${BLASTDBDIR}/refseq.fasta..."
+[[ -f ${BLASTDBDIR}/refseq.old ]] && rm ${BLASTDBDIR}/refseq.old
+mv ${BLASTDBDIR}/refseq.fasta ${BLASTDBDIR}/refseq.old
+while read -r line; do
+	if echo "$line" | grep ">"; then
+    		echo "$line" | cut -d "." -f 1 >> ${BLASTDBDIR}/refseq.fasta
+	else
+		echo "$line" >> ${BLASTDBDIR}/refseq.fasta
+	fi
+done < "${BLASTDBDIR}/refseq.old"
 
 # Cria a lista de números de acc Genbank a partir do arquivo .fasta
 echo "Criando o arquivo ${BLASTDBDIR}/refseq.acc..."
