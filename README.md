@@ -97,3 +97,6 @@ $ install_thirdparty.sh
 - quality_filter.sh
 - assembly_de_novo.sh <-spades / -velvet><br>
 Note: We intend to develop a code to generate full pipelines using different software and take advantage of the codes already written so far.
+
+<b>Database</b><br>
+- Viral Genomes > Complete RefSeq release of viral sequences (available at https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/) 
