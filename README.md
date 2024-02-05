@@ -86,7 +86,7 @@ $ ~/miniconda3/bin/conda init zsh
 - R (BioConductor)
 $ sudo apt install r-cran-littler
 
-To make it simpler, one can install all packages runnnig:<br>
+To make it simpler, one can install all packages runnig:<br>
 $ install_linuxpacks.sh -i *.packs<br>
 $ install_thirdparty.sh
 
