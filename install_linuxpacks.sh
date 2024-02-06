@@ -47,7 +47,7 @@ else
 					echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
 					read -r
 					echo $REPLY
-					if [[ $REPLY = "y" ]]; then
+					if [[ $REPLY == [Yy] ]]; then
 						sudo apt-get install ${PACKAGE_NAME}
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
