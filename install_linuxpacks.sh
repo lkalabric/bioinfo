@@ -18,6 +18,7 @@ if [[ $(sudo -v) ]]; then
 fi
 
 # Function to test if package exists in Debian
+# https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 function package_exist() {
     dpkg -s $1 &> /dev/null
     return $?
@@ -25,6 +26,7 @@ function package_exist() {
 
 function is_installed() {
      dpkg --verify "$1" 2>/dev/null
+     return $?
 }
 
 # Validate parameters
