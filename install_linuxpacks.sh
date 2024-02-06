@@ -47,7 +47,7 @@ else
     			;;
    			"-i" ) echo "Installation in progress..."
 				# Check if package is installed and install it if not
-				PACKAGE_NAME="${PACKAGE_DIR}/$2"
+				PACKAGE_NAME=$2
  				if ! package_exist ${PACKAGE_NAME}; then
 					echo "Package name wrong or package list *.packs not found!"
 					exit 0				
