@@ -50,12 +50,12 @@ else
    			"-i" ) echo "Installation in progress..."
 				# Check if package is installed and install it if not
 				PACKAGE_NAME=$2
- 				if ! package_exist ${PACKAGE_NAME}; then
-					echo "Package name wrong or package list *.packs not found!"
-					exit 0				
-				else
-					echo "Package ${PACKAGE_NAME} is available in the Debian Distro!"
-				fi   				
+ 				#if ! package_exist ${PACKAGE_NAME}; then
+				#	echo "Package name wrong or package list *.packs not found!"
+				#	exit 0				
+				#else
+				#	echo "Package ${PACKAGE_NAME} is available in the Debian Distro!"
+				#fi   				
 				if ! is_installed $PACKAGE_NAME; then
 					echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
 					read -r
