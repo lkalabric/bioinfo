@@ -99,4 +99,5 @@ $ install_thirdparty.sh
 Note: We intend to develop a code to generate full pipelines using different software and take advantage of the codes already written so far.
 
 <b>Database</b><br>
-- Viral Genomes > Complete RefSeq release of viral sequences (available at https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/) 
+- Viral Genomes > Complete RefSeq release of viral sequences (available at https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/)
+- 16S refseq (available at https://www.ncbi.nlm.nih.gov/refseq/targetedloci/16S_process/)
