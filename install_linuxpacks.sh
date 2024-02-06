@@ -25,7 +25,7 @@ function is_installed() {
 
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
+	echo "Syntax: install_linuxpacks.sh <-u to update/upgrade/-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 	exit 0;
 else
 #	if [[ -z $2 ]]; then
