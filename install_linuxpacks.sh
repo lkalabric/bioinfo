@@ -12,7 +12,7 @@
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # This script is good for superuser or root user only!!!
-if ["$(id -u)" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     sudo -v
     exit 0
 fi
