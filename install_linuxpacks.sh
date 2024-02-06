@@ -32,11 +32,11 @@ if [ $# = 0 ]; then
 	echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 	exit 0;
 else
-	if [[ -z $2 ]]; then
-		echo "Package name or package list *.packs file is required!"
-		echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
-		exit 0
-	else
+#	if [[ -z $2 ]]; then
+#		echo "Package name or package list *.packs file is required!"
+#		echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
+#		exit 0
+#	else
  		case $1 in
 			"-u" ) echo "Update/Upgrade in progress..."
 				# Pior to any installation it is recommended to update-upgrade your Linux Distro# Update & upgrade your Linux Distro
@@ -94,5 +94,5 @@ else
 		esac	
   			
 	
-	fi
+#	fi
 fi
