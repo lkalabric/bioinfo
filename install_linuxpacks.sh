@@ -4,8 +4,8 @@
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # URL:
 # last update: 13 OUT 2021
-# Objetive: Install Ubuntu packages and keep a record of all installations
-# Syntax: ./install_linuxpacks.sh <-i/-l> <package_name/package_list *.packs file>
+# Objetive: Updade/Upgrade and Install Linux packages, and keep a record of all installations
+# Syntax: ./install_linuxpacks.sh <-u/-i/-l> <package_name/package_list *.packs file>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
 # Packages files dir
@@ -38,14 +38,15 @@ else
 		exit 0
 	else
  		case $1 in
-			"-i" ) echo "Installation in progress..."
-				# Pior to any installation it is recommended to update-upgrade your Linux Distro
-				# Update & upgrade your Linux Distro
+			"-u" ) echo "Update/Upgrade in progress..."
+				# Pior to any installation it is recommended to update-upgrade your Linux Distro# Update & upgrade your Linux Distro
 				echo "Updating & upgrading installed packages before starting any new installation..."
 				sudo apt-get update
 				sudo apt list --upgradable
-				sudo apt-get upgrade
-    				# Check if package is installed and install it if not
+				sudo apt-get upgrade    				
+    			;;
+   			"-i" ) echo "Installation in progress..."
+				# Check if package is installed and install it if not
 				PACKAGE_NAME="${PACKAGE_DIR}/$2"
  				if ! package_exist ${PACKAGE_NAME}; then
 					echo "Package name wrong or package list *.packs not found!"
@@ -68,11 +69,10 @@ else
 				fi
     			;;
 			"-l" ) echo "Listing package(s) name(s) and descrition..."
-   				mapfile PACKAGE_LIST < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
    				# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
-				PACKAGELIST_DIR="${HOME}/repos/bioinfo"
 				PACKAGELIST_FILENAME=$2
-   				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
+   				mapfile PACKAGE_LIST < "${PACKAGE_DIR}/${PACKAGELIST_FILENAME}"			
+       				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
        					apt-cache search ^${PACKAGE_NAME}$
 					if ! which $PACKAGE_NAME > /dev/null; then
 						echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
