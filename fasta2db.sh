@@ -11,9 +11,10 @@
 #
 # Validação da entrada de dados na linha de comando
 #
-TAXON=$1	# Taxon path/filename or taxondir
-DBNAME=$2	# Database name
-DBTYPE=$3	# Tipo de banco de dados nucl ou prot
+DBTOOL=$1	# Feramneta de banco de dados Blats ou Diamond
+TAXON=$2	# Taxon path/filename or taxondir
+DBNAME=$3	# Database name
+DBTYPE=$4	# Tipo de banco de dados nucl ou prot
 if [[ $# -lt 3 ]]; then
 	echo "Falta o caminho/nome ou o caminho do Taxon, o diretório do Blastdb a ser criado, ou o tipo do banco de dados!"
 	echo "Sintáxe: ./fasta2db.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot>"
