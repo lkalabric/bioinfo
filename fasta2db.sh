@@ -67,7 +67,7 @@ case $1 in
       # Cria a lista de taxid a partir nos números de acc Genbank
       [[ -f ${DBDIR}/refseq.map ]] && rm  ${DBDIR}/refseq.map
       # Retrive Taxid
-       echo "Criando o arquivo ${DBDIR}/refseq.map..."
+      echo "Criando o arquivo ${DBDIR}/refseq.map..."
       while read -r line; do
       	echo "$line "$(esearch -db assembly -q "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
       done < ${DBDIR}/refseq.acc
