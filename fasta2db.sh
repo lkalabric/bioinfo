@@ -36,7 +36,7 @@ case $1 in
 		DBDIR=${HOME}/data/BLASTDB/${DBNAME}
  		
    		if [ -d ${DBDIR} ]; then
-			read -p "Diretório já existe, (R)esetar ou (C)ontinuar?" continuar
+			read -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
        		fi
    		# Reseta o diretório antes de criar um novo banco de dados
 		if [ $continuar ~= "Rr" ]; then
