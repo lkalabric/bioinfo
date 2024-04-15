@@ -43,6 +43,8 @@ case $1 in
    			rm -r ${DBDIR}
       			mkdir -vp ${DBDIR}
 		fi
+
+  exit 0
   			
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBNAME}/refseq.fasta antes de montar o banco de dados
 		echo "Concatenando as sequencias referências em ${DBDIR}/refseq.fasta..."
