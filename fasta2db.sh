@@ -44,11 +44,9 @@ case $1 in
 	      			echo "Reseteando o banco de dados..."
 				rm -r ${DBDIR}
 				mkdir -vp ${DBDIR}
-	   			return 0  
       			;;
 		    	[Cc]) 
        				echo "Continuando de onde paramos..."
-	   			return  1 
        			;;
 		esac
 		  			
