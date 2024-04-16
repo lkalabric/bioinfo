@@ -41,12 +41,12 @@ case $1 in
    		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
 		    	[Rr]) 
-	      			echo "Reseteando o banco de dados..."
+	      			echo -e "\nReseteando o banco de dados..."
 				rm -r ${DBDIR}
 				mkdir -vp ${DBDIR}
       			;;
 		    	[Cc]) 
-       				echo "Continuando de onde paramos..."
+       				echo -e "\nContinuando de onde paramos..."
        			;;
 		esac
 		  			
@@ -81,9 +81,11 @@ case $1 in
 		# Retrive Taxid
 		echo "Criando o arquivo ${DBDIR}/refseq.map..."
   		touch ${DBDIR}/refseq.map
+    		# Caso seja necessário continuar, armazenar o último acc processado
+      		lastacc = $(tail -n 1 ${DBDIR}/refseq.map | cut -d " " -f 1)
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
-   			[[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
+   			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
 			echo "$line "$(esearch -db assembly -q "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
 		done < ${DBDIR}/refseq.acc
 		
@@ -98,11 +100,22 @@ case $1 in
 "-diamond")
 		# Diretório onde será criado o novo banco de dados refseq
 		DBDIR=${HOME}/data/DIAMONDDB/${DBNAME}
-		
+
+		if [ -d ${DBDIR} ]; then
+			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
+		fi
 		# Reseta o diretório antes de criar um novo banco de dados
-		[[ -d ${DBDIR} ]] && rm -r ${DBDIR}
-		[[ ! -d ${DBDIR} ]] && mkdir -vp ${DBDIR}
-		
+		case $continuar in
+			[Rr]) 
+				echo -e "\nReseteando o banco de dados..."
+				rm -r ${DBDIR}
+				mkdir -vp ${DBDIR}
+			;;
+			[Cc]) 
+				echo -e "\nContinuando de onde paramos..."
+			;;
+		esac
+
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBNAME}/refseq.fasta antes de montar o banco de dados
 		echo "Concatenando as sequencias referências em ${DBNAME}/refseq.fasta..."
 		if [ -f ${TAXON} ]; then
