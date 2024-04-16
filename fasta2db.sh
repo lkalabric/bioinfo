@@ -82,7 +82,7 @@ case $1 in
 		echo "Criando o arquivo ${DBDIR}/refseq.map..."
   		touch ${DBDIR}/refseq.map
     		# Caso seja necessário continuar, armazenar o último acc processado
-      		lastacc = $(tail -n 1 ${DBDIR}/refseq.map | cut -d " " -f 1)
+      		lastacc=$(tail -n 1 ${DBDIR}/refseq.map | cut -d " " -f 1)
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
    			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
