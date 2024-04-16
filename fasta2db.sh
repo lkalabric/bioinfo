@@ -40,13 +40,13 @@ case $1 in
        		fi
    		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
-		    	[Rr]*) 
+		    	[Rr]) 
 	      			echo "Reseteando o banco de dados..."
 				rm -r ${DBDIR}
 				mkdir -vp ${DBDIR}
 	   			return 0  
       			;;
-		    	[Cc]*) 
+		    	[Cc]) 
        				echo "Continuando de onde paramos..."
 	   			return  1 
        			;;
