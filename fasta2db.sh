@@ -40,12 +40,16 @@ case $1 in
        		fi
    		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
-		    [Rr]*) 
-      			echo "Reseteando o banco de dados..."
-			rm -r ${DBDIR}
-			mkdir -vp ${DBDIR}
-   			return 0  ;;
-		    [Cc]*) echo "Continuando de onde paramos..." ; return  1 ;;
+		    	[Rr]*) 
+	      			echo "Reseteando o banco de dados..."
+				rm -r ${DBDIR}
+				mkdir -vp ${DBDIR}
+	   			return 0  
+      			;;
+		    	[Cc]*) 
+       				echo "Continuando de onde paramos..."
+	   			return  1 
+       			;;
 		esac
 		  			
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/refseq.fasta antes de montar o banco de dados
