@@ -80,6 +80,7 @@ case $1 in
 		[[ -f ${DBDIR}/refseq.map ]] && rm  ${DBDIR}/refseq.map
 		# Retrive Taxid
 		echo "Criando o arquivo ${DBDIR}/refseq.map..."
+  		touch ${DBDIR}/refseq.map
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
    			[[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
