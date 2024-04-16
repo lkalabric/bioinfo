@@ -86,6 +86,7 @@ case $1 in
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
    			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
+      			echo "Downloading taxid do acc $line..." 
 			echo "$line "$(esearch -db assembly -q "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
 		done < ${DBDIR}/refseq.acc
 		
