@@ -12,7 +12,7 @@
 #
 # Validação da entrada de dados na linha de comando
 #
-DBTOOL=$1	# Feramneta de banco de dados Blats ou Diamond
+DBTOOL=$1	# Feramneta de banco de dados Blast ou Diamond
 TAXON=$2	# Taxon path/filename or taxondir
 DBNAME=$3	# Database name
 DBTYPE=$4	# Tipo de banco de dados nucl ou prot
