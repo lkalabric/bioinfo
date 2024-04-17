@@ -3,7 +3,7 @@
 # Cria o banco de dados Blast ou Diamond a partir de arquivos .fasta para busca
 # Autor: Luciano Kalabric Silva
 # Data: 24/03/2023
-# Última atualização: 15/04/2024
+# Última atualização: 17/04/2024
 # Log: Debugging
 # 15/04/2024 - Permite que o script continue de onde parou para permitir concluir a criação do arquivo .map
 
