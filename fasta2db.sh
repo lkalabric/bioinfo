@@ -7,7 +7,7 @@
 # Log: Debugging
 # 15/04/2024 - Permite que o script continue de onde parou para permitir concluir a criação do arquivo .map
 
-# Sintáxe: 
+# Sintáxe: Em revisão
 
 #
 # Validação da entrada de dados na linha de comando
