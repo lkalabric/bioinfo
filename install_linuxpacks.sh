@@ -18,8 +18,10 @@ PACKAGE_DIR="${HOME}/repos/bioinfo/"
 #fi
 
 if ((EUID != 0)); then
-    sudo -v
-    exit 0
+	echo "Please run as root"
+	exit 0
+else
+	sudo -v
 fi
 
 # Function to test if package is installed in your Debian machine
