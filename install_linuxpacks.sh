@@ -17,7 +17,7 @@ PACKAGE_DIR="${HOME}/repos/bioinfo/"
 #  exit
 #fi
 
-if ((EUID != 0)); then
+if ((EUID != 1000)); then
 	echo "Please run as root"
 	exit 0
 fi
