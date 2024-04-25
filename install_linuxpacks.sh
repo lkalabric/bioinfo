@@ -1,5 +1,4 @@
- $EUID
- #!/bin/bash
+#!/bin/bash
 
 # autor: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
