@@ -11,14 +11,14 @@
 # Packages files dir
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
-echo "Parei aqui!"
-exit 0
-
 # This script is good for superuser or root user only!!!
 if ((EUID != 0)); then
     sudo -v
     exit 0
 fi
+
+echo "Parei aqui!"
+exit 0
 
 # Function to test if package is installed in your Debian machine
 function is_installed() {
