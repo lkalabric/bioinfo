@@ -20,7 +20,7 @@ PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 if ((EUID != 0)); then
     sudo -v
-    # exit 0
+    exit 0
 fi
 
 # Function to test if package is installed in your Debian machine
