@@ -12,10 +12,10 @@
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # This script is good for superuser or root user only!!!
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
+#if [ "$EUID" -ne 0 ]
+#  then echo "Please run as root"
+#  exit
+#fi
 
 if ((EUID != 0)); then
     sudo -v
