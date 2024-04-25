@@ -19,7 +19,6 @@ PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 if ((EUID != 0)); then
     sudo -v
-else    
     exit 0
 fi
 
