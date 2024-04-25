@@ -11,6 +11,9 @@
 # Packages files dir
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
+echo "Parei aqui!"
+exit 0
+
 # This script is good for superuser or root user only!!!
 if ((EUID != 0)); then
     sudo -v
