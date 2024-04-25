@@ -1,4 +1,5 @@
-#!/bin/bash
+ $EUID
+ #!/bin/bash
 
 # autor: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
@@ -21,9 +22,6 @@ if ((EUID != 0)); then
     sudo -v
     # exit 0
 fi
-
-echo "Parei aqui!"
-exit 0
 
 # Function to test if package is installed in your Debian machine
 function is_installed() {
