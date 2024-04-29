@@ -52,6 +52,7 @@ case $1 in
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/refseq.fasta antes de montar o banco de dados
 		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/refseq.fasta..."
 		if [ -f ${TAXON} ]; then
+  			touch "${DBDIR}/refseq.fasta"
 			cat ${TAXON} > "${DBDIR}/refseq.fasta"
 		else
 			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/refseq.fasta"
