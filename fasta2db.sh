@@ -88,7 +88,7 @@ case $1 in
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
    			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
       			echo "Downloading taxid do acc $line..." >> ${DBDIR}/refseq.log
-			echo "$line "$(esearch -db assembly -q "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
+			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
 		done < ${DBDIR}/refseq.acc
 		
 		# Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
