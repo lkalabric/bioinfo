@@ -3,10 +3,9 @@
 # Cria o banco de dados Blast ou Diamond a partir de arquivos .fasta para busca
 # Autor: Luciano Kalabric Silva
 # Data: 24/03/2023
-# Última atualização: 17/04/2024
+# Última atualização: 29/04/2024
 # Log: Debugging
 # 15/04/2024 - Permite que o script continue de onde parou para permitir concluir a criação do arquivo .map
-
 # Sintáxe: Em revisão
 
 #
@@ -16,7 +15,7 @@ DBTOOL=$1	# Feramneta de banco de dados Blast ou Diamond
 TAXON=$2	# Taxon path/filename or taxondir
 DBNAME=$3	# Database name
 DBTYPE=$4	# Tipo de banco de dados nucl ou prot
-if [[ $# -lt 3 ]]; then
+if [[ $# -lt 4 ]]; then
 	echo "Falta o caminho/nome ou o caminho do Taxon, o diretório do Blastdb a ser criado, ou o tipo do banco de dados!"
 	echo "Sintáxe: ./fasta2db.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot>"
 	exit 0
@@ -41,7 +40,7 @@ case $1 in
    		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
 		    	[Rr]) 
-	      			echo -e "\nReseteando o banco de dados..."
+	      			echo -e "\nResetando o banco de dados..."
 				rm -r ${DBDIR}
 				mkdir -vp ${DBDIR}
       			;;
@@ -49,7 +48,7 @@ case $1 in
        				echo -e "\nContinuando de onde paramos..."
        			;;
 		esac
-		  			
+		
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/refseq.fasta antes de montar o banco de dados
 		echo "Concatenando as sequencias referências em ${DBDIR}/refseq.fasta..."
 		if [ -f ${TAXON} ]; then
@@ -77,11 +76,12 @@ case $1 in
 		grep ">" ${DBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/refseq.acc
 		
 		# Cria a lista de taxid a partir nos números de acc Genbank
-		[[ -f ${DBDIR}/refseq.map ]] && rm  ${DBDIR}/refseq.map
-		# Retrive Taxid
 		echo "Criando o arquivo ${DBDIR}/refseq.map..."
-  		touch ${DBDIR}/refseq.map
-    		# Caso seja necessário continuar, armazenar o último acc processado
+  		[[ -f ${DBDIR}/refseq.map ]] && rm  ${DBDIR}/refseq.map
+		touch ${DBDIR}/refseq.map
+  		
+    		# Retrive Taxid
+		# Caso seja necessário continuar, armazenar o último acc processado
       		lastacc=$(tail -n 1 ${DBDIR}/refseq.map | cut -d " " -f 1)
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
