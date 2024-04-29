@@ -39,6 +39,7 @@ else
 #		echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 #		exit 0
 #	else
+		PACKAGE_NAME=$2
  		case $1 in
 			"-u" ) echo "Update/Upgrade in progress..."
 				# Pior to any installation it is recommended to update-upgrade your Linux Distro# Update & upgrade your Linux Distro
