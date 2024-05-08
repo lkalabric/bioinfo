@@ -128,7 +128,7 @@ case $1 in
 		esac
 		
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/reference.fasta antes de montar o banco de dados
-		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/refseq.fasta..."
+		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/reference.fasta..."
 		if [ -f ${TAXON} ]; then
   			cp "${HOME}/${TAXON}" "${DBDIR}/reference.fasta"
 		else
