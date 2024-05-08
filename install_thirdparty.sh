@@ -103,7 +103,7 @@ sudo apt install cmake
 # downloading the tool
 # wget http://github.com/bbuchfink/diamond/releases/download/v2.1.9/diamond-linux64.tar.gz -P Downloads/
 # cd Downloads/
-# tar xzf diamond-linux64.tar.gz
+# tar xzf diamond-linux64.tar.gz -C ~/bin/
 # creating a diamond-formatted database file
 # ./diamond makedb --in reference.fasta -d reference
 # running a search in blastp mode
