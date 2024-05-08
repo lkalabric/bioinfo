@@ -26,7 +26,7 @@ if [ $# = 1 ]; then
   		cd ${REPO_DIR}/${REPO}
 		git pull
 		# Reset scripts/ dir and copy files .sh and .R to it
-  		rm r- ${SCRIPT_DIR}
+  		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
@@ -41,7 +41,7 @@ if [ $# = 1 ]; then
   		cd ${dir}
 		git pull
 		# Reset scripts/ dir and copy files .sh and .R to it
-  		rm r- ${SCRIPT_DIR}
+  		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
