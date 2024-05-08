@@ -25,7 +25,9 @@ if [ $# = 1 ]; then
   		echo "Git pulling ${REPO} repo..."
   		cd ${REPO_DIR}/${REPO}
 		git pull
-		# Copy files only if they exist
+		# Reset scripts/ dir and copy files .sh and .R to it
+  		rm r- ${SCRIPT_DIR}
+    		mkdir ${SCRIPT_DIR}
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
@@ -38,7 +40,9 @@ if [ $# = 1 ]; then
  		echo "Git pulling ${dir} repo..."
   		cd ${dir}
 		git pull
-		# Copy files only if they exist
+		# Reset scripts/ dir and copy files .sh and .R to it
+  		rm r- ${SCRIPT_DIR}
+    		mkdir ${SCRIPT_DIR}
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
