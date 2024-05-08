@@ -133,7 +133,7 @@ case $1 in
   			cp "${HOME}/${TAXON}" "${DBDIR}/reference.fasta"
 		else
 			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/reference.fasta"
-			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/refseq.fasta"
+			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/reference.fasta"
 		fi
 	
 		# Cria a lista de números de acc Genbank a partir do arquivo .fasta
