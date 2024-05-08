@@ -99,6 +99,22 @@ sudo apt install cmake
 #ctest --test-dir cmake-build
 #cmake --install cmake-build --prefix ${HOME}/bin
 
+# Instalar DIAMOND - DIAMOND is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data
+# downloading the tool
+# wget http://github.com/bbuchfink/diamond/releases/download/v2.1.9/diamond-linux64.tar.gz
+# tar xzf diamond-linux64.tar.gz
+# creating a diamond-formatted database file
+# ./diamond makedb --in reference.fasta -d reference
+# running a search in blastp mode
+# ./diamond blastp -d reference -q queries.fasta -o matches.tsv
+# running a search in blastx mode
+# ./diamond blastx -d reference -q reads.fasta -o matches.tsv
+# downloading and using a BLAST database
+# update_blastdb.pl --decompress --blastdb_version 5 swissprot
+# ./diamond prepdb -d swissprot
+# ./diamond blastp -d swissprot -q queries.fasta -o matches.tsv
+
+
 # Instalar Star
 #https://github.com/alexdobin/STAR
 # Get latest STAR source from releases
