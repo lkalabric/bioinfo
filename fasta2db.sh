@@ -102,7 +102,7 @@ case $1 in
 
 "-diamond")
 		# Validação do tipo de busca
-    		if [ ${DBTYPE} -eq "-nucl" ]; then
+    		if [ ${DBTYPE}="-nucl" ]; then
 			echo "Invalid parameter! DIAMOND is a sequence aligner for protein and translated DNA searches only."
    			exit 0
        		fi
