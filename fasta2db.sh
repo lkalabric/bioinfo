@@ -158,7 +158,7 @@ case $1 in
 		
 		# Cria o banco de dados reference propriamente dito para busca pelos programas Blast
 		echo "Criando o banco de dados ${DBNAME}..."
-		diamond makedb -in ${DBDIR}/reference.fasta -d ${DBDIR}/reference
+		diamond makedb --in ${DBDIR}/reference.fasta --db ${DBDIR}/reference
 		echo "Banco de dados criado com sucesso!"
 		
 		exit 2
