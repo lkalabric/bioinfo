@@ -101,7 +101,8 @@ sudo apt install cmake
 
 # Instalar DIAMOND - DIAMOND is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data
 # downloading the tool
-# wget http://github.com/bbuchfink/diamond/releases/download/v2.1.9/diamond-linux64.tar.gz
+# wget http://github.com/bbuchfink/diamond/releases/download/v2.1.9/diamond-linux64.tar.gz -P Downloads/
+# cd Downloads/
 # tar xzf diamond-linux64.tar.gz
 # creating a diamond-formatted database file
 # ./diamond makedb --in reference.fasta -d reference
