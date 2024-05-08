@@ -18,7 +18,7 @@ DBTYPE=$4	# Tipo de banco de dados nucl ou prot
 if [[ $# -lt 4 ]]; then
 	echo "Falta o caminho/nome ou o caminho do Taxon, o diretório do Blastdb a ser criado, ou o tipo do banco de dados!"
 	echo "Sintáxe: ./fasta2db.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot>"
-	exit 0
+ 	exit 0
 fi
 
 # Diretórios dos dados data/ (Subjects)
@@ -33,7 +33,12 @@ case $1 in
 	"-blast")
 		# Diretório onde será criado o novo banco de dados refseq
 		DBDIR=${HOME}/data/BLASTDB/${DBNAME}
- 		
+
+		if [ ${DBTYPE} eq "-nucl" ]; then
+			echo "Invalid parameter! DIAMOND is a sequence aligner for protein and translated DNA searches only."
+   			exit 0
+       		fi
+   
    		if [ -d ${DBDIR} ]; then
 			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
        		fi
@@ -86,7 +91,7 @@ case $1 in
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
    			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
-      			echo "Downloading taxid do acc $line..." >> ${DBDIR}/refseq.log
+      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/refseq.log
 			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
 		done < ${DBDIR}/refseq.acc
 		
@@ -99,56 +104,62 @@ case $1 in
 	;;
 
 "-diamond")
-		# Diretório onde será criado o novo banco de dados refseq
+		# Diretório onde será criado o novo banco de dados reference
 		DBDIR=${HOME}/data/DIAMONDDB/${DBNAME}
-
-		if [ -d ${DBDIR} ]; then
+ 		
+   		if [ -d ${DBDIR} ]; then
 			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
-		fi
-		# Reseta o diretório antes de criar um novo banco de dados
+       		fi
+   		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
-			[Rr]) 
-				echo -e "\nReseteando o banco de dados..."
+		    	[Rr]) 
+	      			echo -e "\nResetando o banco de dados..."
 				rm -r ${DBDIR}
 				mkdir -vp ${DBDIR}
-			;;
-			[Cc]) 
-				echo -e "\nContinuando de onde paramos..."
-			;;
+      			;;
+		    	[Cc]) 
+       				echo -e "\nContinuando de onde paramos..."
+       			;;
 		esac
-
-		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBNAME}/refseq.fasta antes de montar o banco de dados
-		echo "Concatenando as sequencias referências em ${DBNAME}/refseq.fasta..."
-		if [ -f ${TAXON} ]; then
-		cat ${TAXON} > "${DBDIR}/refseq.fasta"
-		else
-		# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/refseq.fasta"
-		find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/refseq.fasta"
-		fi
 		
-		conda activate diamond
-		# Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
-		echo "Criando o banco de dados ${DBNAME}/refseq..."
-		diamond makedb --in ${DBDIR}/refseq.fasta --db refseq
-		cp refseq.* ${DBDIR}/
+		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/reference.fasta antes de montar o banco de dados
+		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/refseq.fasta..."
+		if [ -f ${TAXON} ]; then
+  			cp "${HOME}/${TAXON}" "${DBDIR}/reference.fasta"
+		else
+			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/reference.fasta"
+			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/refseq.fasta"
+		fi
+	
+		# Cria a lista de números de acc Genbank a partir do arquivo .fasta
+		echo "Criando o arquivo ${DBDIR}/reference.acc..."
+		[[ -f ${DBDIR}/reference.acc ]] && rm  ${DBDIR}/reference.acc
+		grep ">" ${DBDIR}/reference.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/reference.acc
+		
+		# Cria a lista de taxid a partir nos números de acc Genbank
+		echo "Criando o arquivo ${DBDIR}/reference.map..."
+  		[[ -f ${DBDIR}/reference.map ]] && rm  ${DBDIR}/reference.map
+		touch ${DBDIR}/reference.map
+  		
+    		# Retrive Taxid
+		# Caso seja necessário continuar, armazenar o último acc processado
+      		lastacc=$(tail -n 1 ${DBDIR}/reference.map | cut -d " " -f 1)
+		while read -r line; do
+			# Caso seja necessário continuar, pula as linhas com os acc já processados
+   			# [[ ! -z $(grep "$line" "${DBDIR}/reference.map") ]] && continue
+      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/reference.log
+			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/reference.map
+		done < ${DBDIR}/reference.acc
+		
+		# Cria o banco de dados reference propriamente dito para busca pelos programas Blast
+		echo "Criando o banco de dados ${DBNAME}..."
+		diamond makedb -in ${DBDIR}/reference.fasta -d ${DBDIR}/reference
+		echo "Banco de dados criado com sucesso!"
 		
 		exit 2
-		;;
-
+	;;		
+      
 *)
 		echo "Invalid parameter!"
 		exit 3
 esac
-
-# Faz o donwload do taxdb
-# wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz -P ${BLASTDBDIR}
-
-# IMPORTATE: Após incluir uma nova sequencia no diretório REFSEQ e executar uma nova análise, é importante
-# atualizar os arquivos WIMP para sumarizar o relatório da busca pelo Blast. Abaixo seguem alguns reports
-# para conferência
-# echo "Conferir o arquivo refseq.fasta e os arquivos .wimp..."
-# echo "Total de taxons encontrados no arquivo refseq.fasta atual: $(grep -c ">" ${REFSEQDIR}/refseq.fasta)"
-# echo "Total de números de acesso (refseq.acc): $(wc -l ${REFSEQDIR}/refseq.acc)"
-# echo "Total de números de acesso com taxid (refseq.map): $(wc -l ${REFSEQDIR}/refseq.map)"
-# echo -e "Total de números de acesso em cada arquivo .wimp:\n $(wc -l ${HOME}/data/WIMP/*.wimp)"
-# echo "IMPORTANTE: Atualizar os arquivos .wimp para uma relatoria correta!"
