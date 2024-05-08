@@ -33,16 +33,13 @@ case $1 in
 	"-blast")
 		# Diretório onde será criado o novo banco de dados refseq
 		DBDIR=${HOME}/data/BLASTDB/${DBNAME}
-
-		if [ ${DBTYPE} eq "-nucl" ]; then
-			echo "Invalid parameter! DIAMOND is a sequence aligner for protein and translated DNA searches only."
-   			exit 0
-       		fi
-   
-   		if [ -d ${DBDIR} ]; then
+     		if [ -d ${DBDIR} ]; then
 			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
-       		fi
-   		# Reseta o diretório antes de criar um novo banco de dados
+		else
+   			mkdir -vp ${DBDIR}
+		fi
+  
+		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
 		    	[Rr]) 
 	      			echo -e "\nResetando o banco de dados..."
@@ -104,11 +101,19 @@ case $1 in
 	;;
 
 "-diamond")
-		# Diretório onde será criado o novo banco de dados reference
+		# Validação do tipo de busca
+    		if [ ${DBTYPE} eq "-nucl" ]; then
+			echo "Invalid parameter! DIAMOND is a sequence aligner for protein and translated DNA searches only."
+   			exit 0
+       		fi
+		
+  		# Diretório onde será criado o novo banco de dados reference
 		DBDIR=${HOME}/data/DIAMONDDB/${DBNAME}
- 		
+
    		if [ -d ${DBDIR} ]; then
 			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
+		else
+   			mkdir -vp ${DBDIR}
        		fi
    		# Reseta o diretório antes de criar um novo banco de dados
 		case $continuar in
