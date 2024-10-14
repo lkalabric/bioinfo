@@ -23,7 +23,7 @@ BLASTSUITE=$3   # Tipo de busca Blast
 
 if [[ $# -lt 3 ]]; then
 	echo "Falta o nome do arquivo ou caminho contendo as queries, diretório BlastDB ou blast suite!"
-	echo "Sintáxe: ./blastanything.sh <QUERYFILENAME/QUERYDIR> <BLASTDBDIR> <BLASTSUITE: blastn/blastp/blastx/tblastn/tblastx>"
+	echo "Sintáxe: ./blastanything.sh <QUERYDIR/QUERYFILENAME> <BLASTDBDIR> <BLASTSUITE: blastn/blastp/blastx/tblastn/tblastx>"
 	exit 0
 fi
 
