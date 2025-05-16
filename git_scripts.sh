@@ -31,8 +31,8 @@ if [ $# = 1 ]; then
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
-    		export PATH="/${SCRIPT_DIR}:$PATH" Add to PATH Temporarily
-      		# Better is to add Permanently, need to include the line above in the file .bashrc 
+    		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
+      		# export PATH="/${SCRIPT_DIR}:$PATH"
 	fi	
  else
  	echo "List of cloned repositories:"
@@ -48,7 +48,7 @@ if [ $# = 1 ]; then
   		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
-    		export PATH="/${SCRIPT_DIR}:$PATH" # Add to PATH Temporarily
-      		# Better is to add Permanently, need to include the line above in the file .bashrc 
+    		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
+      		# export PATH="/${SCRIPT_DIR}:$PATH"
 	done
  fi
