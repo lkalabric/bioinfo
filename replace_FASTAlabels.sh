@@ -16,16 +16,16 @@ fi
 
 arquivo_fasta_original="$1"
 arquivo_novos_labels="$2"
-arquivo_fasta_modificado="$1_modificado.fasta" # Nome de arquivo temporário com timestamp
+arquivo_fasta_modificado="$($1 > sed -e 's/\.fasta$//')_modificado.fasta" # Nome de arquivo temporário com timestamp
 
 # Verifica se os arquivos existem e são legí­veis
 if [ ! -f "$arquivo_fasta_original" ] || [ ! -r "$arquivo_fasta_original" ]; then
-  echo "Erro: O arquivo FASTA original '$arquivo_fasta_original' nÃ£o existe ou nÃ£o pode ser lido."
+  echo "Erro: O arquivo FASTA original '$arquivo_fasta_original' não existe ou nÃ£o pode ser lido."
   exit 1
 fi
 
 if [ ! -f "$arquivo_novos_labels" ] || [ ! -r "$arquivo_novos_labels" ]; then
-  echo "Erro: O arquivo de novos labels '$arquivo_novos_labels' nÃ£o existe ou nÃ£o pode ser lido."
+  echo "Erro: O arquivo de novos labels '$arquivo_novos_labels' não existe ou nÃ£o pode ser lido."
   exit 1
 fi
 
