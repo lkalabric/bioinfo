@@ -16,7 +16,7 @@ fi
 
 arquivo_fasta_original="$1"
 arquivo_novos_labels="$2"
-arquivo_fasta_modificado="temp_modificado_$(date +%s).fasta" # Nome de arquivo temporÃ¡rio com timestamp
+arquivo_fasta_modificado="$1_modificado.fasta" # Nome de arquivo temporário com timestamp
 
 # Verifica se os arquivos existem e são legí­veis
 if [ ! -f "$arquivo_fasta_original" ] || [ ! -r "$arquivo_fasta_original" ]; then
