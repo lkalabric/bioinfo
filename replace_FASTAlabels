@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Substitui os labels de arquivos multisequence FASTA
+# Autor: Luciano Kalabric Silva (uso Gemini)
+# Data: 11/06/2025
+# Última atualização: 11/06/2025
+# Log: Debugging
+# Sintáxe: replace_FASTAlabels.sh arquivo_fasta_original.fasta novos_labels.txt
 
 # Verifica se os argumentos necessários foram fornecidos
 if [ -z "$1" ] || [ -z "$2" ]; then
