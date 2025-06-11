@@ -16,7 +16,7 @@ fi
 
 arquivo_fasta_original="$1"
 arquivo_novos_labels="$2"
-arquivo_fasta_modificado="$(ls -a $1 > sed -e 's/\.fasta$//')_modificado.fasta" # Nome de arquivo temporário com timestamp
+arquivo_fasta_modificado="$(ls -a $1 | sed -e 's/\.fasta$//')_modificado.fasta" # Nome de arquivo temporário com timestamp
 
 # Verifica se os arquivos existem e são legí­veis
 if [ ! -f "$arquivo_fasta_original" ] || [ ! -r "$arquivo_fasta_original" ]; then
