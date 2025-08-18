@@ -4,7 +4,7 @@
 # em um genoma de referência (FASTA) usando BWA e SAMtools.
 
 # Uso:
-# ./pipeline_mapeamento.sh <genoma_referencia.fasta> <leituras_R1.fastq> <leituras_R2.fastq>
+# ./seq_mapping.sh <genoma_referencia.fasta> <leituras_R1.fastq> <leituras_R2.fastq>
 
 #---------------------------------------------------------------------------------------------------
 # 1. VALIDAÇÃO E DEFINIÇÃO DE VARIÁVEIS
