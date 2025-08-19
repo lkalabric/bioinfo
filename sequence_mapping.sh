@@ -52,11 +52,12 @@ test_dir="examples/minimap2_mapping/"
 # Mapeamento propriamente dito
 # 1 - long sequences against a reference genome
 minimap2 -a $test_dir/MT-human.fa $test_dir/MT-orang.fa > $test_dir/test.sam
+# 2 - create an index first and then map
+minimap2 -x map-ont -d MT-human-ont.mmi $test_dir/MT-human.fa
+minimap2 -a MT-human-ont.mmi $test_dir/MT-orang.fa > test.sam
+
 exit
 
-# 2 - create an index first and then map
-./minimap2 -x map-ont -d MT-human-ont.mmi test/MT-human.fa
-./minimap2 -a MT-human-ont.mmi test/MT-orang.fa > test.sam
 # 3 - use presets (no test data)
 ./minimap2 -ax map-pb ref.fa pacbio.fq.gz > aln.sam       # PacBio CLR genomic reads
 ./minimap2 -ax map-ont ref.fa ont.fq.gz > aln.sam         # Oxford Nanopore genomic reads
