@@ -8,10 +8,10 @@
 # Sintáxe: Em revisão
 
 # Pacotes requeridos: minimap2, bwa
-PACKAGES=("minimap2" "bwa")
+declare -a PACKAGES=("minimap2" "bwa")
 
 # Instala pacote(s) caso não exista(m)
-for pack in "${$PACKAGES[@]}"; do
+for pack in "${PACKAGES[@]}"; do
 	PACKAGE_NAME=$pack # Replace with the actual package name
 	COMMAND_NAME=$pack # Replace with a command provided by the package
 	if ! which "$COMMAND_NAME" > /dev/null; then
