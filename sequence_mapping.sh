@@ -5,12 +5,12 @@
 # Data de criação: 19/08/2025
 # Última atualização: 19/08/2025
 # Log: Debugging
-# Sintáxe: Em revisão
+# Sintáxe: sequence_mapping.sh <MAPPINGTOOL: minimap2/bwa> <REFSEQ_DIR/FILENAME.fasta> <BDTYPE: nucl/prot> <QUERY.fasta>
 
 # Pacotes requeridos: minimap2, bwa
 declare -a PACKAGES=("minimap2" "bwa")
 
-# Instala pacote(s) caso não exista(m)
+# Instala pacote(s) Linux caso não exista(m)
 for pack in "${PACKAGES[@]}"; do
 	PACKAGE_NAME=$pack # Replace with the actual package name
 	COMMAND_NAME=$pack # Replace with a command provided by the package
@@ -23,45 +23,29 @@ for pack in "${PACKAGES[@]}"; do
 	fi
 done
 
-exit
-
-
-
-# Validação da entrada de dados na linha de comando
-#
-MAPPINGTOOL=$1  # Ferramenta de mapeamento minimap2 ou bwa
-REFSEQ=$2   # path/filename refseq.fasta
-DBTYPE=$4  # Tipo de sequencia a ser analisada nucl ou prot
-QUERY=$5   # path/filename query.fasta com as sequencias query
-if [[ $# -lt 4 ]]; then
-	echo "Falta algum parâmetro: (1) ferramenta de geração de banco de dados, (2) caminho/nome do Taxon, (3) apelido do banco de dados a ser criado, (4) tipo do sequencia, ou (5) o nome do arquivo Query (.fasta)!"
-	echo "Sintáxe: ./sequence_mapping.sh <MAPPINGTOOL: minimpa2/bwa> <REFSEQ_DIR/FILENAME.fasta> <BDTYPE: nucl/prot> <QUERY.fasta>"
- 	exit 0
-fi
-
 #
 # Uso do minimap2
 #
 # Link: https://github.com/lh3/minimap2
-
-
-
-# Baixando e instalando a versão mais recente do minimap2
-cd Downloads && git clone https://github.com/lh3/minimap2
-cd minimap2 && make
-cp minimap2 ~/bin
+# Baixando e instalando a versão mais recente do minimap2 diretamente do site do app
+# cd Downloads && git clone https://github.com/lh3/minimap2
+# cd minimap2 && make
+# cp minimap2 ~/bin
 # or
-conda create --name minimap2 python=3.9
-conda activate
-conda install bioconda::minimap2
+# conda create --name minimap2 python=3.9
+# conda activate minimap2
+# conda install bioconda::minimap2
 
-
-
-# Criação do banco de dados
-echo "Criando o banco de dados $DBNAME..."
-fasta2db.sh $DBTOOL $REFSEQ $DBTYPE $QUERY
-
-
+# Validação da entrada de dados na linha de comando sequence_mapping.sh
+MAPPINGTOOL=$1  # Ferramenta de mapeamento minimap2 ou bwa
+REFSEQ=$2   # path/filename refseq.fasta
+DBTYPE=$3  # Tipo de sequencia a ser analisada nucl ou prot
+QUERY=$4   # path/filename query.fasta com as sequencias query
+#if [[ $# -lt 4 ]]; then
+#	echo "Falta algum parâmetro: (1) ferramenta de geração de banco de dados, (2) caminho/nome do Taxon, (3) apelido do banco de dados a ser criado, (4) tipo do sequencia, ou (5) o nome do arquivo Query (.fasta)!"
+#	echo "Sintáxe: ./sequence_mapping.sh <MAPPINGTOOL: minimap2/bwa> <REFSEQ_DIR/FILENAME.fasta> <BDTYPE: nucl/prot> <QUERY.fasta>"
+# 	exit 0
+#fi
 
 test_dir="examples/minimap2_mapping/"
 
