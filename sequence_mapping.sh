@@ -7,17 +7,21 @@
 # Log: Debugging
 # Sintáxe: Em revisão
 
-# Instala pacote caso não exista
-PACKAGE_NAME="minimap2" # Replace with the actual package name
-COMMAND_NAME="minimap2" # Replace with a command provided by the package
+# Pacotes requeridos: minimap2, bwa
+PACKAGES=("minimap2" "bwa")
 
-if ! which "$COMMAND_NAME" > /dev/null; then
-    echo "$PACKAGE_NAME not found. Installing..."
-    sudo apt update
-    sudo apt install -y "$PACKAGE_NAME"
-else
-    echo "$PACKAGE_NAME is already installed."
-fi
+# Instala pacote(s) caso não exista(m)
+for pack in "${$PACKAGES[@]}"; do
+	PACKAGE_NAME=$pack # Replace with the actual package name
+	COMMAND_NAME=$pack # Replace with a command provided by the package
+	if ! which "$COMMAND_NAME" > /dev/null; then
+	    echo "$PACKAGE_NAME not found. Installing..."
+	    sudo apt update
+	    sudo apt install -y "$PACKAGE_NAME"
+	else
+	    echo "$PACKAGE_NAME is already installed."
+	fi
+done
 
 exit
 
