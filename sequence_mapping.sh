@@ -1,40 +1,61 @@
 #!/bin/bash
 
-# Mapea sequencias query multiseqfasta file (.fasta) em uma refseq (banco de dados Blast ou Diamond)
+# Mapear sequencias query multiseqfasta file (.fasta) em uma refseq
 # Autor: Luciano Kalabric Silva
-# Data de criação: 10/07/2025
-# Última atualização: 10/07/2025
+# Data de criação: 19/08/2025
+# Última atualização: 19/08/2025
 # Log: Debugging
-# 15/04/2024 - Permite que o script continue de onde parou para permitir concluir a criação do arquivo .map
 # Sintáxe: Em revisão
 
 #
 # Validação da entrada de dados na linha de comando
 #
-DBTOOL=$1  # Ferramenta de banco de dados Blast ou Diamond
-TAXON=$2   # Taxon path/filename or taxondir
-DBNAME=$3  # Database name
+MAPPINGTOOL=$1  # Ferramenta de mapeamento minimap2 ou bwa
+REFSEQ=$2   # path/filename refseq.fasta
 DBTYPE=$4  # Tipo de sequencia a ser analisada nucl ou prot
-QUERY=$5   # Arquivo .fasta com as sequencias query
+QUERY=$5   # path/filename query.fasta com as sequencias query
 if [[ $# -lt 4 ]]; then
 	echo "Falta algum parâmetro: (1) ferramenta de geração de banco de dados, (2) caminho/nome do Taxon, (3) apelido do banco de dados a ser criado, (4) tipo do sequencia, ou (5) o nome do arquivo Query (.fasta)!"
 	echo "Sintáxe: ./sequence_mapping.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot> <QUERY>"
  	exit 0
 fi
 
-# Criação do banco de dados
-echo "Criando o banco de dados $DBNAME..."
-fasta2db.sh $DBTOOL $TAXON $DBNAME $DBTYPE
-
 #
 # Uso do minimap2
 #
 # Link: https://github.com/lh3/minimap2
 
+# Instala pacote caso não exista
+PACKAGE_NAME="minimap2" # Replace with the actual package name
+COMMAND_NAME="minimap2" # Replace with a command provided by the package
+
+if ! which "$COMMAND_NAME" > /dev/null; then
+    echo "$PACKAGE_NAME not found. Installing..."
+    sudo apt update
+    sudo apt install -y "$PACKAGE_NAME"
+else
+    echo "$PACKAGE_NAME is already installed."
+fi
+
+exit
+
+
 # Baixando e instalando a versão mais recente do minimap2
 cd Downloads && git clone https://github.com/lh3/minimap2
 cd minimap2 && make
 cp minimap2 ~/bin
+# or
+conda create --name minimap2 python=3.9
+conda activate
+conda install bioconda::minimap2
+
+
+
+# Criação do banco de dados
+echo "Criando o banco de dados $DBNAME..."
+fasta2db.sh $DBTOOL $REFSEQ $DBTYPE $QUERY
+
+
 
 test_dir="examples/minimap2_mapping/"
 
