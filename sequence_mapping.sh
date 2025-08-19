@@ -7,7 +7,22 @@
 # Log: Debugging
 # Sintáxe: Em revisão
 
-#
+# Instala pacote caso não exista
+PACKAGE_NAME="minimap2" # Replace with the actual package name
+COMMAND_NAME="minimap2" # Replace with a command provided by the package
+
+if ! which "$COMMAND_NAME" > /dev/null; then
+    echo "$PACKAGE_NAME not found. Installing..."
+    sudo apt update
+    sudo apt install -y "$PACKAGE_NAME"
+else
+    echo "$PACKAGE_NAME is already installed."
+fi
+
+exit
+
+
+
 # Validação da entrada de dados na linha de comando
 #
 MAPPINGTOOL=$1  # Ferramenta de mapeamento minimap2 ou bwa
@@ -25,19 +40,6 @@ fi
 #
 # Link: https://github.com/lh3/minimap2
 
-# Instala pacote caso não exista
-PACKAGE_NAME="minimap2" # Replace with the actual package name
-COMMAND_NAME="minimap2" # Replace with a command provided by the package
-
-if ! which "$COMMAND_NAME" > /dev/null; then
-    echo "$PACKAGE_NAME not found. Installing..."
-    sudo apt update
-    sudo apt install -y "$PACKAGE_NAME"
-else
-    echo "$PACKAGE_NAME is already installed."
-fi
-
-exit
 
 
 # Baixando e instalando a versão mais recente do minimap2
