@@ -16,7 +16,7 @@ DBTYPE=$4  # Tipo de sequencia a ser analisada nucl ou prot
 QUERY=$5   # path/filename query.fasta com as sequencias query
 if [[ $# -lt 4 ]]; then
 	echo "Falta algum parâmetro: (1) ferramenta de geração de banco de dados, (2) caminho/nome do Taxon, (3) apelido do banco de dados a ser criado, (4) tipo do sequencia, ou (5) o nome do arquivo Query (.fasta)!"
-	echo "Sintáxe: ./sequence_mapping.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot> <QUERY>"
+	echo "Sintáxe: ./sequence_mapping.sh <MAPPINGTOOL: minimpa2/bwa> <REFSEQ_DIR/FILENAME.fasta> <BDTYPE: nucl/prot> <QUERY.fasta>"
  	exit 0
 fi
 
