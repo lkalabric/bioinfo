@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Este script realiza o mapeamento de sequências de peptídeos em sequencias de proteínas utilizando o app peptidemapper
-EXAMPLES_DIR="examples/peptidemapper/"
+EXAMPLES_DIR="{$HOME}/examples/peptidemapper/"
 
 #Instalação do app
 #wget http://genesis.ugent.be/maven2/com/compomics/utilities/5.0.39/utilities-5.0.39.zip
