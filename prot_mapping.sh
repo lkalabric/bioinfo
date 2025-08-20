@@ -10,4 +10,4 @@ EXAMPLES_DIR="{$HOME}/examples/peptidemapper/"
 #java -cp utilities-5.0.39.jar com.compomics.cli.peptide_mapper.PeptideMapperCLI -p exampleFiles/PeptideMapping/yeast.fasta exampleFiles/PeptideMapping/yeast-pep-1k.csv results.csv
 
 # Uso do Peptide Mapper
-java -cp ~/bin/utilities-5.0.39.jar com.compomics.cli.peptide_mapper.PeptideMapperCLI -p $EXAMPLES_DIR/PeptideMapping/yeast.fasta $EXAMPLES_DIR/PeptideMapping/yeast-pep-1k.csv results.csv
+java -cp ~/bin/utilities-5.0.39.jar com.compomics.cli.peptide_mapper.PeptideMapperCLI -p {$EXAMPLES_DIR}/PeptideMapping/yeast.fasta {$EXAMPLES_DIR}/PeptideMapping/yeast-pep-1k.csv results.csv
