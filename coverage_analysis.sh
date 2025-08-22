@@ -17,8 +17,8 @@ SAMFILENAME=$1	# Caminho/Nome do arquivo.sam a ser analisado
 #
 
 # Convete uma aquivo .sam em .bam
-samtools view -b -o ${SAMFILENAME}.bam ${SAMFILENAME}
+samtools view -b -o "${SAMFILENAME}.bam" ${SAMFILENAME}
 
 # Estima a profundidade em cada posição do arquivo .bam
-samtools depth ${SAMFILENAME}.bam -o ${SAMFILENAME}.bam.depth
+samtools depth "${SAMFILENAME}.bam" -o "${SAMFILENAME}.bam.depth"
 
