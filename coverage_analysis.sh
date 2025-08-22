@@ -16,9 +16,13 @@ SAMFILENAME=$1	# Caminho/Nome do arquivo.sam a ser analisado
 # Análise propriamente dita
 #
 
-# Convete uma aquivo .sam em .bam
+# Converte um arquivo .sam em .bam
 samtools view -b -o "${SAMFILENAME}.bam" ${SAMFILENAME}
 
 # Estima a profundidade em cada posição do arquivo .bam
 samtools depth "${SAMFILENAME}.bam" -o "${SAMFILENAME}.bam.depth"
+
+# Estima a cobertura média do alinhamento
+samtools coverage -l 1 "${SAMFILENAME}.bam"
+
 
