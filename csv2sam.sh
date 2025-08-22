@@ -37,7 +37,8 @@ do
     qual="*"
 
     echo "$posicao\n"
-    posicao_corrigida=((var = "${posicao}"))-1
+    posicao_corrigida="${posicao}-1
+    #posicao_corrigida=((var = "${posicao}"))-1
     # --- 4. Construir o registro SAM (separado por TABs) ---
     # sam_record="${read_id}\t${flag}\t${ref_id}\t${posicao}\t${mapq}\t${cigar}\t${rnext}\t${pnext}\t${tlen}\t${sequencia}\t${qual}"
     sam_record="${read_id}\t${flag}\t${ref_id}\t${posicao_corrigida}\t${mapq}\t${cigar}\t${rnext}\t${pnext}\t${tlen}\t${sequencia}\t${qual}"
