@@ -52,17 +52,20 @@ function blastanything () {
   # Link: https://www.metagenomics.wiki/tools/blast/blastn-output-format-6
   echo -e "Classificando as reads pelo ${BLASTSUITE}...\n"
   if [ -f ${QUERY} ]; then
-	# Cria o comando Blast suite para busca em banco de sequencias local
+	# Busca as sequencias do arquivo query.fasta no banco de sequencias local
 	QUERYNAME=$(basename ${QUERY})
-      	CALL_FUNC=echo $(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}" -out "${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE}" -outfmt "6 qseqid sseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
+		#CALL_FUNC=echo $(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}" -out "${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE}" -outfmt "6 qseqid sseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)	
+	   	CALL_FUNC=echo $(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}" -out "${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE}" -outfmt "18" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
       	# Executa o comando contido na variável CALL_FUNC
       	eval $CALL_FUNC 
       	# Gera o arquivo de log
 	echo "${i} $(wc -l < ${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE})" >> ${BLASTRESULTSDIR}/passed_reads.log
   else
+  	# Busca as sequencias dos arquivos.fasta da query no banco de sequencias local
 	  for i in $(find ${QUERY}/*.fasta -type f -exec basename {} .fasta \; | sort); do
 		# Cria o comando Blast suite para busca em banco de sequencias local
-		CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "6 qseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
+		# CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "6 qseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
+  		CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "18" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
 		# Executa o comando contido na variável CALL_FUNC
 		eval $CALL_FUNC 
 		# Gera o arquivo de log
