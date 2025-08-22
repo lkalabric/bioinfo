@@ -13,7 +13,7 @@
 QUERY=$1	# Nome do diretório que conte o(s) arquivo(s) query no formato fasta
 BLASTDB=$2	# Banco de dados BlastDB
 BLASTSUITE=$3   # Tipo de busca Blast
-BLASTDBDIR="data/BLASTDB/"{$BLASTDB}"/"
+BLASTDBDIR="data/BLASTDB/{$BLASTDB}/"
 
 # Blast suites disponíveis: 
 # blastn - search a nucleotide db using a nucleotide query
