@@ -7,6 +7,8 @@
 # Log: Debugging
 # 15/04/2024 - Permite que o script continue de onde parou para permitir concluir a criação do arquivo .map
 # Sintáxe: Em revisão
+Pacotes Linux requeridos: ncbi-blast+ ou diamond-aligner
+Pacotes de outros repositórios requeridos: Nenhum
 
 #
 # Validação da entrada de dados na linha de comando
