@@ -29,7 +29,7 @@ if [[ $# -lt 3 ]]; then
 fi
 
 # Saída de dados
-BLASTRESULTSDIR="${HOME}/blast-results"
+BLASTRESULTSDIR="blast-results"
 [[ ! -d $BLASTRESULTSDIR ]] && mkdir $BLASTRESULTSDIR
 
 # Preparação do BLASTDB local
