@@ -34,8 +34,8 @@ BLASTRESULTSDIR="${HOME}/blast-results"
 # Preparação do BLASTDB local
 # Script: fasta2blastdb.sh
 # Concatena todas as REFSEQs num arquivo refseq.fasta único e cria o BLASTDB
-# Extrai o label das sequencias em refseq.fasta e cria o arquivo refseq.acc 
-# A partir do arquivo refseq.acc, cria o arquivo refseq.map que mapeia os taxid (números que identificam as espécies taxonômica)
+# Extrai o label das sequências em blastdb.fasta e cria o arquivo blastdb.acc 
+# A partir do arquivo blastdb.acc, cria o arquivo blastdb.map que mapeia os taxid (números que identificam as espécies taxonômica)
 
 # Declaração das funções do script
 function blastanything () {
@@ -51,7 +51,7 @@ function blastanything () {
   if [ -f ${QUERY} ]; then
 	# Cria o comando Blast suite para busca em banco de sequencias local
 	QUERYNAME=$(basename ${QUERY})
-      	CALL_FUNC=echo $(${BLASTSUITE} -db "${BLASTDBDIR}refseq" -query "${QUERY}" -out "${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE}" -outfmt "6 qseqid sseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
+      	CALL_FUNC=echo $(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}" -out "${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE}" -outfmt "6 qseqid sseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
       	# Executa o comando contido na variável CALL_FUNC
       	eval $CALL_FUNC 
       	# Gera o arquivo de log
@@ -59,7 +59,7 @@ function blastanything () {
   else
 	  for i in $(find ${QUERY}/*.fasta -type f -exec basename {} .fasta \; | sort); do
 		# Cria o comando Blast suite para busca em banco de sequencias local
-		CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}refseq" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "6 qseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
+		CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "6 qseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
 		# Executa o comando contido na variável CALL_FUNC
 		eval $CALL_FUNC 
 		# Gera o arquivo de log
