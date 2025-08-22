@@ -28,6 +28,7 @@ do
     # Campos fixos ou calculados.
     flag=0
     mapq=20
+    ref_id="ref1"
     # A string CIGAR é o comprimento da sequência seguido de 'M' (Match).
     cigar="${#sequencia}M"
     rnext="*"
