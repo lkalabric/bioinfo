@@ -44,8 +44,8 @@ function blastanything () {
   # Busca as QUERIES e salva na pasta diretório BLASTNREADSDIR
   # Parâmetros do Blast suite
   # Filter
-  EVALUE=0.000001
-  WORDSIZE=8
+  # EVALUE=0.000001
+  # WORDSIZE=8
   QCOV=90
   # outfmt
   # Link: https://www.metagenomics.wiki/tools/blast/blastn-output-format-6
