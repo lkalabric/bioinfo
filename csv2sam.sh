@@ -7,7 +7,7 @@
 
 # Nome do arquivo de entrada CSV
 INPUT_CSV=$1
-INPUT_DIR="blast-results"
+INPUT_DIR="~/blast-results"
 
 # Nome do arquivo de saída SAM
 OUTPUT_SAM="${INPUT_CSV}.sam"
