@@ -33,7 +33,7 @@ case $1 in
     # Blast database
     ##
 	"blast")
-		# Diretório onde será criado o novo banco de dados refseq
+		# Diretório onde será criado o novo banco de dados blastdb
 		DBDIR=${HOME}/data/BLASTDB/${DBNAME}
      		if [ -d ${DBDIR} ]; then
 			read -n 1 -p "Diretório já existe, (R)esetar ou (C)ontinuar? " continuar
@@ -53,50 +53,50 @@ case $1 in
        			;;
 		esac
 		
-		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/refseq.fasta antes de montar o banco de dados
-		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/refseq.fasta..."
+		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/blastdb.fasta antes de montar o banco de dados
+		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/blastdb.fasta..."
 		if [ -f ${TAXON} ]; then
-  			cp "${HOME}/${TAXON}" "${DBDIR}/refseq.fasta"
+  			cp "${HOME}/${TAXON}" "${DBDIR}/blastdb.fasta"
 		else
-			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/refseq.fasta"
-			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/refseq.fasta"
+			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/blastdb.fasta"
+			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/blastdb.fasta"
 		fi
 	
 		# Processa a linha de descrição das sequencias referências para conter apenas o número de acesso sem espaços
-		# echo "Processando os labels do arquivo ${DBDIR}/refseq.fasta..."
-		# [[ -f ${DBDIR}/refseq.old ]] && rm ${DBDIR}/refseq.old
-		# mv ${DBDIR}/refseq.fasta ${DBDIR}/refseq.old
+		# echo "Processando os labels do arquivo ${DBDIR}/blastdb.fasta..."
+		# [[ -f ${DBDIR}/blastdb.old ]] && rm ${DBDIR}/blastdb.old
+		# mv ${DBDIR}/blastdb.fasta ${DBDIR}/blastdb.old
 		# while read -r line; do
 		#	if echo "$line" | grep ">"; then
-		#    		echo "$line" | cut -d "." -f 1 >> ${DBDIR}/refseq.fasta
+		#    		echo "$line" | cut -d "." -f 1 >> ${DBDIR}/blastdb.fasta
 		#	else
-		#		echo "$line" >> ${DBDIR}/refseq.fasta
+		#		echo "$line" >> ${DBDIR}/blastdb.fasta
 		#	fi
-		# done < "${DBDIR}/refseq.old"
+		# done < "${DBDIR}/blastdb.old"
 
 		# Cria a lista de números de acc Genbank a partir do arquivo .fasta
-		echo "Criando o arquivo ${DBDIR}/refseq.acc..."
-		[[ -f ${DBDIR}/refseq.acc ]] && rm  ${DBDIR}/refseq.acc
-		grep ">" ${DBDIR}/refseq.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/refseq.acc
+		echo "Criando o arquivo ${DBDIR}/blastdb.acc..."
+		[[ -f ${DBDIR}/blastdb.acc ]] && rm  ${DBDIR}/blastdb.acc
+		grep ">" ${DBDIR}/blastdb.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/blastdb.acc
 		
 		# Cria a lista de taxid a partir nos números de acc Genbank
-		echo "Criando o arquivo ${DBDIR}/refseq.map..."
-  		[[ -f ${DBDIR}/refseq.map ]] && rm  ${DBDIR}/refseq.map
-		touch ${DBDIR}/refseq.map
+		echo "Criando o arquivo ${DBDIR}/blastdb.map..."
+  		[[ -f ${DBDIR}/blastdb.map ]] && rm  ${DBDIR}/blastdb.map
+		touch ${DBDIR}/blastdb.map
   		
     		# Retrive Taxid
 		# Caso seja necessário continuar, armazenar o último acc processado
-      		lastacc=$(tail -n 1 ${DBDIR}/refseq.map | cut -d " " -f 1)
+      		lastacc=$(tail -n 1 ${DBDIR}/blastdb.map | cut -d " " -f 1)
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
-   			# [[ ! -z $(grep "$line" "${DBDIR}/refseq.map") ]] && continue
-      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/refseq.log
-			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/refseq.map
-		done < ${DBDIR}/refseq.acc
+   			# [[ ! -z $(grep "$line" "${DBDIR}/blastdb.map") ]] && continue
+      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/blastdb.log
+			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/blastdb.map
+		done < ${DBDIR}/blastdb.acc
 		
-		# Cria o banco de dados refseq propriamente dito para busca pelos programas Blast
+		# Cria o banco de dados blastdb propriamente dito para busca pelos programas Blast
 		echo "Criando o banco de dados ${DBNAME}..."
-		makeblastdb -in ${DBDIR}/refseq.fasta -parse_seqids -taxid_map ${DBDIR}/refseq.map -dbtype ${DBTYPE} -out ${DBDIR}/refseq
+		makeblastdb -in ${DBDIR}/blastdb.fasta -parse_seqids -taxid_map ${DBDIR}/blastdb.map -dbtype ${DBTYPE} -out ${DBDIR}/blastdb
 		echo "Banco de dados criado com sucesso!"
 		
 		exit 1
@@ -109,7 +109,7 @@ case $1 in
    			exit 0
        		fi
 		
-  		# Diretório onde será criado o novo banco de dados reference
+  		# Diretório onde será criado o novo banco de dados diamonddb
 		DBDIR=${HOME}/data/DIAMONDDB/${DBNAME}
 
    		if [ -d ${DBDIR} ]; then
@@ -129,38 +129,38 @@ case $1 in
        			;;
 		esac
 		
-		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/reference.fasta antes de montar o banco de dados
-		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/reference.fasta..."
+		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/diamonddb.fasta antes de montar o banco de dados
+		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/refseq.fasta..."
 		if [ -f ${TAXON} ]; then
-  			cp "${HOME}/${TAXON}" "${DBDIR}/reference.fasta"
+  			cp "${HOME}/${TAXON}" "${DBDIR}/refseq.fasta"
 		else
-			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/reference.fasta"
-			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/reference.fasta"
+			# find ${TAXON} -type f -iname '*.fasta' -print0 | sort -z | xargs -0 cat > "${DBDIR}/refseq.fasta"
+			find ${TAXON} -name '*.fasta' -exec cat {} + > "${DBDIR}/refseq.fasta"
 		fi
 	
 		# Cria a lista de números de acc Genbank a partir do arquivo .fasta
-		echo "Criando o arquivo ${DBDIR}/reference.acc..."
-		[[ -f ${DBDIR}/reference.acc ]] && rm  ${DBDIR}/reference.acc
-		grep ">" ${DBDIR}/reference.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/reference.acc
+		echo "Criando o arquivo ${DBDIR}/diamonddb.acc..."
+		[[ -f ${DBDIR}/diamonddb.acc ]] && rm  ${DBDIR}/diamonddb.acc
+		grep ">" ${DBDIR}/diamonddb.fasta | sed 's/>//' | cut -d " " -f 1 > ${DBDIR}/diamonddb.acc
 		
 		# Cria a lista de taxid a partir nos números de acc Genbank
-		echo "Criando o arquivo ${DBDIR}/reference.map..."
-  		[[ -f ${DBDIR}/reference.map ]] && rm  ${DBDIR}/reference.map
-		touch ${DBDIR}/reference.map
+		echo "Criando o arquivo ${DBDIR}/diamonddb.map..."
+  		[[ -f ${DBDIR}/diamonddb.map ]] && rm  ${DBDIR}/diamonddb.map
+		touch ${DBDIR}/diamonddb.map
   		
     		# Retrive Taxid
 		# Caso seja necessário continuar, armazenar o último acc processado
-      		lastacc=$(tail -n 1 ${DBDIR}/reference.map | cut -d " " -f 1)
+      		lastacc=$(tail -n 1 ${DBDIR}/diamonddb.map | cut -d " " -f 1)
 		while read -r line; do
 			# Caso seja necessário continuar, pula as linhas com os acc já processados
-   			# [[ ! -z $(grep "$line" "${DBDIR}/reference.map") ]] && continue
-      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/reference.log
-			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/reference.map
-		done < ${DBDIR}/reference.acc
+   			# [[ ! -z $(grep "$line" "${DBDIR}/diamonddb.map") ]] && continue
+      			echo "Downloading taxid do acc $line..." | tee -a ${DBDIR}/diamonddb.log
+			echo "$line "$(esearch -db assembly -query "$line" < /dev/null | esummary | xtract -pattern DocumentSummary -element Taxid) >> ${DBDIR}/diamonddb.map
+		done < ${DBDIR}/diamonddb.acc
 		
-		# Cria o banco de dados reference propriamente dito para busca pelos programas Blast
+		# Cria o banco de dados diamonddb propriamente dito para busca pelos programas Blast
 		echo "Criando o banco de dados ${DBNAME}..."
-		diamond makedb --in ${DBDIR}/reference.fasta --db ${DBDIR}/reference
+		diamond makedb --in ${DBDIR}/diamonddb.fasta --db ${DBDIR}/diamonddb
 		echo "Banco de dados criado com sucesso!"
 		
 		exit 2
