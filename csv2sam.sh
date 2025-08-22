@@ -7,6 +7,7 @@
 
 # Nome do arquivo de entrada CSV
 INPUT_CSV=$1
+INPUT_DIR="blast/results"
 
 # Nome do arquivo de saída SAM
 OUTPUT_SAM="${INPUT_CSV}.sam"
@@ -22,7 +23,7 @@ echo -e "$SAM_HEADER" > "$OUTPUT_SAM"
 # Usamos 'tail -n +2' para pular o cabeçalho do CSV.
 # O comando 'while read' lê cada linha do CSV.
 # O 'IFS=,' define o separador de campo como vírgula.
-tail -n +2 "$INPUT_CSV" | while IFS=',' read -r read_id ref_id posicao sequencia
+tail -n +2 "$INPUT_DIR/$INPUT_CSV" | while IFS=',' read -r read_id ref_id posicao sequencia
 do
     # --- 3. Preencher os campos do registro SAM ---
     # Campos fixos ou calculados.
