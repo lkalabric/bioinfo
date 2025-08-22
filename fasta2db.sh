@@ -19,7 +19,7 @@ DBNAME=$3	# Database name
 DBTYPE=$4	# Tipo de banco de dados nucl ou prot
 if [[ $# -lt 4 ]]; then
 	echo "Falta o caminho/nome ou o caminho do Taxon, o diretório do Blastdb a ser criado, ou o tipo do banco de dados!"
-	echo "Sintáxe: ./fasta2db.sh <-blast/-diamond> <TAXONDIR/TAXONFILENAME> <DBNAME> <BDTYPE: nucl/prot>"
+	echo "Sintáxe: ./fasta2db.sh <DBTOOL: 'blast', 'diamond'> <TAXON: Path/File name.fasta> <DBNAME> <BDTYPE: 'nucl', 'prot'>"
  	exit 0
 fi
 
@@ -32,7 +32,7 @@ case $1 in
     ##
     # Blast database
     ##
-	"-blast")
+	"blast")
 		# Diretório onde será criado o novo banco de dados refseq
 		DBDIR=${HOME}/data/BLASTDB/${DBNAME}
      		if [ -d ${DBDIR} ]; then
@@ -102,7 +102,7 @@ case $1 in
 		exit 1
 	;;
 
-"-diamond")
+"diamond")
 		# Validação do tipo de busca
     		if [ ${DBTYPE} == "-nucl" ]; then
 			echo "Invalid parameter! DIAMOND is a sequence aligner for protein and translated DNA searches only."
