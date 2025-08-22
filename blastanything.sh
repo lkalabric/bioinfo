@@ -11,8 +11,9 @@
 # Validação da entrada de dados na linha de comando
 #
 QUERY=$1	# Nome do diretório que conte o(s) arquivo(s) query no formato fasta
-BLASTDBDIR=$2	# Diretório contendo o BlastDB
+BLASTDB=$2	# Banco de dados BlastDB
 BLASTSUITE=$3   # Tipo de busca Blast
+BLASTDBDIR="data/BLASTDB/"{$BLASTDB}"/"
 
 # Blast suites disponíveis: 
 # blastn - search a nucleotide db using a nucleotide query
@@ -23,7 +24,7 @@ BLASTSUITE=$3   # Tipo de busca Blast
 
 if [[ $# -lt 3 ]]; then
 	echo "Falta o nome do arquivo ou caminho contendo as queries, diretório BlastDB ou blast suite!"
-	echo "Sintáxe: ./blastanything.sh <QUERY: Path/File name.fasta> <BLASTDBDIR> <BLASTSUITE: 'blastn', 'blastp', 'blastx', 'tblastn', 'tblastx'"
+	echo "Sintáxe: ./blastanything.sh <QUERY: Path/File name.fasta> <BLASTDB> <BLASTSUITE: 'blastn', 'blastp', 'blastx', 'tblastn', 'tblastx'"
 	exit 0
 fi
 
