@@ -23,7 +23,7 @@ fi
 
 # Diretórios dos dados data/ (Subjects)
 # Salvar os arquivos contendo as sequencias referências no formato Fasta (obtidos do Genbank) 
-# individualmente ou no formato multiseq Fasta neste diretório ou em sub-diretórios. Os arquivos
+# individualmente ou no formato multiseq Fasta neste diretório ou em subdiretórios. Os arquivos
 # serão contatenados recursivamente em um único arquivo refseq.fasta para criação do banco de dados
 
 case $1 in
@@ -52,7 +52,7 @@ case $1 in
 		esac
 		
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/refseq.fasta antes de montar o banco de dados
-		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/refseq.fasta..."
+		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/refseq.fasta..."
 		if [ -f ${TAXON} ]; then
   			cp "${HOME}/${TAXON}" "${DBDIR}/refseq.fasta"
 		else
@@ -128,7 +128,7 @@ case $1 in
 		esac
 		
 		# Se TAXON for um diretório, concatena todos os arquivos .fasta em ${DBDIR}/reference.fasta antes de montar o banco de dados
-		echo "Concatenando as sequencias referências ${TAXON} em ${DBDIR}/reference.fasta..."
+		echo "Concatenando as sequências referências ${TAXON} em ${DBDIR}/reference.fasta..."
 		if [ -f ${TAXON} ]; then
   			cp "${HOME}/${TAXON}" "${DBDIR}/reference.fasta"
 		else
