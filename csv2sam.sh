@@ -6,10 +6,10 @@
 # Substitua 'seu_arquivo.csv' pelo nome do seu arquivo de entrada.
 
 # Nome do arquivo de entrada CSV
-INPUT_CSV="seu_arquivo.csv"
+INPUT_CSV=$1
 
 # Nome do arquivo de saída SAM
-OUTPUT_SAM="saida.sam"
+OUTPUT_SAM="output.sam"
 
 # --- 1. Criar o cabeçalho do arquivo SAM ---
 # O cabeçalho é obrigatório para um arquivo SAM válido.
@@ -35,10 +35,11 @@ do
     tlen=0
     # A qualidade (QUAL) é definida como '*' pois não está disponível no CSV.
     qual="*"
-
+    
+    posicao_corrigida=$posicao-1
     # --- 4. Construir o registro SAM (separado por TABs) ---
-    sam_record="${read_id}\t${flag}\t${ref_id}\t${posicao}\t${mapq}\t${cigar}\t${rnext}\t${pnext}\t${tlen}\t${sequencia}\t${qual}"
-
+    # sam_record="${read_id}\t${flag}\t${ref_id}\t${posicao}\t${mapq}\t${cigar}\t${rnext}\t${pnext}\t${tlen}\t${sequencia}\t${qual}"
+    sam_record="${read_id}\t${flag}\t${ref_id}\t${posicao_corrigida}\t${mapq}\t${cigar}\t${rnext}\t${pnext}\t${tlen}\t${sequencia}\t${qual}"
     # --- 5. Escrever o registro no arquivo de saída ---
     echo -e "$sam_record" >> "$OUTPUT_SAM"
 done
