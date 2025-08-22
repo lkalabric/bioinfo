@@ -36,7 +36,7 @@ do
     # A qualidade (QUAL) é definida como '*' pois não está disponível no CSV.
     qual="*"
 
-    echo "$posicao\n"
+    echo "${posicao}\n"
     posicao_corrigida="${posicao}-1
     #posicao_corrigida=((var = "${posicao}"))-1
     # --- 4. Construir o registro SAM (separado por TABs) ---
