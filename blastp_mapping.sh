@@ -62,7 +62,7 @@ function blastp_mapping () {
       	# Gera o arquivo de log
 	echo "${i} $(wc -l < "${QUERYNAME}.${BLASTSUITE}.csv")" >> blasted_reads.log
   else
-  	# Busca as sequencias dos arquivos.fasta da query no banco de sequencias local
+  	# Busca as sequências dos arquivos.fasta da query no banco de sequencias local
 	  for i in $(find ${QUERY}/*.fasta -type f -exec basename {} .fasta \; | sort); do
 		# Cria o comando Blast suite para busca em banco de sequencias local
 		# CALL_FUNC=echo$(${BLASTSUITE} -db "${BLASTDBDIR}blastdb" -query "${QUERY}${i}.fasta" -out "${BLASTRESULTSDIR}/${i}.${BLASTSUITE}" -outfmt "6 qseqid sseqid length mismatch gapopen qstart qend sstart send evalue qcovhsp" -qcov_hsp_perc ${QCOV} -max_target_seqs 1)
