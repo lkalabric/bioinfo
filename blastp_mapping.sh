@@ -60,7 +60,7 @@ function blastp_mapping () {
       	# Executa o comando contido na variável CALL_FUNC
       	eval $CALL_FUNC 
       	# Gera o arquivo de log
-	echo "${i} $(wc -l < ${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE})" >> ${BLASTRESULTSDIR}/passed_reads.log
+	echo "${i} $(wc -l < ${BLASTRESULTSDIR}/${QUERYNAME}.${BLASTSUITE})" >> passed_reads.log
   else
   	# Busca as sequencias dos arquivos.fasta da query no banco de sequencias local
 	  for i in $(find ${QUERY}/*.fasta -type f -exec basename {} .fasta \; | sort); do
@@ -71,7 +71,7 @@ function blastp_mapping () {
 		# Executa o comando contido na variável CALL_FUNC
 		eval $CALL_FUNC 
 		# Gera o arquivo de log
-		echo "${i} $(wc -l < ${BLASTRESULTSDIR}/${i}.${BLASTSUITE})" >> ${BLASTRESULTSDIR}/passed_reads.log
+		echo "${i} $(wc -l < ${BLASTRESULTSDIR}/${i}.${BLASTSUITE})" >> passed_reads.log
 	  done
   fi
   echo "Resultados ${BLASTSUIE} obtidos com sucesso!"
