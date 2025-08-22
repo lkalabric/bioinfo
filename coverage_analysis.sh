@@ -23,6 +23,6 @@ samtools view -b -o "${SAMFILENAME}.bam" ${SAMFILENAME}
 samtools depth "${SAMFILENAME}.bam" -o "${SAMFILENAME}.bam.depth"
 
 # Estima a cobertura média do alinhamento
-samtools coverage -l 1 "${SAMFILENAME}.bam"
+samtools coverage -A -w -r "${SAMFILENAME}.bam"
 
 
