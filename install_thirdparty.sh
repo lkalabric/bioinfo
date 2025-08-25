@@ -30,6 +30,8 @@ if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
 	# After saving the file, run the following command to the export take effect:
 	source ~/.bashrc
+ 	# Update conda
+  	conda update -n base -c defaults conda
  	exit 1
 fi
 
