@@ -2,3 +2,14 @@ cutadapt
 nanofilt
 trimmomatic
 spades
+busco
+cd-hit
+crossmap
+cutadapt
+diamond
+hmmer
+iqtree
+multiqc
+nanofilt
+soapdenovo2
+velvet
