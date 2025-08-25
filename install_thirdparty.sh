@@ -14,8 +14,8 @@ if [[ $(sudo -v) ]]; then
 	sudo apt-get update
 	sudo apt list --upgradable
 	sudo apt-get upgrade
+ 	exit 0
 fi
-exit 1
 
 # Install Miniconda, if not present
 if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
@@ -30,6 +30,7 @@ if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	echo 'export PATH="$HOME/miniconda3/bin:$PATH" # add miniconda3/bin to PATH' >> ~/.bashrc # appends the export to ~/.bashrc file
 	# After saving the file, run the following command to the export take effect:
 	source ~/.bashrc
+ 	exit 1
 fi
 
 # Using Miniconda
