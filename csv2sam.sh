@@ -9,7 +9,7 @@
 INPUT_CSV=$1
 
 # Nome do arquivo de saída SAM
-OUTPUT_SAM="${INPUT_CSV}.sam"
+OUTPUT_SAM="${INPUT_CSV%.*}.sam"
 
 # --- 1. Criar o cabeçalho do arquivo SAM ---
 # O cabeçalho é obrigatório para um arquivo SAM válido.
