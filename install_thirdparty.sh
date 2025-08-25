@@ -17,6 +17,7 @@ if [[ $(sudo -v) ]]; then
 	sudo apt list --upgradable
 	sudo apt-get upgrade
 fi
+exit 1
 
 # Install Miniconda, if not present
 if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
@@ -116,7 +117,7 @@ sudo apt install cmake
 # ./diamond blastp -d swissprot -q queries.fasta -o matches.tsv
 
 
-# Instalar Star
+# Instalar Star (Spliced Transcripts Alignment to a Reference)
 #https://github.com/alexdobin/STAR
 # Get latest STAR source from releases
 #wget https://github.com/alexdobin/STAR/archive/2.7.9a.tar.gz -P ~/Downloads
