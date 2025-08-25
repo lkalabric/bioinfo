@@ -248,3 +248,9 @@ sudo apt install cmake
 # unzip utilities-5.0.39.zip
 # cd utilities-5.0.39
 # java -cp utilities-5.0.39.jar com.compomics.cli.peptide_mapper.PeptideMapperCLI -p exampleFiles/PeptideMapping/yeast.fasta exampleFiles/PeptideMapping/yeast-pep-1k.csv results.csv
+
+# Install bepipred (Prediction of potential linear B-cell epitopes)
+# Link: https://services.healthtech.dtu.dk/services/BepiPred-2.0/
+# After unzip, follow bepipred-1.0.readme instructions
+
+
