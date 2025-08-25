@@ -20,13 +20,13 @@
 DIRECTORY_LIST=("bin" "data" "examples" "logs" "repos" "results" "scripts" "scratch")
 
 # Check if the directory list is valid
-if [ ${DIRECTORY_LIST[@] -eq 0 ]; then
+if [ "${DIRECTORY_LIST[@]" -eq 0 ]; then
     echo "Erro: A lista '$DIRECTORY_LIST' não existe ou não é válida!"
     exit 1
 fi
 # Lê a variável contendo a lista de diretórios e cria cada diretório
 echo "Iniciando a criação dos diretórios..."
-while IFS= read -r DIR_NOME; do
+for DIR_NOME in "${DIRECTORY_LIST[@]"; do
     # O comando 'mkdir -p' cria o diretório (e todos os pais, se necessário).
     # A opção '-p' também evita erros se o diretório já existir.
     if mkdir -p "$DIR_NOME"; then
@@ -34,7 +34,7 @@ while IFS= read -r DIR_NOME; do
     else
         echo "Erro: Falha ao criar o diretório '$DIR_NOME'."
     fi
-done < "$DIRECTORY_LIST"
+done
 echo "Processo concluído."
 exit 0
 
