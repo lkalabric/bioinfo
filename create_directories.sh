@@ -20,7 +20,7 @@
 DIRECTORY_LIST=("bin" "data" "examples" "logs" "repos" "results" "scripts" "scratch")
 
 # Check if the directory list is valid
-if [ ! -f "$DIRECTORY_LIST" ] || [ ! -r "$DIRECTORY_LIST" ]; then
+if [ ${DIRECTORY_LIST[@] -eq 0 ]; then
     echo "Erro: A lista '$DIRECTORY_LIST' não existe ou não é válida!"
     exit 1
 fi
