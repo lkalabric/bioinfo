@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Uso do bepipred
+# Link: https://github.com/UberClifford/BepiPred3.0-Predictor/tree/main
+
+# BepiPred3.0 predicts B-cell epitopes from ESM-2 encodings of proteins sequences.
+
+# Instalação
+conda create -n bepipred3 python=3.8.8
+conda activate bepipred3
+conda install pip
+pip3 install -r requirements.txt
+
 # Define o nome do arquivo de entrada e de saÃ­da
 #input_file="hdv-1_bepipred.txt"
 input_file=$1
@@ -8,7 +19,7 @@ output_file="${input_file%.*}.sam"
 
 # Verifica se o arquivo de entrada existe
 if [[ ! -f "$input_file" ]]; then
-    echo "Erro: O arquivo '$input_file' nÃ£o foi encontrado."
+    echo "Erro: O arquivo '$input_file' não foi encontrado."
     exit 1
 fi
 
