@@ -19,10 +19,13 @@ SAMFILENAME=$1	# Caminho/Nome do arquivo.sam a ser analisado
 # Converte um arquivo .sam em .bam
 samtools view -b -o "${SAMFILENAME}.bam" ${SAMFILENAME}
 
+# Ordena as sequencias antes da análise de cobertura propriamente dita
+samtools sort "${SAMFILENAME}.bam" -o "${SAMFILENAME}.sorted.bam"
+
 # Estima a profundidade em cada posição do arquivo .bam
-samtools depth "${SAMFILENAME}.bam" -o "${SAMFILENAME}.bam.depth"
+samtools depth ${SAMFILENAME}.sorted.bam" -o ${SAMFILENAME}.sorted.bam.depth"
 
 # Estima a cobertura média do alinhamento
-samtools coverage -A -w -r "${SAMFILENAME}.bam"
+samtools coverage -A -w -r ${SAMFILENAME}.sorted.bam"
 
 
