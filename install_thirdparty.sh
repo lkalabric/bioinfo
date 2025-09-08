@@ -257,5 +257,9 @@ sudo apt install cmake
 # Instalar bepipred3
 #conda create -n bepipred3 python=3.8.8
 #conda activate bepipred3
-#pip3 install -r requirements.txt
+#pip3 install -r requirements.txt # Desta forma não funcionou para mim :(
+# Instalar bepipred3 a partir do Github
+# git clone https://github.com/UberClifford/BepiPred3.0-Predictor/tree/main repos/bepipred
+# cp repos/bepipred/bepipred3_CLI.py scripts/
+
 
