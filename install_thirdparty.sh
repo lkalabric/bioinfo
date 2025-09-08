@@ -254,4 +254,8 @@ sudo apt install cmake
 # Link: https://services.healthtech.dtu.dk/services/BepiPred-2.0/
 # After unzip, follow bepipred-1.0.readme instructions
 
+# Instalar bepipred3
+#conda create -n bepipred3 python=3.8.8
+#conda activate bepipred3
+#pip3 install -r requirements.txt
 
