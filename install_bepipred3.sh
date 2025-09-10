@@ -36,6 +36,7 @@ else
     if conda create --name "$ENV_NAME" $PYTHON_VERSION $PACKAGES -y; then
         echo "Sucesso: O ambiente '$ENV_NAME' foi criado com sucesso!"
         conda activate "$ENV_NAME"
+        exit 1
         git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
         git_script.sh
         pip3 install -r repos/bepipred3/requirements.txt
