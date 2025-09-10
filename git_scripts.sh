@@ -24,17 +24,9 @@ if [ $# = 1 ]; then
 		# Git pull REPO
   		echo "Git pulling ${REPO} repo..."
   		cd ${REPO_DIR}/${REPO}
-		git pull
-		# Reset scripts/ dir and copy files .sh and .R to it
-  		rm -r ${SCRIPT_DIR}
-    		mkdir ${SCRIPT_DIR}
-  		find "${REPO_DIR}/" -maxdepth 1 \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
-		chmod +x ${SCRIPT_DIR}/*.sh
-  		cd
-    		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
-      		# export PATH="/${SCRIPT_DIR}:$PATH"
+		git pull		
 	fi	
- else
+else
  	echo "List of cloned repositories:"
 	ls ${REPO_DIR}
  	cd ${REPO_DIR}
@@ -46,13 +38,13 @@ if [ $# = 1 ]; then
 		git pull		
   		cd ..
 	done
- # Reset scripts/ dir and copy files .sh and .R to it
-  		rm -r ${SCRIPT_DIR}
-    		mkdir ${SCRIPT_DIR}
-  		find "${REPO_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
-		find "${SCRIPT_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x {} \;
-		# chmod +x ${SCRIPT_DIR}/*.sh
-  		cd
-    		# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
-      		# export PATH="/${SCRIPT_DIR}:$PATH"
- fi
+fi
+# Reset scripts/ dir and copy files .sh and .R to it
+echo "Restoring scripts and privileges..."
+rm -r ${SCRIPT_DIR}
+mkdir ${SCRIPT_DIR}
+find "${REPO_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
+find "${SCRIPT_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x {} \;
+# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
+# export PATH="/${SCRIPT_DIR}:$PATH"
+
