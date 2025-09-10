@@ -37,14 +37,11 @@ if [ $# = 1 ]; then
  else
  	echo "List of cloned repositories:"
 	ls ${REPO_DIR}
- 	cd ${REPO_DIR}
-	# Git put all repos
-	for dir in $(find . -maxdepth 1 -type d); do
- 		if [ "${dir}" == "." ]; then
-        	continue
-		fi
- 		echo "Git pulling ${dir} repo..."
-  		cd ${dir}
+ 	# Git put all repos
+	for dir in $(find . -mindepth 1 -maxdepth 1 -type d); do
+ 		dir_name="${dir#./}"
+ 		echo "Git pulling ${dir_name} repo..."
+  		cd ${REPO_DIR}/${dir_name}
 		git pull		
   		cd ..
 	done
@@ -54,6 +51,6 @@ if [ $# = 1 ]; then
   		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
-    		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
+    		# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
       		# export PATH="/${SCRIPT_DIR}:$PATH"
  fi
