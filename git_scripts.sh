@@ -11,7 +11,7 @@
 REPO=$1
 
 # Repository directory
-REPO_DIR=${HOME}/repos
+REPO_DIR="${HOME}/repos"
 
 # Scripts directory
 SCRIPT_DIR="${HOME}/scripts"
@@ -28,7 +28,7 @@ if [ $# = 1 ]; then
 		# Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
+  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
@@ -46,7 +46,7 @@ if [ $# = 1 ]; then
  # Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find ${REPO_DIR}/ \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
+  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
