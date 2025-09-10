@@ -44,14 +44,14 @@ fi
 
 REPO_URL="https://github.com/UberClifford/BepiPred3.0-Predictor.git"
 REPO_DIR="~/repos/$ENV_NAME"
-# Clonagem script para execução do bepipred3 do GitHub
+# Clonagem do repositório BepiPred3.0-Predictor do GitHub
 echo "Clonando o repositório do bepipred3 localmente..."
 if [ -d "$REPO_DIR" ]; then
     echo "Sucesso: O diretório '$REPO_DIR' já existe. Nenhuma ação de clone necessária."
 else
-    echo "Diretório '$DIR_NAME' não encontrado. Iniciando o processo de clonegem..."
+    echo "Diretório '$DIR_NAME' não encontrado. Iniciando o processo de clonagem..."
     # O comando 'git clone' clona o repositório.
-    if git clone "$REPO_URL"; then
+    if git clone "$REPO_URL" "$REPO_DIR"; then
         echo "Sucesso: Repositório clonado com sucesso para '$REPO_DIR'."
         echo "Atualizando o script bepipr3_CLI.py..."
         cp ~/repos/bepipred3/bepipred3_CLI.py ~/scripts/
