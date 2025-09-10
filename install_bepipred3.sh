@@ -3,7 +3,7 @@
 # Author: Luciano Kalabric Silva
 # Institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # Objective: Install and execute bepipred3
-# Syntax: bepipred.sh -i protein_seq.fast -o output.txt -pred
+# Syntax: install_bepipred3.sh
 # Link: https://github.com/UberClifford/BepiPred3.0-Predictor/tree/main
 
 # Este script verifica se um ambiente Conda com um nome específico
@@ -20,6 +20,7 @@ PYTHON_VERSION="python=3.8.8"
 # Exemplo: PACKAGES="numpy pandas scikit-learn"
 PACKAGES=""
 
+# --- Lógica do Script ---
 echo "Verificando a existência do ambiente Conda: '$ENV_NAME'..."
 
 # O comando 'conda info --envs' lista todos os ambientes.
@@ -44,8 +45,7 @@ else
         exit 1
     fi
 fi
-
-# --- Lógica do Script ---
+ls
 
 # Por convenção, 'exit 0' indica sucesso
 exit 0
