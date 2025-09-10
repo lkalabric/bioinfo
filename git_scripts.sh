@@ -39,9 +39,9 @@ if [ $# = 1 ]; then
 	ls ${REPO_DIR}
  	# Git put all repos
 	for dir in $(find . -mindepth 1 -maxdepth 1 -type d); do
- 		dir_name="${dir#./}"
- 		echo "Git pulling ${dir_name} repo..."
-  		cd ${REPO_DIR}/${dir_name}
+ 		${REPO}="${dir#./}"     
+ 		echo "Git pulling ${REPO} repo..."
+  		cd ${REPO_DIR}/${REPO}
 		git pull		
   		cd ..
 	done
