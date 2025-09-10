@@ -17,7 +17,16 @@ if [[ $(sudo -v) ]]; then
  	exit 0
 fi
 
-# Install Miniconda, if not present
+
+# Instaal Miniconda manualmente
+# Link: https://www.anaconda.com/docs/getting-started/miniconda/install#linux-2
+# mkdir -p ~/miniconda3
+# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+# bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+# rm ~/miniconda3/miniconda.sh
+# source ~/miniconda3/bin/activate
+# conda init --all
+# Install Miniconda automaticamente, if not present
 if [ ! -f ~/Downloads/Miniconda3-latest-Linux-x86_64.sh ]; then
 	# Install and configure Miniconda if not installed
  	# Link: https://www.cyberithub.com/how-to-install-miniconda-on-ubuntu-20-04-lts-focal-fossa/
