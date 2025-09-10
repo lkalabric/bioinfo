@@ -37,11 +37,12 @@ if [ $# = 1 ]; then
  else
  	echo "List of cloned repositories:"
 	ls ${REPO_DIR}
+ 	cd ${REPO_DIR}
  	# Git put all repos
 	for dir in $(find . -mindepth 1 -maxdepth 1 -type d); do
  		REPO="${dir#./}"     
  		echo "Git pulling ${REPO} repo..."
-  		cd ${REPO_DIR}/${REPO}
+  		cd ${REPO}
 		git pull		
   		cd ..
 	done
