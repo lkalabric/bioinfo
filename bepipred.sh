@@ -5,7 +5,8 @@
 
 # --- Configurações ---
 # Defina o nome do ambiente Conda que você quer verificar/criar
-ENV_NAME="bepipred"
+# Exemplo: ENV_NAME="bepipred3"
+ENV_NAME="bepipred3"
 
 # Defina as bibliotecas que você quer instalar, se o ambiente for criado
 # Exemplo: PYTHON_VERSION="python=3.9"
