@@ -43,7 +43,7 @@ else
 fi
 
 REPO_URL="https://github.com/UberClifford/BepiPred3.0-Predictor.git"
-REPO_DIR="~/repos/$ENV_NAME"
+REPO_DIR="${HOME}/repos/$ENV_NAME"
 # Clonagem do repositório BepiPred3.0-Predictor do GitHub
 echo "Clonando o repositório do bepipred3 localmente..."
 if [ -d "$REPO_DIR" ]; then
