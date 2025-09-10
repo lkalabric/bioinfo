@@ -49,8 +49,9 @@ if [ $# = 1 ]; then
  # Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
-		chmod +x ${SCRIPT_DIR}/*.sh
+  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
+		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x ${SCRIPT_DIR}/{} \;
+		# chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
       		# export PATH="/${SCRIPT_DIR}:$PATH"
