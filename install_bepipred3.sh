@@ -46,6 +46,8 @@ ls
 echo "Clonando o repositório do bepipred3 localmente..."
 git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
 echo "Atualizando o script bepipr3_CLI.py..."
+cp ~/repos/bepipred3/bepipred3_CLI.py ~/scripts/
+chmod +x ~/scripts/bepipred3_CLI.py
 
 # Instalação manual
 echo "Para conclui a instalação, execute conda init e conda activate $ENV_NAME"
