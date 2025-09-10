@@ -35,7 +35,9 @@ else
     if conda create --name "$ENV_NAME" $PYTHON_VERSION $PACKAGES -y; then
         echo "Sucesso: O ambiente '$ENV_NAME' foi criado com sucesso!"
         conda activate "$ENV_NAME"
-        pip3 install -r requirements.txt
+        git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
+        git_script.sh
+        pip3 install -r repos/bepipred3/requirements.txt
     else
         echo "Erro: Falha ao criar o ambiente '$ENV_NAME'. Verifique as permissões ou a instalação do Conda."
         # Encerra o script com um código de erro
