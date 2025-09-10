@@ -50,7 +50,7 @@ if [ $# = 1 ]; then
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
   		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
-		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x ${SCRIPT_DIR}/{} \;
+		find "${SCRIPT_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x {} \;
 		# chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
