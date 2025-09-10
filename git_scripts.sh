@@ -36,12 +36,17 @@ if [ $# = 1 ]; then
 	fi	
  else
  	echo "List of cloned repositories:"
-	ls $REPO_DIR
+	ls ${REPO_DIR}
+ 	cd ${REPO_DIR}
 	# Git put all repos
-	for dir in "${REPO_DIR}/"; do
+	for dir in $(find . -maxdepth 1 -type d); do
+ 		if [ "${dir}" == "." ]; then
+        	continue
+		fi
  		echo "Git pulling ${dir} repo..."
-  		cd ${REPO_DIR}/${dir}
+  		cd ${dir}
 		git pull		
+  		cd ..
 	done
  # Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
