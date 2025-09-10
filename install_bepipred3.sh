@@ -42,13 +42,13 @@ else
     fi
 fi
 ls
-# Clonagem script para execução do do bepipred3 do GitHub
+# Clonagem script para execução do bepipred3 do GitHub
 echo "Clonando o repositório do bepipred3 localmente..."
 git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
-git_script.sh
+echo "Atualizando o script bepipr3_CLI.py..."
 
 # Instalação manual
-echo "Executar conda init e conda activate $ENV_NAME"
+echo "Para conclui a instalação, execute conda init e conda activate $ENV_NAME"
 echo "Com o ambiente "$ENV_NAME" ativado, inicie a instalação do programa executável utilizando o comando:"
 echo "pip3 install -r repos/bepipred3/requirements.txt"
         
