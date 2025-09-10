@@ -41,7 +41,7 @@ else
         exit 1
     fi
 fi
-ls
+
 # Clonagem script para execução do bepipred3 do GitHub
 echo "Clonando o repositório do bepipred3 localmente..."
 git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
