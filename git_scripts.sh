@@ -38,7 +38,7 @@ if [ $# = 1 ]; then
  	echo "List of cloned repositories:"
 	ls $REPO_DIR
 	# Git put all repos
-	for dir in ${REPO_DIR}/*; do
+	for dir in "${REPO_DIR}/"; do
  		echo "Git pulling ${dir} repo..."
   		cd ${REPO_DIR}/${dir}
 		git pull		
