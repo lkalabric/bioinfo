@@ -49,7 +49,7 @@ echo "Clonando o repositório do bepipred3 localmente..."
 if [ -d "$REPO_DIR" ]; then
     echo "Sucesso: O diretório '$REPO_DIR' já existe. Nenhuma ação de clone necessária."
 else
-    echo "Diretório '$DIR_NAME' não encontrado. Iniciando o processo de clone..."
+    echo "Diretório '$DIR_NAME' não encontrado. Iniciando o processo de clonegem..."
     # O comando 'git clone' clona o repositório.
     if git clone "$REPO_URL"; then
         echo "Sucesso: Repositório clonado com sucesso para '$REPO_DIR'."
