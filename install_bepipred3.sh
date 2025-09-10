@@ -42,14 +42,28 @@ else
     fi
 fi
 
+REPO_URL="https://github.com/UberClifford/BepiPred3.0-Predictor.git"
+REPO_DIR="~/repos/$ENV_NAME"
 # Clonagem script para execução do bepipred3 do GitHub
 echo "Clonando o repositório do bepipred3 localmente..."
-git clone https://github.com/UberClifford/BepiPred3.0-Predictor.git repos/bepipred3
-echo "Atualizando o script bepipr3_CLI.py..."
-cp ~/repos/bepipred3/bepipred3_CLI.py ~/scripts/
-chmod +x ~/scripts/bepipred3_CLI.py
+if [ -d "$REPO_DIR" ]; then
+    echo "Sucesso: O diretório '$REPO_DIR' já existe. Nenhuma ação de clone necessária."
+else
+    echo "Diretório '$DIR_NAME' não encontrado. Iniciando o processo de clone..."
+    # O comando 'git clone' clona o repositório.
+    if git clone "$REPO_URL"; then
+        echo "Sucesso: Repositório clonado com sucesso para '$REPO_DIR'."
+        echo "Atualizando o script bepipr3_CLI.py..."
+        cp ~/repos/bepipred3/bepipred3_CLI.py ~/scripts/
+        chmod +x ~/scripts/bepipred3_CLI.py
+    else
+        echo "Erro: Falha ao clonar o repositório. Verifique a URL e sua conexão com a internet."
+        # Sair com um código de erro para indicar falha
+        exit 1
+    fi
+fi
 
-# Instalação manual
+# Etapa final da instalação será manual, pois o comando conda activate não executa dentro do script!
 echo "Para conclui a instalação, execute conda init e conda activate $ENV_NAME"
 echo "Com o ambiente "$ENV_NAME" ativado, inicie a instalação do programa executável utilizando o comando:"
 echo "pip3 install -r repos/bepipred3/requirements.txt"
