@@ -40,15 +40,15 @@ if [ $# = 1 ]; then
 	# Git put all repos
 	for dir in ${REPO_DIR}/*; do
  		echo "Git pulling ${dir} repo..."
-  		cd ${dir}
-		git pull
-		# Reset scripts/ dir and copy files .sh and .R to it
+  		cd ${REPO_DIR}/${dir}
+		git pull		
+	done
+ # Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find . \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
+  		find ${REPO_DIR}/ \( -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
       		# export PATH="/${SCRIPT_DIR}:$PATH"
-	done
  fi
