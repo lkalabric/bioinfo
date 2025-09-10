@@ -28,7 +28,7 @@ if [ $# = 1 ]; then
 		# Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find "${REPO_DIR}/" \( -maxdepth 1 -name '*.sh' -o -name '*.R' \) -exec cp {} ${SCRIPT_DIR} \;
+  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' \) -maxdepth 1 -exec cp {} ${SCRIPT_DIR} \;
 		chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# Add SCRIPT_DIR Permanently, need to edit .bashrc file and add the following line
@@ -49,8 +49,8 @@ if [ $# = 1 ]; then
  # Reset scripts/ dir and copy files .sh and .R to it
   		rm -r ${SCRIPT_DIR}
     		mkdir ${SCRIPT_DIR}
-  		find "${REPO_DIR}/" \( -maxdepth 1 -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
-		find "${SCRIPT_DIR}/" \( -maxdepth 1 -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x {} \;
+  		find "${REPO_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -maxdepth 1 -exec cp {} ${SCRIPT_DIR} \;
+		find "${SCRIPT_DIR}/" \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -maxdepth 1 -exec chmod +x {} \;
 		# chmod +x ${SCRIPT_DIR}/*.sh
   		cd
     		# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
