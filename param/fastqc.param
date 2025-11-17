@@ -1,3 +1,4 @@
 # Valor padrão; Valor personalizado
+FILTER=on; # FILTER=off
 # Para personalizar sua variável, basta remover o comentário da linha de comando
 THREADS=3; THREADS=1
