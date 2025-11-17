@@ -10,4 +10,4 @@ else
     exit 1
 fi
 echo "--- Carregamento de Variáveis Concluído ---"
-echo "Número de threads: $THREAD"
+echo "Número de threads: $THREADS"
