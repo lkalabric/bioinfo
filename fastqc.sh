@@ -10,4 +10,5 @@ else
     exit 1
 fi
 echo "--- Carregamento de Variáveis Concluído ---"
-echo "Número de threads: $THREADS"
+echo "Filtro padrão: $FILTER"
+echo "Número de threads personalizado: $THREADS"
