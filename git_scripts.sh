@@ -39,12 +39,30 @@ else
   		cd ..
 	done
 fi
+
+# Garante que a pasta física realmente exista
+if [ ! -d "$SCRIPT_DIR" ]; then
+    echo "Criando o diretório $SCRIPT_DIR..."
+    mkdir -p "$SCRIPT_DIR"
+fi
+
+# Define o arquivo de configuração do Bash
+ARQUIVO_CONFIG="$HOME/.bashrc"
+
+# Comando de export que queremos adicionar
+LINHA_EXPORT="export PATH=\"\$PATH:$SCRIPT_DIR\""
+
+# Verifica se o caminho já está presente no arquivo para evitar duplicatas
+if grep -Fq "$SCRIPT_DIR" "$ARQUIVO_CONFIG"; then
+    echo "O caminho '$SCRIPT_DIR' já está configurado no seu $ARQUIVO_CONFIG."
+else
+    # Adiciona a linha ao final do arquivo de configuração
+    echo -e "\n# Adicionado pelo script de configuracao de PATH\n$LINHA_EXPORT" >> "$ARQUIVO_CONFIG"
+    echo "Sucesso! O caminho 'SCRIPT_DIR' foi adicionado ao seu $ARQUIVO_CONFIG."
+    echo "Para aplicar as alterações imediatamente, execute: source $ARQUIVO_CONFIG"
+fi
+
 # Reset scripts/ dir and copy files .sh and .R to it
 echo "Restoring scripts and privileges..."
-rm -r ${SCRIPT_DIR}
-mkdir ${SCRIPT_DIR}
 find "${REPO_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec cp {} ${SCRIPT_DIR} \;
 find "${SCRIPT_DIR}/" -maxdepth 2 \( -name '*.sh' -o -name '*.R' -o -name '*.py' \) -exec chmod +x {} \;
-# To add SCRIPT_DIR permanently in the PATH, one needs to edit .bashrc file and add the following line
-# export PATH="/${SCRIPT_DIR}:$PATH"
-
