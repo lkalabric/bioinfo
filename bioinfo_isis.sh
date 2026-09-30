@@ -57,9 +57,11 @@ fastp \
 
 # Ativa o ambiente contendo o trimmomatic
 conda activate trimmomatic_env
+# Define o caminho do adaptador dinamicamente
+ADAPTERS="$CONDA_PREFIX/share/trimmomatic/adapters/TruSeq3-PE.fa"
 trimmomatic PE -threads 4 \
   "$INPUT_DIR/$R1" "$INPUT_DIR/$R2" \
   "${TRIM_DIR}/${AMOSTRA}_R1_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R1_unpaired.fq.gz" \
   "${TRIM_DIR}/${AMOSTRA}_R2_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R2_unpaired.fq.gz" \
-  ILLUMINACLIP:adapters/TruSeq3-PE.fa:2:30:10:2:True \
+  ILLUMINACLIP:${ADAPTERS}:2:30:10:2:True \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
