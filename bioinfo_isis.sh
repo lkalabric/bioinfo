@@ -17,7 +17,7 @@ mkdir "$QC_RAW_MULTIQC_DIR"  # Cria a pasta para os resultados do MultiQC
 mkdir "$FASTP_DIR"           # Cria a pasta para os resultados do Fastp
 
 # Controle de qualidade
-fastqc -t 4 -o "$QC_RAW" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
+fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
 
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
