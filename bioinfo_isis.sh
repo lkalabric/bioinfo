@@ -55,8 +55,10 @@ fastp \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread 4
 
+# Ativa o ambiente contendo o trimmomatic
+conda activate trimmomatic_env
 trimmomatic PE -threads 4 \
-  "$TRIM_DIR/$R1" "$TRIM_DIR/$R2" \
+  "$INPUT_DIR/$R1" "$INPUT_DIR/$R2" \
   "${TRIM_DIR}/${AMOSTRA}_R1_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R1_unpaired.fq.gz" \
   "${TRIM_DIR}/${AMOSTRA}_R2_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R2_unpaired.fq.gz" \
   ILLUMINACLIP:adapters/TruSeq3-PE.fa:2:30:10:2:True \
