@@ -51,5 +51,5 @@ fastp \
   --length_required 50 \
   --correction \
   --html "${FASTP_DIR}/${AMOSTRA}_fastp_report.html" \
-  # --json sample_fastp_report.json \
+  --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread 4
