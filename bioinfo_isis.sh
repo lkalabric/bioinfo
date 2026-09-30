@@ -19,8 +19,14 @@ mkdir "$FASTP_DIR"           # Cria a pasta para os resultados do Fastp
 # Controle de qualidade
 fastqc -t 4 -o "$QC_RAW" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
 
-# Ativar o ambiente Conda que contém o app multiqc 1.35 (versão mais atual)
-conda source multiqc
+# Previne a mensagem "executar conda init primeiro"
+# Encontre e carregue a função 'conda' para o subshell
+# (Ajuste o caminho para a sua instalação do conda ou miniconda)
+source ~/miniconda3/etc/profile.d/conda.sh
+# Se usar anaconda: source ~/anaconda3/etc/profile.d/conda.sh
+
+# Ativa o ambiente normalmente
+conda activate multiqc
 multiqc "$QC_RAW_DIR" -o "$QC_RAW_MULTIQC_DIR"
 
 # Pré-processamento dos dados
