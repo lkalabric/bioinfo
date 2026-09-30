@@ -1,7 +1,7 @@
 # Salvar os resultados das análises por amostra no diretório results/
 INPUT_DIR="data/hermes"
 AMOSTRA="102390"
-OUTPUT_DIR="results/${AMOSTRA}"
+OUTPUT_DIR="qc_results/${AMOSTRA}"
 R1="102390_S5_L001_R1_001.fastq.gz"
 R2="102390_S5_L001_R2_001.fastq.gz"
 
