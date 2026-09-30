@@ -15,8 +15,8 @@ fi
 INPUT_DIR="data/hermes"
 # AMOSTRA="102390"
 OUTPUT_DIR="qc-results/${AMOSTRA}"
-R1="${AMOSTRA}_*R1*"
-R2="${AMOSTRA}_*R2*"
+R1=$(find . -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -print -quit)
+R2=$(find . -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -print -quit)
 
 # Caminhos dos diretórios das análises parciais
 QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
