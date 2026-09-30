@@ -1,6 +1,19 @@
+# Script bioingo_isis.sh
+# Autor: Isis Katarina
+# Data da criação: 30/09/2026
+# Sintáse: bioinfo_isis.sh <AMOSTRA>
+
+AMOSTRA=$1
+# Valida se a variável está vazia
+if [ -z "$AMOSTRA" ]; then
+    echo "Erro: Amostra inexistente ou nome vazio. Entrar com um nome de amostra válido."
+    echo "Encerrando o script..."
+    exit 1
+fi
+
 # Salvar os resultados das análises por amostra no diretório results/
 INPUT_DIR="data/hermes"
-AMOSTRA="102390"
+# AMOSTRA="102390"
 OUTPUT_DIR="qc-results/${AMOSTRA}"
 R1="102390_S5_L001_R1_001.fastq.gz"
 R2="102390_S5_L001_R2_001.fastq.gz"
