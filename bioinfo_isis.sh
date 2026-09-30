@@ -10,11 +10,8 @@ QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
 QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 
-mkdir temp/              # Cria uma pasta temporária das análises
-mkdir "$OUTPUT_DIR"      # Cria a pasta de resultados por amostra
-mkdir "$QC_RAW_DIR"          # Cria a pasta para os resultados do FastQC
-mkdir "$QC_RAW_MULTIQC_DIR"  # Cria a pasta para os resultados do MultiQC
-mkdir "$FASTP_DIR"           # Cria a pasta para os resultados do Fastp
+# Cria as pastas com as análises parciais
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR"
 
 # Controle de qualidade
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
