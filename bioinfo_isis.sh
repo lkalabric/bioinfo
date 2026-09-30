@@ -15,8 +15,8 @@ fi
 INPUT_DIR="data/hermes"
 # AMOSTRA="102390"
 OUTPUT_DIR="qc-results/${AMOSTRA}"
-R1="102390_S5_L001_R1_001.fastq.gz"
-R2="102390_S5_L001_R2_001.fastq.gz"
+R1="${AMOSTRA}_*R1*"
+R2="${AMOSTRA}_*R2*"
 
 # Caminhos dos diretórios das análises parciais
 QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
