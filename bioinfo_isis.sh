@@ -22,9 +22,10 @@ R2=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n"
 QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
 QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
+TRIM_DIR="${OUTPUT_DIR}/trim_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR"
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR"
 
 # Controle de qualidade
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
@@ -53,3 +54,10 @@ fastp \
   --html "${FASTP_DIR}/${AMOSTRA}_fastp_report.html" \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread 4
+
+trimmomatic PE -threads 4 \
+  "$TRIM_DIR/$R1" "$TRIM_DIR/$R2" \
+  "${TRIM_DIR}/${AMOSTRA}_R1_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R1_unpaired.fq.gz" \
+  "${TRIM_DIR}/${AMOSTRA}_R2_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R2_unpaired.fq.gz" \
+  ILLUMINACLIP:adapters/TruSeq3-PE.fa:2:30:10:2:True \
+  LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
