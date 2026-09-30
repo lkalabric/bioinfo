@@ -20,8 +20,7 @@ mkdir "$FASTP_DIR"           # Cria a pasta para os resultados do Fastp
 fastqc -t 4 -o "$QC_RAW" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
 
 # Ativar o ambiente Conda que contém o app multiqc 1.35 (versão mais atual)
-conda init
-conda activate multiqc
+conda source multiqc
 multiqc "$QC_RAW_DIR" -o "$QC_RAW_MULTIQC_DIR"
 
 # Pré-processamento dos dados
