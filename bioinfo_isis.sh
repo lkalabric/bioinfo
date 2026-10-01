@@ -3,11 +3,11 @@
 # Data da criação: 30/09/2026
 # Sintáse: bioinfo_isis.sh <AMOSTRA>
 
-Requisitos:
-- Linux: fastqc, fastp, spades
-- Conda: trimmomatic, multiqc, quast
+# Requisitos:
+# - Linux: fastqc, fastp, spades
+# - Conda: trimmomatic, multiqc, quast
 
-
+# Nome da amostra passada na linha de comando
 AMOSTRA=$1
 # 1) Valida se a variável está vazia
 if [ -z "$AMOSTRA" ]; then
