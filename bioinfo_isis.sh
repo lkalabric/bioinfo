@@ -22,6 +22,7 @@ INPUT_DIR="data/hermes"
 OUTPUT_DIR="qc-results/${AMOSTRA}"
 R1=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
 R2=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
+REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 
 # Caminhos dos diretórios das análises parciais
 QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
@@ -29,11 +30,10 @@ QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
-ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 QUAST_DIR="${OUTPUT_DIR}/quast_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$ASSEMBLY_DIR" "$QUAST_DIR"
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$QUAST_DIR"
 
 # 3) Controle de qualidade pelo fastqc
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
@@ -76,22 +76,27 @@ trimmomatic PE -threads 4 \
   ILLUMINACLIP:${ADAPTERS}:2:30:10:2:True \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
 
-# 5) Montagem de novo
-spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR} --threads 8
+# 5) Montagem de novo usando Spades
+spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/1 --threads 8
 
-# 6) Avaliação da montagem
+# 5.1) Avaliação da montagem
 # Link: https://github.com/ablab/quast
 # Link: https://anaconda.org/channels/bioconda/packages/quast/overview
 # Instala Quast num ambiente Conda com Python 3.10 ou 3.11 (compatível com a biblioteca padrão distutils)
 # conda install quast python=3.10 -y
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
-quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR}
-# quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
+# quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}
+quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
 
-# 5.1) Montagem por referência
-spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${ASSEMBLY_DIR} --threads 8
+# 6) Montagem por referência usando Spades
+# Análise usando o preset --metaviral do Spades
+spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/2 --threads 8
+# Análise usando uma sequência de referência
+spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/3 --trusted-contigs ${REFSEQ} --threads 8
 
 # 6.1) Avaliação da montagem
 conda activate quast
-quast.py "${ASSEMBLY_DIR}/contigs.fasta" -o ${ASSEMBLY_DIR}/quast_out -r data/refseq/NC_045512_sequence.fasta
+quast.py "${SPADES_DIR}/2/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
+quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
+
