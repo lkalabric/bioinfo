@@ -86,3 +86,4 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOST
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR}
+quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
