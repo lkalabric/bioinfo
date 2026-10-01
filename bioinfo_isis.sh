@@ -68,4 +68,4 @@ trimmomatic PE -threads 4 \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
 
   # Montagem
-  spades.py -1 "${FASTP_DIR}/${AMOSTRA}_clean.fq.gz -2 "${FASTP_DIR}/${AMOSTRA}_clean.fq.gz -o spades_out/ --threads 8
+  spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR} --threads 8
