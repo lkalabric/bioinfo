@@ -111,3 +111,25 @@ conda activate bwa-mem2
 bwa-mem2 index "${REFSEQ}"
 bwa-mem2 mem -t "${THREADS}" "${REFSEQ}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o "${ASSEMBLY_DIR}/alinhado.bam"
 
+exit
+
+### Em desenvolvimento
+
+# Relatórios do Mapeamento
+samtools flagstat alinhado.bam > relatorio_mapeamento.txt
+samtools stats alinhado.bam > estatisticas_detalhadas.txt
+samtools coverage alinhado.bam
+
+# Sequencia consenso
+THREADS=$(nproc)
+REF="data/refseq/NC_045512_sequence.fasta"
+
+# 1. Mapear genótipos e variantes (gera um VCF comprimido)
+bcftools mpileup -Ou -f "$REF" alinhado.bam | \
+bcftools call -mv -Oz -o variantes.vcf.gz
+
+# 2. Indexar o arquivo VCF
+bcftools index variantes.vcf.gz
+
+# 3. Gerar a sequência consenso (FASTA final)
+bcftools consensus -f "$REF" variantes.vcf.gz > sequencia_consenso.fasta
