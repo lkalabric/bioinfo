@@ -75,7 +75,7 @@ trimmomatic PE -threads 4 \
   ILLUMINACLIP:${ADAPTERS}:2:30:10:2:True \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
 
-# 5) Montagem
+# 5) Montagem de novo
 spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR} --threads 8
 
 # 6) Avaliação da montagem
