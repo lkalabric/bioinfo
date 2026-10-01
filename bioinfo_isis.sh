@@ -108,5 +108,6 @@ quast.py "${SPADES_DIR}/3/contigs.fasta" -o "${QUAST_DIR}/3" -r "${REFSEQ}"
 # bwa-mem2 mem ref.fa read1.fq read2.fq > out.sam
 # Ativa o ambiente Conda contendo o bwa-mem2
 conda activate bwa-mem2
-bwa-mem2 mem -t "${THREADS}" data/refseq/NC_045512_sequence.fasta "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o "${ASSEMBLY_DIR}/alinhado.bam"
+bwa-mem2 index "${REFSEQ}"
+bwa-mem2 mem -t "${THREADS}" "${REFSEQ}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o "${ASSEMBLY_DIR}/alinhado.bam"
 
