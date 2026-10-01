@@ -87,7 +87,7 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOST
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 # quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}
-quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}/1 -r data/refseq/NC_045512_sequence.fasta
+quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}/1 -r ${REFSEQ}
 
 # 6) Montagem por referência usando Spades
 # Análise usando o preset --metaviral do Spades
@@ -97,6 +97,6 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOST
 
 # 6.1) Avaliação da montagem
 conda activate quast
-quast.py "${SPADES_DIR}/2/contigs.fasta" -o ${QUAST_DIR}/2 -r data/refseq/NC_045512_sequence.fasta
-quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR}/3 -r data/refseq/NC_045512_sequence.fasta
+quast.py "${SPADES_DIR}/2/contigs.fasta" -o ${QUAST_DIR}/2 -r ${REFSEQ}
+quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR}/3 -r ${REFSEQ}
 
