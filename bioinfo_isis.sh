@@ -23,9 +23,10 @@ QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
 QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
+SPADES_DIR="${OUTPUT_DIR}/spades_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR"
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR"
 
 # Controle de qualidade
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
@@ -55,8 +56,8 @@ fastp \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread 4
 
-# Ativa o ambiente contendo o trimmomatic
-conda activate trimmomatic_env
+# Ativa o ambiente contendo o Trimmomatic
+conda activate trimmomatic
 # Define o caminho do adaptador dinamicamente
 ADAPTERS="$CONDA_PREFIX/share/trimmomatic/adapters/TruSeq3-PE.fa"
 trimmomatic PE -threads 4 \
@@ -65,3 +66,6 @@ trimmomatic PE -threads 4 \
   "${TRIM_DIR}/${AMOSTRA}_R2_paired.fq.gz" "${TRIM_DIR}/${AMOSTRA}_R2_unpaired.fq.gz" \
   ILLUMINACLIP:${ADAPTERS}:2:30:10:2:True \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+
+  # Montagem
+  spades.py -1 "${FASTP_DIR}/${AMOSTRA}_clean.fq.gz -2 "${FASTP_DIR}/${AMOSTRA}_clean.fq.gz -o spades_out/ --threads 8
