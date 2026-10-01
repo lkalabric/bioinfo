@@ -79,7 +79,8 @@ trimmomatic PE -threads 4 \
 spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR} --threads 8
 
 # 6) Avaliação da montagem
-Link: https://anaconda.org/channels/bioconda/packages/quast/overview
+# Link: https://github.com/ablab/quast
+# Link: https://anaconda.org/channels/bioconda/packages/quast/overview
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR}
