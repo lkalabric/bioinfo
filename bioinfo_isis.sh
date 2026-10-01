@@ -31,9 +31,10 @@ FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
 QUAST_DIR="${OUTPUT_DIR}/quast_out"
+ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$QUAST_DIR"
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$QUAST_DIR" "$ASSEMBLY_DIR"
 
 # 3) Controle de qualidade pelo fastqc
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
@@ -41,7 +42,7 @@ fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
 # 3.1) Controle de qualidade pelo multiqc
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
-# (Ajuste o caminho para a sua instalação do conda ou miniconda)
+# (Ajuste o caminho para a sua instalação do Conda ou Miniconda)
 source ~/miniconda3/etc/profile.d/conda.sh
 # Se usar anaconda: source ~/anaconda3/etc/profile.d/conda.sh
 
@@ -64,7 +65,7 @@ fastp \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread 4
 
-# 4.1) Pré-processamento dos dados pelo trimmomatic
+# 4.1) Pré-processamento dos dados pelo Trimmomatic
 # Ativa o ambiente Conda contendo o Trimmomatic
 conda activate trimmomatic
 # Define o caminho do adaptador dinamicamente
@@ -77,7 +78,7 @@ trimmomatic PE -threads 4 \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
 
 # 5) Montagem de novo usando Spades
-spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/1 --threads 8
+spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o ${SPADES_DIR}/1 --threads 8
 
 # 5.1) Avaliação da montagem
 # Link: https://github.com/ablab/quast
@@ -91,12 +92,17 @@ quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}/1 -r ${REFSEQ}
 
 # 6) Montagem por referência usando Spades
 # Análise usando o preset --metaviral do Spades
-spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/2 --threads 8
+spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o ${SPADES_DIR}/2 --threads 8
 # Análise usando uma sequência de referência
-spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${SPADES_DIR}/3 --trusted-contigs ${REFSEQ} --threads 8
+spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o ${SPADES_DIR}/3 --trusted-contigs ${REFSEQ} --threads 8
 
 # 6.1) Avaliação da montagem
 conda activate quast
 quast.py "${SPADES_DIR}/2/contigs.fasta" -o ${QUAST_DIR}/2 -r ${REFSEQ}
 quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR}/3 -r ${REFSEQ}
+
+# 6.2) Montagem por referência/Mapeamento usando o bwa-mem2
+# Link: https://github.com/bwa-mem2/bwa-mem2
+# bwa-mem2 mem ref.fa read1.fq read2.fq > out.sam
+bwa-mem2 mem -t 8 ${REFSEQ} "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o ${ASSEMBLY_DIR}/alinhado.bam
 
