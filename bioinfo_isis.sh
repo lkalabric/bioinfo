@@ -29,10 +29,11 @@ QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
+ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 QUAST_DIR="${OUTPUT_DIR}/quast_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$QUAST_DIR"
+mkdir -p temp "$QC_RAW_DIR" "$QC_RAW_MULTIQC_DIR" "$FASTP_DIR" "$TRIM_DIR" "$SPADES_DIR" "$ASSEMBLY_DIR" "$QUAST_DIR"
 
 # 3) Controle de qualidade pelo fastqc
 fastqc -t 4 -o "$QC_RAW_DIR" "$INPUT_DIR/$R1" "$INPUT_DIR/$R2"
@@ -86,4 +87,11 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOST
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR}
-quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
+# quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR} -r data/refseq/NC_045512_sequence.fasta
+
+# 5.1) Montagem por referência
+spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz -o ${ASSEMBLY_DIR} --threads 8
+
+# 6.1) Avaliação da montagem
+conda activate quast
+quast.py "${ASSEMBLY_DIR}/contigs.fasta" -o ${ASSEMBLY_DIR}/quast_out -r data/refseq/NC_045512_sequence.fasta
