@@ -81,6 +81,8 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz -2 "${FASTP_DIR}/${AMOST
 # 6) Avaliação da montagem
 # Link: https://github.com/ablab/quast
 # Link: https://anaconda.org/channels/bioconda/packages/quast/overview
+# Instala Quast num ambiente Conda com Python 3.10 ou 3.11 (compatível com a biblioteca padrão distutils)
+# conda install quast python=3.10 -y
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 quast.py "${SPADES_DIR}/contigs.fasta" -o ${QUAST_DIR}
