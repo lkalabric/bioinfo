@@ -97,6 +97,7 @@ spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP
 spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o ${SPADES_DIR}/3 --trusted-contigs ${REFSEQ} --threads 8
 
 # 6.1) Avaliação da montagem
+# Ativa o ambiente Conda contendo o Quast
 conda activate quast
 quast.py "${SPADES_DIR}/2/contigs.fasta" -o ${QUAST_DIR}/2 -r ${REFSEQ}
 quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR}/3 -r ${REFSEQ}
@@ -104,5 +105,7 @@ quast.py "${SPADES_DIR}/3/contigs.fasta" -o ${QUAST_DIR}/3 -r ${REFSEQ}
 # 6.2) Montagem por referência/Mapeamento usando o bwa-mem2
 # Link: https://github.com/bwa-mem2/bwa-mem2
 # bwa-mem2 mem ref.fa read1.fq read2.fq > out.sam
+# Ativa o ambiente Conda contendo o bwa-mem2
+conda activate bwa-mem2
 bwa-mem2 mem -t 8 ${REFSEQ} "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o ${ASSEMBLY_DIR}/alinhado.bam
 
