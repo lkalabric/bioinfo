@@ -14,7 +14,7 @@
 # conda install pacote
 # - Pacotes Conda: trimmomatic, multiqc, quast
 
-# 1) Configura a entrada de dados
+# 1) Configuração da entrada de dados
 AMOSTRA=$1
 # AMOSTRA="102390"
 INPUT_DIR="data/hermes"
@@ -32,7 +32,7 @@ else
     fi
 fi
 
-# 2) Saída de dados
+# 2) Configuração da saída de dados
 OUTPUT_DIR="qc-results/${AMOSTRA}"
 R1=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
 R2=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
