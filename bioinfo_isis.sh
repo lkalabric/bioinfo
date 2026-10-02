@@ -17,7 +17,7 @@
 # 1) Configura a entrada de dados
 AMOSTRA=$1
 # AMOSTRA="102390"
-INPUT_DIR="data/hermes/${AMOSTRA}"
+INPUT_DIR="data/hermes"
 
 # Valida se a variável $AMOSTRA está vazia ou se é existente
 if [ -z "${AMOSTRA}" ]; then
@@ -25,7 +25,7 @@ if [ -z "${AMOSTRA}" ]; then
     echo "Encerrando o script..."
     exit 1
 else
-    if [ ! -e  "${INPUT_DIR}" ]; then
+    if [ ! $(find "${INPUT_DIR}" -name "${AMOSTRA}*R1*" -print -quit) ]; then
         echo "Erro: Amostra não encontrada! Entrar com um nome de amostra válido."
         echo "Encerrando o script..."
         exit 2
