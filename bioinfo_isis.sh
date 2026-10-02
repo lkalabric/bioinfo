@@ -5,23 +5,37 @@
 
 # Requisitos:
 # - Linux: fastqc, fastp, spades
-# - Conda: trimmomatic, multiqc, quast
+# - Miniconda: https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install
+# curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# bash ~/Miniconda3-latest-Linux-x86_64.sh
+# source ~/.bashrc
+# conda create -n pacote_env
+# conda activate pacote_env
+# conda install pacote
+# - Pacotes Conda: trimmomatic, multiqc, quast
 
-# Nome da amostra passada na linha de comando
+# 1) Configura a entrada de dados
 AMOSTRA=$1
-# 1) Valida se a variável está vazia
+# AMOSTRA="102390"
+INPUT_DIR="data/hermes/${AMOSTRA}"
+
+# Valida se a variável $AMOSTRA está vazia ou se é existente
 if [ -z "$AMOSTRA" ]; then
-    echo "Erro: Amostra inexistente ou nome vazio. Entrar com um nome de amostra válido."
+    echo "Erro: Insira o nome da amostra. Sintáxe: bioinfo-isis.sh 102390"
     echo "Encerrando o script..."
     exit 1
+else
+    if [ -e  "${INPUT_DIR}"]; then
+        echo "Erro: Amostra não encontrada! Entrar com um nome de amostra válido."
+        echo "Encerrando o script..."
+        exit 2
+    fi
 fi
 
-# 2) Entrada e saída de dados
-INPUT_DIR="data/hermes"
-# AMOSTRA="102390"
+# 2) Saída de dados
 OUTPUT_DIR="qc-results/${AMOSTRA}"
-R1=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
-R2=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
+R1=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
+R2=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
 REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 THREADS=$(nproc)
 
@@ -49,7 +63,9 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 # Ativa o ambiente Conda contendo MultiQC
 conda activate multiqc
-multiqc "${QC_RAW_DIR}" -o "${QC_RAW_MULTIQC_DIR}"
+multiqc \
+    "${QC_RAW_DIR}" \
+    -o "${QC_RAW_MULTIQC_DIR}"
 
 # 4) Pré-processamento dos dados pelo fastp
 fastp \
@@ -79,7 +95,11 @@ trimmomatic PE -threads "${THREADS}" \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
 
 # 5) Montagem de novo usando Spades
-spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o "${SPADES_DIR}/1" --threads "${THREADS}"
+spades.py \
+    -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
+    -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" \
+    -o "${SPADES_DIR}/1" \
+    --threads "${THREADS}"
 
 # 5.1) Avaliação da montagem
 # Link: https://github.com/ablab/quast
@@ -89,29 +109,54 @@ spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOS
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
 # quast.py "${SPADES_DIR}/1/contigs.fasta" -o ${QUAST_DIR}
-quast.py "${SPADES_DIR}/1/contigs.fasta" -o "${QUAST_DIR}/1" -r "${REFSEQ}"
+quast.py \
+    "${SPADES_DIR}/1/contigs.fasta" \
+    -o "${QUAST_DIR}/1" \
+    -r "${REFSEQ}"
 
 # 6) Montagem por referência usando Spades
 # Análise usando o preset --metaviral do Spades
-spades.py --metaviral -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o "${SPADES_DIR}/2" --threads "${THREADS}"
+spades.py \
+    --metaviral \
+    -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
+    -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" \
+    -o "${SPADES_DIR}/2" \
+    --threads "${THREADS}"
 # Análise usando uma sequência de referência
-spades.py -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" -o "${SPADES_DIR}/3" --trusted-contigs "${REFSEQ}" --threads "${THREADS}"
+spades.py \
+    -1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
+    -2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" \
+    -o "${SPADES_DIR}/3" \
+    --trusted-contigs "${REFSEQ}" \
+    --threads "${THREADS}"
 
 # 6.1) Avaliação da montagem
 # Ativa o ambiente Conda contendo o Quast
 conda activate quast
-quast.py "${SPADES_DIR}/2/contigs.fasta" -o "${QUAST_DIR}/2" -r "${REFSEQ}"
-quast.py "${SPADES_DIR}/3/contigs.fasta" -o "${QUAST_DIR}/3" -r "${REFSEQ}"
+quast.py \
+    "${SPADES_DIR}/2/contigs.fasta" \
+    -o "${QUAST_DIR}/2" \
+    -r "${REFSEQ}"
+quast.py \
+    "${SPADES_DIR}/3/contigs.fasta" \
+    -o "${QUAST_DIR}/3" \
+    -r "${REFSEQ}"
 
 # 6.2) Montagem por referência/Mapeamento usando o bwa-mem2
 # Link: https://github.com/bwa-mem2/bwa-mem2
 # bwa-mem2 mem ref.fa read1.fq read2.fq > out.sam
 # Ativa o ambiente Conda contendo o bwa-mem2
 conda activate bwa-mem2
-bwa-mem2 index "${REFSEQ}"
-bwa-mem2 mem -t "${THREADS}" "${REFSEQ}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" | samtools sort -o "${ASSEMBLY_DIR}/alinhado.bam"
+bwa-mem2 index \
+    "${REFSEQ}"
+bwa-mem2 mem \
+    -t "${THREADS}" \
+    "${REFSEQ}" \
+    "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
+    "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" \
+    | samtools sort -o "${ASSEMBLY_DIR}/alinhado.bam"
 
-exit
+exit 3
 
 ### Em desenvolvimento
 
@@ -120,7 +165,7 @@ samtools flagstat alinhado.bam > relatorio_mapeamento.txt
 samtools stats alinhado.bam > estatisticas_detalhadas.txt
 samtools coverage alinhado.bam
 
-# Sequencia consenso
+# Sequência consenso
 THREADS=$(nproc)
 REF="data/refseq/NC_045512_sequence.fasta"
 
