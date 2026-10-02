@@ -25,7 +25,7 @@ if [ -z "${AMOSTRA}" ]; then
     echo "Encerrando o script..."
     exit 1
 else
-    if [ -e  "${INPUT_DIR}" ]; then
+    if [ ! -e  "${INPUT_DIR}" ]; then
         echo "Erro: Amostra não encontrada! Entrar com um nome de amostra válido."
         echo "Encerrando o script..."
         exit 2
