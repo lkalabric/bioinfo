@@ -20,12 +20,12 @@ AMOSTRA=$1
 INPUT_DIR="data/hermes/${AMOSTRA}"
 
 # Valida se a variável $AMOSTRA está vazia ou se é existente
-if [ -z "$AMOSTRA" ]; then
+if [ -z "${AMOSTRA}" ]; then
     echo "Erro: Insira o nome da amostra. Sintáxe: bioinfo-isis.sh 102390"
     echo "Encerrando o script..."
     exit 1
 else
-    if [ -e  "${INPUT_DIR}"]; then
+    if [ -e  "${INPUT_DIR}" ]; then
         echo "Erro: Amostra não encontrada! Entrar com um nome de amostra válido."
         echo "Encerrando o script..."
         exit 2
