@@ -1,6 +1,6 @@
 # Script bioinfo_isis.sh
 # Autor: Isis Katarina
-# Data da criação: 30/09/2026
+# Data da criação: 14/10/2026
 # Sintáse: bioinfo_isis.sh <AMOSTRA>
 
 # Requisitos:
