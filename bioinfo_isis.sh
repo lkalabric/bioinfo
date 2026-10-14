@@ -50,7 +50,7 @@ QUAST_DIR="${OUTPUT_DIR}/quast_out"
 ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${TRIM_DIR}" "${SPADES_DIR}" "${QUAST_DIR}" "${ASSEMBLY_DIR}"
+mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${QC_TRIM_DIR}" "${TRIM_DIR}" "${SPADES_DIR}" "${QUAST_DIR}" "${ASSEMBLY_DIR}"
 
 # 3) Controle de qualidade pelo fastqc
 fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
