@@ -33,7 +33,7 @@ else
 fi
 
 # 2) Configuração da saída de dados
-OUTPUT_DIR="qc-results/${AMOSTRA}"
+OUTPUT_DIR="results/${AMOSTRA}"
 R1=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
 R2=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
 REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
