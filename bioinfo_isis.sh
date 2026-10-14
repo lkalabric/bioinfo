@@ -40,8 +40,9 @@ REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 THREADS=$(nproc)
 
 # Caminhos dos diretórios das análises parciais
-QC_RAW_DIR="${OUTPUT_DIR}/qc_raw"
+QC_RAW_DIR="${OUTPUT_DIR}/qc_pre"
 QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
+QC_TRIM_DIR="${OUTPUT_DIR}/qc_pos"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
@@ -53,8 +54,6 @@ mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${TRIM_DIR
 
 # 3) Controle de qualidade pelo fastqc
 fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
-
-exit 5
 
 # 3.1) Controle de qualidade pelo multiqc
 # Previne a mensagem "executar conda init primeiro"
@@ -83,6 +82,11 @@ fastp \
   --html "${FASTP_DIR}/${AMOSTRA}_fastp_report.html" \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread "${THREADS}"
+
+# 4.1) Controle de qualidade pelo fastqc pós-trimagem
+fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${R1}" "${FASTP_DIR}/${R2}"
+
+exit 5
 
 # 4.1) Pré-processamento dos dados pelo Trimmomatic
 # Ativa o ambiente Conda contendo o Trimmomatic
