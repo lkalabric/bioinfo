@@ -18,6 +18,7 @@
 AMOSTRA=$1
 # AMOSTRA="102390"
 INPUT_DIR="data/hermes"
+PRIMERS_DIR="data/primers"
 
 # Valida se a variável $AMOSTRA está vazia ou se é existente
 if [ -z "${AMOSTRA}" ]; then
@@ -44,15 +45,25 @@ QC_RAW_DIR="${OUTPUT_DIR}/qc_pre"
 QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
 QC_TRIM_DIR="${OUTPUT_DIR}/qc_pos"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
+CUTADAPT_DIR="${OUTPUT_DIR}/cutadapt_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
 QUAST_DIR="${OUTPUT_DIR}/quast_out"
 ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${QC_TRIM_DIR}" "${TRIM_DIR}" "${SPADES_DIR}" "${QUAST_DIR}" "${ASSEMBLY_DIR}"
+mkdir -p temp \ 
+        "${QC_RAW_DIR}" \ 
+        "${QC_RAW_MULTIQC_DIR}" \
+        "${FASTP_DIR}" \
+        "${CUTADAPT_DIR}" \
+        "${QC_TRIM_DIR}" \
+        "${TRIM_DIR}" \
+        "${SPADES_DIR}" \
+        "${QUAST_DIR}" \
+        "${ASSEMBLY_DIR}"
 
-# 3) Controle de qualidade pelo fastqc
+# 3) Análise de qualidade do sequenciamento pelo fastqc
 fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
 
 # 3.1) Controle de qualidade pelo multiqc
@@ -85,6 +96,15 @@ fastp \
 
 # 4.1) Controle de qualidade pelo fastqc pós-trimagem
 fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
+
+# 5) Remoção das sequências de primers usando a ferramenta cutadapt
+# Nota: Esse passo só é necessário se o sequenciamento foi por amplificação
+cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
+         -G file:"${PRIMERS_DIR}/primers_reverse.fasta" \
+         -o "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" \
+         -p "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz" \
+         "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
+         "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
 
 exit 5
 
