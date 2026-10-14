@@ -41,21 +41,21 @@ REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 THREADS=$(nproc)
 
 # Caminhos dos diretórios das análises parciais
-QC_RAW_DIR="${OUTPUT_DIR}/qc_pre"
-QC_TRIM_DIR="${OUTPUT_DIR}/qc_pos"
-QC_MULTIQC_DIR="${OUTPUT_DIR}/qc_multiqc"
+QC_PRE_DIR="${OUTPUT_DIR}/qc_pre"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 CUTADAPT_DIR="${OUTPUT_DIR}/cutadapt_out"
+QC_POS_DIR="${OUTPUT_DIR}/qc_pos"
+QC_MULTIQC_DIR="${OUTPUT_DIR}/qc_multiqc"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
 SPADES_DIR="${OUTPUT_DIR}/spades_out"
 QUAST_DIR="${OUTPUT_DIR}/quast_out"
 ASSEMBLY_DIR="${OUTPUT_DIR}/assembly_out"
 
 # Cria as pastas com as análises parciais
-mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${CUTADAPT_DIR}" "${QC_TRIM_DIR}" "${TRIM_DIR}" "${SPADES_DIR}" "${QUAST_DIR}" "${ASSEMBLY_DIR}"
+mkdir -p temp "${QC_PRE_DIR}" "${FASTP_DIR}" "${CUTADAPT_DIR}" "${QC_POS_DIR}" "${QC_MULTIQC_DIR}" "${TRIM_DIR}" "${SPADES_DIR}" "${QUAST_DIR}" "${ASSEMBLY_DIR}"
 
 # 3) Análise de qualidade do sequenciamento pelo fastqc
-fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
+fastqc -t "${THREADS}" -o "${QC_PRE_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
 
 # 4) Pré-processamento dos dados pelo fastp e cutadapt
 # 4.1) Remoção dos adaptadores e filtro de qualidade pelo fastp
@@ -83,9 +83,9 @@ cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
 
 # 4.3) Análise de qualidade pré e pós-trimagem pelo multiqc
-cp -a "${QC_RAW_DIR}/." "${QC_TRIM_DIR}/"
-fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
-fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz"
+cp -a "${QC_PRE_DIR}/." "${QC_POS_DIR}/"
+fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
+fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz"
 
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
