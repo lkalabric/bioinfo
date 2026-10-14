@@ -54,6 +54,8 @@ mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${TRIM_DIR
 # 3) Controle de qualidade pelo fastqc
 fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
 
+exit 5
+
 # 3.1) Controle de qualidade pelo multiqc
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
