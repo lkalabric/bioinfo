@@ -62,8 +62,8 @@ fastqc -t "${THREADS}" -o "${QC_PRE_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R
 fastp \
   --in1 "${INPUT_DIR}/${R1}" \
   --in2 "${INPUT_DIR}/${R2}" \
-  --out1 "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
-  --out2 "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz" \
+  --out1 "${FASTP_DIR}/${AMOSTRA}_R1_clean.fastq.gz" \
+  --out2 "${FASTP_DIR}/${AMOSTRA}_R2_clean.fastq.gz" \
   --detect_adapter_for_pe \
   --qualified_quality_phred 20 \
   --unqualified_percent_limit 30 \
@@ -77,15 +77,15 @@ fastp \
 # Nota: Esse passo só é necessário se o sequenciamento foi por amplificação
 cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -G file:"${PRIMERS_DIR}/primers_reverse.fasta" \
-         -o "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" \
-         -p "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz" \
-         "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
-         "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
+         -o "${CUTADAPT_DIR}/${AMOSTRA}_R1_trimmed.fastq.gz" \
+         -p "${CUTADAPT_DIR}/${AMOSTRA}_R2_trimmed.fastq.gz" \
+         "${FASTP_DIR}/${AMOSTRA}_R1_clean.fastq.gz" \
+         "${FASTP_DIR}/${AMOSTRA}_R2_clean.fastq.gz"
 
 # 4.3) Análise de qualidade pré e pós-trimagem pelo multiqc
 cp -a "${QC_PRE_DIR}/." "${QC_POS_DIR}/"
-fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
-fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz"
+fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1_clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2_clean.fastq.gz"
+fastqc -t "${THREADS}" -o "${QC_POS_DIR}" "${CUTADAPT_DIR}/${AMOSTRA}_R1_trimmed.fastq.gz" "${CUTADAPT_DIR}/${AMOSTRA}_R2_trimmed.fastq.gz"
 
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
