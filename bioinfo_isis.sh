@@ -96,7 +96,7 @@ source ~/miniconda3/etc/profile.d/conda.sh
 # Ativa o ambiente Conda contendo MultiQC
 conda activate multiqc
 multiqc \
-    "${QC_TRIM_DIR}" \
+    "${QC_POS_DIR}" \
     -o "${QC_MULTIQC_DIR}"
 
 exit 5
