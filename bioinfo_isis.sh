@@ -42,8 +42,8 @@ THREADS=$(nproc)
 
 # Caminhos dos diretórios das análises parciais
 QC_RAW_DIR="${OUTPUT_DIR}/qc_pre"
-QC_MULTIQC_DIR="${OUTPUT_DIR}/qc_multiqc"
 QC_TRIM_DIR="${OUTPUT_DIR}/qc_pos"
+QC_MULTIQC_DIR="${OUTPUT_DIR}/qc_multiqc"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 CUTADAPT_DIR="${OUTPUT_DIR}/cutadapt_out"
 TRIM_DIR="${OUTPUT_DIR}/trim_out"
@@ -83,6 +83,10 @@ cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
 
 # 4.3) Análise de qualidade pré e pós-trimagem pelo multiqc
+# cp "${QC_RAW_DIR}" "${QC_TRIM_DIR}"
+# fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
+# fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${CUTADAPT_DIR}/${AMOSTRA}_R1.trimmed.fastq.gz" "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz"
+
 # Previne a mensagem "executar conda init primeiro"
 # Encontre e carregue a função 'conda' para o subshell
 # (Ajuste o caminho para a sua instalação do Conda ou Miniconda)
@@ -92,7 +96,7 @@ source ~/miniconda3/etc/profile.d/conda.sh
 # Ativa o ambiente Conda contendo MultiQC
 conda activate multiqc
 multiqc \
-    "${QC_RAW_DIR}" ${FASTP_DIR} ${CUTADAPT_DIR} \
+    "${QC_TRIM_DIR}" "${FASTP_DIR}" "${CUTADAPT_DIR}" \
     -o "${QC_MULTIQC_DIR}"
 
 exit 5
