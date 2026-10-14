@@ -84,7 +84,7 @@ fastp \
   --thread "${THREADS}"
 
 # 4.1) Controle de qualidade pelo fastqc pós-trimagem
-fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${R1}" "${FASTP_DIR}/${R2}"
+fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
 
 exit 5
 
