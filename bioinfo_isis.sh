@@ -42,7 +42,7 @@ THREADS=$(nproc)
 
 # Caminhos dos diretórios das análises parciais
 QC_RAW_DIR="${OUTPUT_DIR}/qc_pre"
-QC_RAW_MULTIQC_DIR="${OUTPUT_DIR}/qc_raw_multiqc"
+QC_MULTIQC_DIR="${OUTPUT_DIR}/qc_multiqc"
 QC_TRIM_DIR="${OUTPUT_DIR}/qc_pos"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
 CUTADAPT_DIR="${OUTPUT_DIR}/cutadapt_out"
@@ -57,20 +57,8 @@ mkdir -p temp "${QC_RAW_DIR}" "${QC_RAW_MULTIQC_DIR}" "${FASTP_DIR}" "${CUTADAPT
 # 3) Análise de qualidade do sequenciamento pelo fastqc
 fastqc -t "${THREADS}" -o "${QC_RAW_DIR}" "${INPUT_DIR}/${R1}" "${INPUT_DIR}/${R2}"
 
-# 3.1) Controle de qualidade pelo multiqc
-# Previne a mensagem "executar conda init primeiro"
-# Encontre e carregue a função 'conda' para o subshell
-# (Ajuste o caminho para a sua instalação do Conda ou Miniconda)
-source ~/miniconda3/etc/profile.d/conda.sh
-# Se usar anaconda: source ~/anaconda3/etc/profile.d/conda.sh
-
-# Ativa o ambiente Conda contendo MultiQC
-conda activate multiqc
-multiqc \
-    "${QC_RAW_DIR}" \
-    -o "${QC_RAW_MULTIQC_DIR}"
-
-# 4) Pré-processamento dos dados pelo fastp
+# 4) Pré-processamento dos dados pelo fastp e cutadapt
+# 4.1) Remoção dos adaptadores e filtro de qualidade pelo fastp
 fastp \
   --in1 "${INPUT_DIR}/${R1}" \
   --in2 "${INPUT_DIR}/${R2}" \
@@ -85,10 +73,7 @@ fastp \
   --json "${FASTP_DIR}/${AMOSTRA}_fastp_report.json" \
   --thread "${THREADS}"
 
-# 4.1) Controle de qualidade pelo fastqc pós-trimagem
-fastqc -t "${THREADS}" -o "${QC_TRIM_DIR}" "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
-
-# 5) Remoção das sequências de primers usando a ferramenta cutadapt
+# 4.2) Remoção das sequências de primers pelo cutadapt
 # Nota: Esse passo só é necessário se o sequenciamento foi por amplificação
 cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -G file:"${PRIMERS_DIR}/primers_reverse.fasta" \
@@ -96,6 +81,19 @@ cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -p "${CUTADAPT_DIR}/${AMOSTRA}_R2.trimmed.fastq.gz" \
          "${FASTP_DIR}/${AMOSTRA}_R1.clean.fastq.gz" \
          "${FASTP_DIR}/${AMOSTRA}_R2.clean.fastq.gz"
+
+# 4.3) Análise de qualidade pré e pós-trimagem pelo multiqc
+# Previne a mensagem "executar conda init primeiro"
+# Encontre e carregue a função 'conda' para o subshell
+# (Ajuste o caminho para a sua instalação do Conda ou Miniconda)
+source ~/miniconda3/etc/profile.d/conda.sh
+# Se usar anaconda: source ~/anaconda3/etc/profile.d/conda.sh
+
+# Ativa o ambiente Conda contendo MultiQC
+conda activate multiqc
+multiqc \
+    "${QC_RAW_DIR}" ${FASTP_DIR} ${CUTADAPT_DIR} \
+    -o "${QC_MULTIQC_DIR}"
 
 exit 5
 
