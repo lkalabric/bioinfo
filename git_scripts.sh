@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# autor: Luciano Kalabric Silva
-# institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
-# last update: 26 MAY 2023
-# Objetive: Update scripts from a git repo
+# Autor: Luciano Kalabric Silva
+# Institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
+# Last update: 26 MAY 2023
+# Objective: Update scripts from a git repo
 # Syntax: ./git_scripts.sh <repo>
 # Link: 
 
@@ -57,7 +57,7 @@ if grep -Fq "$SCRIPT_DIR" "$ARQUIVO_CONFIG"; then
     echo "O caminho '$SCRIPT_DIR' já está configurado no seu $ARQUIVO_CONFIG."
 else
     # Adiciona a linha ao final do arquivo de configuração
-    echo -e "\n# Adicionado pelo script de configuracao de PATH\n$LINHA_EXPORT" >> "$ARQUIVO_CONFIG"
+    echo -e "\n# Adicionado pelo script git_script.sh para configuração de PATH\n$LINHA_EXPORT" >> "$ARQUIVO_CONFIG"
     echo "Sucesso! O caminho 'SCRIPT_DIR' foi adicionado ao seu $ARQUIVO_CONFIG."
     echo "Para aplicar as alterações imediatamente, execute: source $ARQUIVO_CONFIG"
 fi
