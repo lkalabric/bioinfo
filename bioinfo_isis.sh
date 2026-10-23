@@ -83,7 +83,8 @@ cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -o "${CUTADAPT_DIR}/${AMOSTRA}_R1_trimmed.fastq.gz" \
          -p "${CUTADAPT_DIR}/${AMOSTRA}_R2_trimmed.fastq.gz" \
          "${FASTP_DIR}/${AMOSTRA}_R1_clean.fastq.gz" \
-         "${FASTP_DIR}/${AMOSTRA}_R2_clean.fastq.gz"
+         "${FASTP_DIR}/${AMOSTRA}_R2_clean.fastq.gz" \
+         --untrimmed-output="${FASTP_DIR}/${AMOSTRA}_untrimmed.fastq.gz"
 
 # 4.3) Análise de qualidade pré e pós-trimagem pelo multiqc
 cp -a "${QC_PRE_DIR}/." "${QC_POS_DIR}/"
