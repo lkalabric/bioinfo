@@ -4,7 +4,7 @@
 # Arquivo .bed a ser convertido pelo script
 ARQUIVO=$1
 
-if [ -z "${ARQUIVO}" || ! -f "${ARQUIVO}" ]; then
+if [[ -z "${ARQUIVO}" || ! -f "${ARQUIVO}" ]]; then
     echo "Uso: bed2fasta.sh <ARQUIVO>."
     echo "Arquivo não encontrado. Encerrando o script..."
     exit 1
