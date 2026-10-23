@@ -21,7 +21,7 @@ sudo apt update && sudo apt install fastqc fastp spades
 AMOSTRA=$1
 INPUT_DIR="data/hermes"
 PRIMERS_DIR="data/primers"
-REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
+REFSEQ="data/refseq/SARS-COV-2/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 # Valida se a variável $AMOSTRA está vazia ou se é existente
 if [ -z "${AMOSTRA}" ]; then
     echo "Erro: Insira o nome da amostra. Sintáxe: bioinfo-isis.sh 102390"
