@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Script bioinfo_isis.sh
 # Autor: Isis Katarina
 # Data da criação: 14/10/2026
