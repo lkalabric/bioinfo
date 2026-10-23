@@ -79,7 +79,6 @@ fastp \
 # Além disso, houve amplificação com primers específicos do kit e Illumina® COVIDSeq™ Test
 cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -G file:"${PRIMERS_DIR}/primers_reverse.fasta" \
-         --discard-untrimmed \
          -o "${CUTADAPT_DIR}/${AMOSTRA}_R1_trimmed.fastq.gz" \
          -p "${CUTADAPT_DIR}/${AMOSTRA}_R2_trimmed.fastq.gz" \
          "${FASTP_DIR}/${AMOSTRA}_R1_clean.fastq.gz" \
