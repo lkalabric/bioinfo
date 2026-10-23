@@ -18,9 +18,9 @@ REFSEQ="MN908947.3.fasta"
 awk '{print NF}' ${ARQUIVO} | sort | uniq -c
 
 # Separa os primers forward e reverse em dois .bed
-grep "LEFT" ${ARQUIVO} > primer_forward.bed
-grep "RIGHT" ${ARQUIVO} > primer_reverse.bed
+grep "LEFT" ${ARQUIVO} > primers_forward.bed
+grep "RIGHT" ${ARQUIVO} > primers_reverse.bed
 
 # Converte .bed para .fasta usando o comando bedtools getfasta
-bedtools getfasta -fi ${REFSEQ} -bed primer_forward.bed -s -name -fo primer_forward.fasta
-bedtools getfasta -fi ${REFSEQ} -bed primer_reverse.bed -s -name -fo primer_reverse.fasta
+bedtools getfasta -fi ${REFSEQ} -bed primers_forward.bed -s -name -fo primers_forward.fasta
+bedtools getfasta -fi ${REFSEQ} -bed primers_reverse.bed -s -name -fo primers_reverse.fasta
