@@ -7,6 +7,7 @@
 
 # Requisitos:
 # - Linux: fastqc, fastp, spades
+sudo apt update && sudo apt install fastqc fastp spades
 # - Miniconda: https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install
 # curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # bash ~/Miniconda3-latest-Linux-x86_64.sh
@@ -18,10 +19,9 @@
 
 # 1) Configuração da entrada de dados
 AMOSTRA=$1
-# AMOSTRA="102390"
 INPUT_DIR="data/hermes"
 PRIMERS_DIR="data/primers"
-
+REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
 # Valida se a variável $AMOSTRA está vazia ou se é existente
 if [ -z "${AMOSTRA}" ]; then
     echo "Erro: Insira o nome da amostra. Sintáxe: bioinfo-isis.sh 102390"
@@ -34,14 +34,12 @@ else
         exit 2
     fi
 fi
+R1=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
+R2=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
+THREADS=$(nproc)
 
 # 2) Configuração da saída de dados
 OUTPUT_DIR="results/${AMOSTRA}"
-R1=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R1*" -printf "%f\n" -quit)
-R2=$(find "${INPUT_DIR}" -maxdepth 1 -type f -name "${AMOSTRA}*R2*" -printf "%f\n" -quit)
-REFSEQ="data/refseq/NC_045512_sequence.fasta" # Referencia de Sars-Cov2
-THREADS=$(nproc)
-
 # Caminhos dos diretórios das análises parciais
 QC_PRE_DIR="${OUTPUT_DIR}/qc_pre"
 FASTP_DIR="${OUTPUT_DIR}/fastp_out"
@@ -76,7 +74,9 @@ fastp \
   --thread "${THREADS}"
 
 # 4.2) Remoção das sequências de primers pelo cutadapt
-# Nota: Esse passo só é necessário se o sequenciamento foi por amplificação
+# Nota: Esse passo só é necessário se o sequenciamento envolve RT e/ou foi por amplificação
+# No sequenciamento Illumina do Sars-Cov-2 foram utilizados random hexamers que precisam ser removidos
+# Além disso, houve amplificação com primers específicos do kit e Illumina® COVIDSeq™ Test
 cutadapt -g file:"${PRIMERS_DIR}/primers_forward.fasta" \
          -G file:"${PRIMERS_DIR}/primers_reverse.fasta" \
          -o "${CUTADAPT_DIR}/${AMOSTRA}_R1_trimmed.fastq.gz" \
