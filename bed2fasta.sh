@@ -6,7 +6,7 @@ ARQUIVO=$1
 
 if [[ -z "${ARQUIVO}" || ! -f "${ARQUIVO}" ]]; then
     echo "Uso: bed2fasta.sh <ARQUIVO>."
-    echo "Arquivo não encontrado. Encerrando o script..."
+    echo "Arquivo ausente ou não encontrado. Encerrando o script..."
     exit 1
 fi
 
