@@ -7,7 +7,7 @@
 
 # Requisitos:
 # - Linux: fastqc, fastp, spades
-sudo apt update && sudo apt install fastqc fastp spades
+# sudo apt update && sudo apt install fastqc fastp spades
 # - Miniconda: https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install
 # curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # bash ~/Miniconda3-latest-Linux-x86_64.sh
