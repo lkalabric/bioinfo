@@ -3,7 +3,7 @@
 # autor: Luciano Kalabric Silva
 # institution: Oswaldo Cruz Foundation, Goncalo Moniz Institute, Bahia, Brazil
 # URL:
-# last update: 13 OUT 2021
+# last update: 27 OUT 2026
 # Objective: Updade/Upgrade and install Linux packages, and keep a record of all installations
 # Syntax: ./install_linuxpacks.sh <-u/-i/-l> <package_name/package_list *.packs file>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
