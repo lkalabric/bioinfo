@@ -9,7 +9,7 @@
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
 # Linux packages are listed in files *.packs in the packages files dir
-PACKAGE_DIR="${HOME}/repos/bioinfo/"
+PACKAGELIST_DIR="${HOME}/repos/bioinfo/"
 
 # Cria o diretório de log, se ele não existe
 LOG_DIR="${HOME}/logs" 
@@ -66,7 +66,7 @@ else
 		"-l" ) 
 			PACKAGELIST_FILENAME=$2
 			echo "Installation in progress from package file ${PACKAGELIST_FILENAME}..."
-			while IFS= read -r PACKAGE_NAME || [[ -n "${PACKAGENAME}" ]]; do
+			while IFS= read -r PACKAGENAME || [[ -n "${PACKAGENAME}" ]]; do
 				# Pula linhas vazias ou que começam com #
 				[[ -z "${PACKAGENAME}" || "${PACKAGENAME}" =~ ^# ]] && continue
 				
@@ -88,7 +88,7 @@ else
 				else
 					echo "$PACKAGENAME already installed in your Linux Distro!"
 				fi
-			done < "${PACKAGE_DIR}/${PACKAGELIST_FILENAME}"
+			done < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
 			;;
 		* ) echo "Invalid option!"; exit 0;;
 	esac	
