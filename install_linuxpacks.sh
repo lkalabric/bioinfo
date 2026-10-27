@@ -47,8 +47,8 @@ else
 			sudo apt-get upgrade 
 			;;
 		"-i" ) 
-			echo "Installation in progress from package list $2..."
-			for PACKAGENAME in "$2"; do
+			echo "Installation in progress from package list ${@:2}..."
+			for PACKAGENAME in "${@:2}"; do
 				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGENAME}"; then
 					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
