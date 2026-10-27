@@ -12,7 +12,7 @@
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # Cria o diretório de log, se ele não existe
-mkdir -p "${HOME}/logs
+mkdir -p "${HOME}/logs"
 
 # This script is for superuser or root user only!!!
 #if [ "$EUID" -ne 0 ]
