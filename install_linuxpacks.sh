@@ -42,7 +42,7 @@ else
 		PACKAGE_NAME=$2
  		case $1 in
 			"-u" ) echo "Update/Upgrade in progress..."
-				# Pior to any installation it is recommended to update-upgrade your Linux Distro# Update & upgrade your Linux Distro
+				# Prior to any installation, it is recommended to update/upgrade your Linux distro.
 				echo "Updating & upgrading installed packages before starting any new installation..."
 				sudo apt-get update
 				sudo apt list --upgradable
@@ -56,6 +56,7 @@ else
 					echo $REPLY
 					if [[ $REPLY == [Yy] ]]; then
 						sudo apt-get install ${PACKAGE_NAME}
+						mkdir -p logs # Cria este diretório se ele não existe
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
