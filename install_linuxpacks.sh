@@ -12,7 +12,7 @@
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # Cria o diretório de log, se ele não existe
-mkdir -p logs
+mkdir -p "${HOME}/logs
 
 # This script is for superuser or root user only!!!
 #if [ "$EUID" -ne 0 ]
@@ -46,7 +46,7 @@ else
 			;;
 		"-i" ) PACKAGE_LIST=$2
 			echo "Installation in progress from package list ${PACKAGE_LIST}..."
-			for PACKAGE_NAME in "${PACKAGE_LIST}"; do
+			for PACKAGE_NAME in ${PACKAGE_LIST}; do
 				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGE_NAME}"; then
 					echo -e "${PACKAGE_NAME} is not installed! Install? (y/n) \c"
@@ -54,13 +54,12 @@ else
 					echo $REPLY
 					if [[ $REPLY == [Yy] ]]; then
 						sudo apt-get install "${PACKAGE_NAME}"
-						mkdir -p logs # Cria este diretório se ele não existe
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
 				else
-					echo "$PACKAGE_NAME already installed in your Linux Distro!"
+					echo "${PACKAGE_NAME} already installed in your Linux Distro!"
 				fi
 			done
 			;;
