@@ -59,7 +59,7 @@ else
 						echo "You can install it anytime!"
 					fi
 				else
-					echo "${PACKAGENAME} already installed in your Linux Distro!"
+					echo "${PACKAGENAME} is already installed in your Linux Distro!"
 				fi
 			done
 			;;
@@ -69,24 +69,19 @@ else
 			while IFS= read -r PACKAGENAME || [[ -n "${PACKAGENAME}" ]]; do
 				# Pula linhas vazias ou que começam com #
 				[[ -z "${PACKAGENAME}" || "${PACKAGENAME}" =~ ^# ]] && continue
-				
 				# Remove espaços em branco extras, se houver
 				PACKAGENAME=$(echo "${PACKAGENAME}" | xargs)
-
-				# O restante da sua lógica de verificação e instalação aqui
+				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGENAME}"; then
-					echo -e "${PACKAGENAME} is not installed! Install? (y/n) \c"
-					read -r
-					echo $REPLY
-					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install "${PACKAGENAME}"
-						mkdir -p logs # Cria este diretório se ele não existe
-						echo "`date` sudo apt-get install ${PACKAGENAME}" >> ${LOG_DIR}/install_linuxpackages.log
+					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
+					if [[ "${REPLY}" == [Yy] ]]; then
+						sudo apt-get -y install "${PACKAGENAME}"
+						echo "`date` sudo apt-get install $PACKAGENAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
 				else
-					echo "$PACKAGENAME already installed in your Linux Distro!"
+					echo "${PACKAGENAME} is already installed in your Linux Distro!"
 				fi
 			done < "${PACKAGELIST_DIR}/${PACKAGELIST_FILENAME}"
 			;;
