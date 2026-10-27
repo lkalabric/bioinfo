@@ -49,11 +49,9 @@ else
 			for PACKAGE_NAME in ${PACKAGE_LIST}; do
 				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGE_NAME}"; then
-					echo -e "${PACKAGE_NAME} is not installed! Install? (y/n) \c"
-					read -r
-					echo $REPLY
+					read -r -p "${PACKAGE_NAME} is not installed! Install? (y/n) " REPLY
 					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install "${PACKAGE_NAME}"
+						sudo apt-get -y install "${PACKAGE_NAME}"
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
