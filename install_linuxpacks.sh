@@ -74,7 +74,7 @@ else
 				PACKAGENAME=$(echo "${PACKAGENAME}" | xargs)
 				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGENAME}"; then
-					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
+					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY < /dev/tty
 					if [[ "${REPLY}" == [Yy] ]]; then
 						sudo apt-get -y install "${PACKAGENAME}"
 						echo "`date` sudo apt-get install $PACKAGENAME" >> ${LOG_DIR}/install_linuxpackages.log
