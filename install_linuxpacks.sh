@@ -53,20 +53,22 @@ else
     			;;
    			"-i" ) echo "Installation in progress..."
 				# Check if package is installed and install it if not
-				if ! is_installed $PACKAGE_NAME; then
-					echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
-					read -r
-					echo $REPLY
-					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install ${PACKAGE_NAME}
-						mkdir -p logs # Cria este diretório se ele não existe
-						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+				for PKG in "$@"; do
+					if ! is_installed "${PKG}"; then
+						echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
+						read -r
+						echo $REPLY
+						if [[ $REPLY == [Yy] ]]; then
+							sudo apt-get install "${PKG}"
+							mkdir -p logs # Cria este diretório se ele não existe
+							echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+						else
+							echo "You can install it anytime!"
+						fi
 					else
-						echo "You can install it anytime!"
+						echo "$PACKAGE_NAME already installed in your Linux Distro!"
 					fi
-				else
-					echo "$PACKAGE_NAME already installed in your Linux Distro!"
-				fi
+				done				
     			;;
 			"-l" ) echo "Listing package(s) name(s) and descrition..."
    				# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
