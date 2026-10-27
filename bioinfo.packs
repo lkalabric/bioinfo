@@ -1,45 +1,29 @@
-### Manipulação de sequências
-seqkit
-seqtk
-bioawk
-samtools
-bcftools
-bedtools
-vcftools
-
-### Alinhamento e montagem
-ncbi-blast+
-bwa
-bowtie
-spades
-hisat2
-# Conda STAR
-# conda create -n rna_env -c bioconda -c conda-forge star
-# conda activate rna_env
-# STAR --version
-
-## Controle de qualidade
+### Controle de qualidade
 fastqc
 multiqc
 fastp
 trimmomatic
 cutadapt
 
-### Filogenia
-maftt
-iqtree2
-figtree
-# Conda RAxML-NG
-# conda install -c bioconda raxml-ng
-# conda create -n phylogeny -c bioconda raxml-ng
-# conda activate phylogeny
-# R ape, igraph
-# install.packages(c("ape", "igraph"))
-# sudo Rscript -e 'install.packages(c("ape", "igraph"), repos="https://cloud.r-project.org")'
-# sudo apt install libglpk-dev libxml2-dev
+### Alinhamento e montagem
+ncbi-blast+
+spades
+bwa
+#quast.py
 
-### Classificação taxonômica/metagenômica
+### Manipulação de variantes e alinhamento (SAM/BAM/VCF)
+samtools
+bcftools
+bedtools
+vcftools
+
+### Classificação taxonômica, metagenômica e ecologia microbiana
 kraken
+metaphlan
+mothur
+qiime
+mummer
+vsearch
 # Conda MetaPhlAn3
 # conda config --add channels defaults
 # conda config --add channels bioconda
@@ -51,32 +35,3 @@ kraken
 # Execute o comando de instalação do banco apontando para essa pasta
 # metaphlan --install --bowtie2db ~/db/metaphlan_databases
 # metaphlan --version
-
-### Transcriptômica
-# hitsat2
-# Conda featureCounts (Subread)
-# conda install -c bioconda subread
-# conda create -n rnaseq -c bioconda subread
-# conda activate rnaseq
-# featureCounts -v
-# R
-# if (!requireNamespace("BiocManager", quietly = TRUE))
-#     install.packages("BiocManager")
-# BiocManager::install("DESeq2")
-# sudo apt update
-# sudo apt install r-base-dev libcurl4-openssl-dev libssl-dev libxml2-dev
-
-### Anotação e predição gênica
-artemis
-prodigal
-# Conda Pokka
-# conda create -n prokka_env -c conda-forge -c bioconda prokka
-# conda activate prokka_env
-# prokka --version
-
-### Visualização 
-# figtree
-# IGV
-# R
-
-
