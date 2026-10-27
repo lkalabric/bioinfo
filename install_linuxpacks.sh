@@ -67,6 +67,7 @@ else
 			PACKAGELIST_FILENAME=$2
 			echo "Installation in progress from package file ${PACKAGELIST_FILENAME}..."
 			while IFS= read -r PACKAGENAME || [[ -n "${PACKAGENAME}" ]]; do
+				echo "Linha ${PACKAGENAME}"
 				# Pula linhas vazias ou que começam com #
 				[[ -z "${PACKAGENAME}" || "${PACKAGENAME}" =~ ^# ]] && continue
 				# Remove espaços em branco extras, se houver
