@@ -25,6 +25,7 @@ cd-hit
 # conda create -n rna_env -c bioconda -c conda-forge star
 # conda activate rna_env
 # STAR --version
+# quast.py
 
 ### Manipulação de variantes e alinhamento (SAM/BAM/VCF)
 samtools
