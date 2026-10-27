@@ -12,7 +12,8 @@
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # Cria o diretório de log, se ele não existe
-mkdir -p "${HOME}/logs"
+LOG_DIR="${HOME}/logs" 
+mkdir -p "${LOG_DIR}"
 
 # This script is for superuser or root user only!!!
 #if [ "$EUID" -ne 0 ]
@@ -66,22 +67,22 @@ else
 		"-l" ) 
 			PACKAGELIST_FILENAME=$2
 			echo "Installation in progress from package file ${PACKAGELIST_FILENAME}..."
-			while IFS= read -r PACKAGE_NAME || [[ -n "${$PACKAGE_NAME}" ]]; do
+			while IFS= read -r PACKAGE_NAME || [[ -n "${PACKAGE_NAME}" ]]; do
 				# Pula linhas vazias ou que começam com #
-				[[ -z "${$PACKAGE_NAME}" || "${$PACKAGE_NAME}" =~ ^# ]] && continue
+				[[ -z "${PACKAGE_NAME}" || "${PACKAGE_NAME}" =~ ^# ]] && continue
 				
 				# Remove espaços em branco extras, se houver
-				PACKAGE_NAME=$(echo "${$PACKAGE_NAME}" | xargs)
+				PACKAGE_NAME=$(echo "${PACKAGE_NAME}" | xargs)
 
 				# O restante da sua lógica de verificação e instalação aqui
-				if ! is_installed "${$PACKAGE_NAME}"; then
-					echo -e "${$PACKAGE_NAME} is not installed! Install? (y/n) \c"
+				if ! is_installed "${PACKAGE_NAME}"; then
+					echo -e "${PACKAGE_NAME} is not installed! Install? (y/n) \c"
 					read -r
 					echo $REPLY
 					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install "${$PACKAGE_NAME}"
+						sudo apt-get install "${PACKAGE_NAME}"
 						mkdir -p logs # Cria este diretório se ele não existe
-						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+						echo "`date` sudo apt-get install ${PACKAGE_NAME}" >> ${LOG_DIR}/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
