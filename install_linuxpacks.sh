@@ -47,47 +47,46 @@ else
 			sudo apt-get upgrade 
 			;;
 		"-i" ) 
-			PACKAGE_LIST="$2"
-			echo "Installation in progress from package list ${PACKAGE_LIST}..."
-			for PACKAGE_NAME in ${PACKAGE_LIST}; do
+			echo "Installation in progress from package list $2..."
+			for PACKAGENAME in "$2"; do
 				# Check if package is installed and install it if not
-				if ! is_installed "${PACKAGE_NAME}"; then
-					read -r -p "${PACKAGE_NAME} is not installed! Install? (y/n) " REPLY
+				if ! is_installed "${PACKAGENAME}"; then
+					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
 					if [[ "${REPLY}" == [Yy] ]]; then
-						sudo apt-get -y install "${PACKAGE_NAME}"
-						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
+						sudo apt-get -y install "${PACKAGENAME}"
+						echo "`date` sudo apt-get install $PACKAGENAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
 				else
-					echo "${PACKAGE_NAME} already installed in your Linux Distro!"
+					echo "${PACKAGENAME} already installed in your Linux Distro!"
 				fi
 			done
 			;;
 		"-l" ) 
 			PACKAGELIST_FILENAME=$2
 			echo "Installation in progress from package file ${PACKAGELIST_FILENAME}..."
-			while IFS= read -r PACKAGE_NAME || [[ -n "${PACKAGE_NAME}" ]]; do
+			while IFS= read -r PACKAGE_NAME || [[ -n "${PACKAGENAME}" ]]; do
 				# Pula linhas vazias ou que começam com #
-				[[ -z "${PACKAGE_NAME}" || "${PACKAGE_NAME}" =~ ^# ]] && continue
+				[[ -z "${PACKAGENAME}" || "${PACKAGENAME}" =~ ^# ]] && continue
 				
 				# Remove espaços em branco extras, se houver
-				PACKAGE_NAME=$(echo "${PACKAGE_NAME}" | xargs)
+				PACKAGENAME=$(echo "${PACKAGENAME}" | xargs)
 
 				# O restante da sua lógica de verificação e instalação aqui
-				if ! is_installed "${PACKAGE_NAME}"; then
-					echo -e "${PACKAGE_NAME} is not installed! Install? (y/n) \c"
+				if ! is_installed "${PACKAGENAME}"; then
+					echo -e "${PACKAGENAME} is not installed! Install? (y/n) \c"
 					read -r
 					echo $REPLY
 					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install "${PACKAGE_NAME}"
+						sudo apt-get install "${PACKAGENAME}"
 						mkdir -p logs # Cria este diretório se ele não existe
-						echo "`date` sudo apt-get install ${PACKAGE_NAME}" >> ${LOG_DIR}/install_linuxpackages.log
+						echo "`date` sudo apt-get install ${PACKAGENAME}" >> ${LOG_DIR}/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
 				else
-					echo "$PACKAGE_NAME already installed in your Linux Distro!"
+					echo "$PACKAGENAME already installed in your Linux Distro!"
 				fi
 			done < "${PACKAGE_DIR}/${PACKAGELIST_FILENAME}"
 			;;
