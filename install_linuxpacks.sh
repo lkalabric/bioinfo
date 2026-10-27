@@ -8,25 +8,24 @@
 # Syntax: ./install_linuxpacks.sh <-u/-i/-l> <package_name/package_list *.packs file>
 # Link: https://stackoverflow.com/questions/1298066/how-can-i-check-if-a-package-is-installed-and-install-it-if-not
 
-# Packages files dir
+# Linux packages are listed in files *.packs in the packages files dir
 PACKAGE_DIR="${HOME}/repos/bioinfo/"
 
 # Cria o diretório de log, se ele não existe
 mkdir -p logs
 
-# This script is good for superuser or root user only!!!
+# This script is for superuser or root user only!!!
 #if [ "$EUID" -ne 0 ]
 #  then echo "Please run as root"
 #  exit
 #fi
-
 if ((EUID != 1000)); then
 	echo "Please run as root"
 	exit 0
 fi
 sudo -v
 
-# Function to test if package is installed in your Debian machine
+# Function to test if a package is installed on your Debian machine
 function is_installed() {
      dpkg --verify "$1" 2>/dev/null
      return $?
@@ -34,7 +33,7 @@ function is_installed() {
 
 # Validate parameters
 if [ $# = 0 ]; then
-	echo "Syntax: install_linuxpacks.sh <-u to update/upgrade/-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
+	echo "Syntax: install_linuxpacks.sh <-u to update/upgrade / -i to install packages from command line / -l to install packages from a package list *.packs file>"
 	exit 0;
 else
 #	if [[ -z $2 ]]; then
@@ -42,8 +41,7 @@ else
 #		echo "Syntax: install_linuxpacks.sh <-i to install individual package/-l to install a list of packages> <package name or package list *.packs file>"
 #		exit 0
 #	else
-		PACKAGE_NAME=$2
- 		case $1 in
+		case $1 in
 			"-u" ) echo "Update/Upgrade in progress..."
 				# Prior to any installation, it is recommended to update/upgrade your Linux distro.
 				echo "Updating & upgrading installed packages before starting any new installation..."
@@ -51,15 +49,16 @@ else
 				sudo apt list --upgradable
 				sudo apt-get upgrade    				
     			;;
-   			"-i" ) echo "Installation in progress..."
+   			"-i" ) PACKAGE_LIST=$2
+				echo "Installation in progress from package list ${PACKAGE_LIST}..."
 				# Check if package is installed and install it if not
-				for PKG in "$@"; do
-					if ! is_installed "${PKG}"; then
-						echo -e "$PACKAGE_NAME is not installed! Install? (y/n) \c"
+				for PACKAGE_NAME in "${PACKAGE_LIST}"; do
+					if ! is_installed "${$PACKAGE_NAME}"; then
+						echo -e "${$PACKAGE_NAME} is not installed! Install? (y/n) \c"
 						read -r
 						echo $REPLY
 						if [[ $REPLY == [Yy] ]]; then
-							sudo apt-get install "${PKG}"
+							sudo apt-get install "${$PACKAGE_NAME}"
 							mkdir -p logs # Cria este diretório se ele não existe
 							echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 						else
@@ -70,9 +69,8 @@ else
 					fi
 				done				
     			;;
-			"-l" ) echo "Listing package(s) name(s) and descrition..."
-   				# Linux packages are listed in files *.packs at the following $PACKAGELIST_DIR
-				PACKAGELIST_FILENAME=$2
+			"-l" ) PACKAGELIST_FILENAME=$2
+				echo "Installation in progress from package file ${PACKAGELIST_FILENAME}"..."
    				mapfile PACKAGE_LIST < "${PACKAGE_DIR}/${PACKAGELIST_FILENAME}"			
        				for PACKAGE_NAME in "${PACKAGE_LIST[@]}"; do 
        					apt-cache search ^${PACKAGE_NAME}$
