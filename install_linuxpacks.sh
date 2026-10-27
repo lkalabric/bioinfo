@@ -54,7 +54,7 @@ else
 					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
 					if [[ "${REPLY}" == [Yy] ]]; then
 						sudo apt-get -y install "${PACKAGENAME}"
-						echo "`date` sudo apt-get install $PACKAGENAME" >> ${HOME}/logs/install_linuxpackages.log
+						echo "`date` sudo apt-get install $PACKAGENAME" >> ${LOG_DIR}/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
@@ -76,7 +76,7 @@ else
 					read -r -p "${PACKAGENAME} is not installed! Install? (y/n) " REPLY
 					if [[ "${REPLY}" == [Yy] ]]; then
 						sudo apt-get -y install "${PACKAGENAME}"
-						echo "`date` sudo apt-get install $PACKAGENAME" >> ${HOME}/logs/install_linuxpackages.log
+						echo "`date` sudo apt-get install $PACKAGENAME" >> ${LOG_DIR}/install_linuxpackages.log
 					else
 						echo "You can install it anytime!"
 					fi
