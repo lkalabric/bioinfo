@@ -1,5 +1,6 @@
 default-jre
 python3
+# pip install numpy pandas scipy biopython networkx
 perl
 cpanminus
 r-base r-base-core
