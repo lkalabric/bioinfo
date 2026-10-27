@@ -37,20 +37,22 @@ if [ $# = 0 ]; then
 	exit 0;
 else
 	case $1 in
-		"-u" ) echo "Update/Upgrade in progress..."
+		"-u" ) 
+			echo "Update/Upgrade in progress..."
 			# Prior to any installation, it is recommended to update/upgrade your Linux distro.
 			echo "Updating & upgrading installed packages before starting any new installation..."
 			sudo apt-get update
 			sudo apt list --upgradable
 			sudo apt-get upgrade 
 			;;
-		"-i" ) PACKAGE_LIST=$2
+		"-i" ) 
+			PACKAGE_LIST="$2"
 			echo "Installation in progress from package list ${PACKAGE_LIST}..."
 			for PACKAGE_NAME in ${PACKAGE_LIST}; do
 				# Check if package is installed and install it if not
 				if ! is_installed "${PACKAGE_NAME}"; then
 					read -r -p "${PACKAGE_NAME} is not installed! Install? (y/n) " REPLY
-					if [[ $REPLY == [Yy] ]]; then
+					if [[ "${REPLY}" == [Yy] ]]; then
 						sudo apt-get -y install "${PACKAGE_NAME}"
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
@@ -61,7 +63,8 @@ else
 				fi
 			done
 			;;
-		"-l" ) PACKAGELIST_FILENAME=$2
+		"-l" ) 
+			PACKAGELIST_FILENAME=$2
 			echo "Installation in progress from package file ${PACKAGELIST_FILENAME}..."
 			while IFS= read -r PACKAGE_NAME || [[ -n "${$PACKAGE_NAME}" ]]; do
 				# Pula linhas vazias ou que começam com #
