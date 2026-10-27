@@ -48,12 +48,12 @@ else
 			echo "Installation in progress from package list ${PACKAGE_LIST}..."
 			for PACKAGE_NAME in "${PACKAGE_LIST}"; do
 				# Check if package is installed and install it if not
-				if ! is_installed "${$PACKAGE_NAME}"; then
-					echo -e "${$PACKAGE_NAME} is not installed! Install? (y/n) \c"
+				if ! is_installed "${PACKAGE_NAME}"; then
+					echo -e "${PACKAGE_NAME} is not installed! Install? (y/n) \c"
 					read -r
 					echo $REPLY
 					if [[ $REPLY == [Yy] ]]; then
-						sudo apt-get install "${$PACKAGE_NAME}"
+						sudo apt-get install "${PACKAGE_NAME}"
 						mkdir -p logs # Cria este diretório se ele não existe
 						echo "`date` sudo apt-get install $PACKAGE_NAME" >> ${HOME}/logs/install_linuxpackages.log
 					else
